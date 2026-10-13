@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Lead {
+  id                 String   @id @default(cuid())
+  submissionId       String   @unique
+  payloadHash        String
+  name               String
+  company            String?
+  email              String?
+  phone              String?
+  telegram           String?
+  service            String
+  budget             String?
+  message            String
+  consentVersion     String
+  consentAt          DateTime @default(now())
+  notificationStatus String   @default("pending")
+  createdAt          DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([notificationStatus])
+}
+
+model RateLimitBucket {
+  key       String @id
+  hits      Int
+  expiresAt BigInt
+
+  @@index([expiresAt])
+}
