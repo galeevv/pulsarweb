@@ -10,7 +10,7 @@ const dunes: GradientConfigInput = {
   color1: "#F4843E",
   color2: "#1A1032",
   color3: "#FFE2B0",
-  speed: 0.3,
+  speed: 0.6,
   scale: 1,
   noise: 0.14,
 }
