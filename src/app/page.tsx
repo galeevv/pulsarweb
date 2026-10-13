@@ -22,8 +22,12 @@ export default function Page() {
           className="dark relative isolate overflow-hidden rounded-3xl bg-background text-foreground sm:rounded-[2rem]"
         >
           <DunesBackground />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-transparent max-xl:bg-black/25"
+          />
           <Container className="relative flex min-h-[calc(100svh-7.5rem)] items-center justify-center py-24 sm:min-h-[calc(100svh-8rem)] xl:justify-start">
-            <div className="flex w-full max-w-2xl flex-col items-center gap-8 rounded-3xl bg-black/65 p-6 text-center backdrop-blur-sm sm:p-10 xl:items-start xl:text-left">
+            <div className="flex w-full flex-col items-center gap-8 text-center xl:items-start xl:text-left">
               <p className="eyebrow text-foreground/80">Студия разработки</p>
               <h1
                 id="hero-title"
