@@ -2,7 +2,7 @@ import { Container } from "@/components/layout/container"
 import { ButtonLink } from "@/components/shared/button-link"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { websiteJsonLd } from "@/lib/seo"
-import { PulsarMark } from "@/components/shared/logo"
+import { DunesBackground } from "@/components/shared/dunes-background"
 import { Section } from "@/components/layout/section"
 import { DeliveryProcess } from "@/components/shared/delivery-process"
 import { LatestProjects } from "@/components/shared/latest-projects"
@@ -16,48 +16,51 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: websiteJsonLd() }}
       />
-      <Container>
+      <div className="p-3 sm:p-4">
         <section
           aria-labelledby="hero-title"
-          className="flex min-h-[calc(100svh-6rem)] flex-col justify-center gap-6 py-8 xl:grid xl:grid-cols-[1.7fr_1fr] xl:items-center xl:gap-12 xl:py-20"
+          className="dark relative isolate overflow-hidden rounded-3xl bg-background text-foreground sm:rounded-[2rem]"
         >
-          <div className="flex flex-col items-center gap-8 text-center xl:items-start xl:text-left">
-            <p className="eyebrow">Студия разработки</p>
-            <h1
-              id="hero-title"
-              className="text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] font-medium tracking-[-0.06em] break-normal hyphens-none"
-            >
-              <span className="block">Разрабатываем</span>{" "}
-              <span className="block xl:whitespace-nowrap">
-                цифровые продукты
-              </span>{" "}
-              <span className="block">для бизнеса</span>
-            </h1>
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-              От первой идеи до работающего продукта. Разработка, запуск и
-              сопровождение.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 xl:justify-start">
-              <ButtonLink href="/contacts" className="min-h-12 px-5">
-                Обсудить проект
-                <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
-              </ButtonLink>
-              <ButtonLink
-                href="/projects"
-                variant="outline"
-                className="min-h-12 px-5"
-              >
-                Посмотреть проекты
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </ButtonLink>
-            </div>
-          </div>
-          <PulsarMark
-            size={400}
-            className="hidden size-full max-h-96 text-foreground xl:block"
+          <DunesBackground />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-transparent max-xl:bg-black/25"
           />
+          <Container className="relative flex min-h-[calc(100svh-7.5rem)] items-center py-24 sm:min-h-[calc(100svh-8rem)]">
+            <div className="flex w-full flex-col items-center gap-8 text-center xl:items-start xl:text-left">
+              <p className="eyebrow text-foreground/80">Студия разработки</p>
+              <h1
+                id="hero-title"
+                className="text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] font-medium tracking-[-0.06em] break-normal hyphens-none"
+              >
+                <span className="block">Разрабатываем</span>{" "}
+                <span className="block xl:whitespace-nowrap">
+                  цифровые продукты
+                </span>{" "}
+                <span className="block">для бизнеса</span>
+              </h1>
+              <p className="max-w-md text-lg leading-relaxed text-foreground/90">
+                От первой идеи до работающего продукта. Разработка, запуск и
+                сопровождение.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 xl:justify-start">
+                <ButtonLink href="/contacts" className="min-h-12 px-5">
+                  Обсудить проект
+                  <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
+                </ButtonLink>
+                <ButtonLink
+                  href="/projects"
+                  variant="outline"
+                  className="min-h-12 px-5"
+                >
+                  Посмотреть проекты
+                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                </ButtonLink>
+              </div>
+            </div>
+          </Container>
         </section>
-      </Container>
+      </div>
       <Section className="pt-10 md:pt-14" id="services">
         <SectionHeader
           eyebrow="Что делаем"
