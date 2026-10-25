@@ -21,6 +21,8 @@ const env = {
   TRUST_PROXY: "false",
   TELEGRAM_BOT_TOKEN: partialIntegrations ? "123456:test_only_token" : "",
   TELEGRAM_CHAT_ID: "",
+  TELEGRAM_OWNER_CHAT_ID: "",
+  TELEGRAM_OWNER_USERNAME: "galeev66",
   RESEND_API_KEY: partialIntegrations ? "re_test_only_key" : "",
   EMAIL_FROM: "",
   LEAD_NOTIFICATION_EMAIL: "",

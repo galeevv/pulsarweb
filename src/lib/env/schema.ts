@@ -38,6 +38,8 @@ export const serverEnvSchema = z.object({
   LEAD_NOTIFICATION_EMAIL: optionalString,
   TELEGRAM_BOT_TOKEN: optionalString,
   TELEGRAM_CHAT_ID: optionalString,
+  TELEGRAM_OWNER_CHAT_ID: optionalString,
+  TELEGRAM_OWNER_USERNAME: optionalString,
 })
 
 export type ServerEnv = z.output<typeof serverEnvSchema>

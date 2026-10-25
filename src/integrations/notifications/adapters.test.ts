@@ -12,6 +12,15 @@ afterEach(() => {
 
 const lead: Lead = {
   id: "lead-test",
+  publicId: "PW-1001",
+  requestKind: "PROJECT",
+  companyContext: undefined,
+  projectReference: undefined,
+  sourceUrl: undefined,
+  referrer: undefined,
+  utmSource: undefined,
+  utmMedium: undefined,
+  utmCampaign: undefined,
   name: "<b>Client</b>",
   email: "client@example.com",
   company: undefined,
@@ -19,7 +28,7 @@ const lead: Lead = {
   telegram: undefined,
   budget: undefined,
   service: "websites",
-  message: "<script>alert(1)</script> " + "x".repeat(5000),
+  description: "<script>alert(1)</script> " + "x".repeat(5000),
   consentVersion: "2026-10-06",
   createdAt: new Date("2026-10-06T00:00:00Z"),
 }
@@ -138,7 +147,7 @@ describe("notification adapters with mocked network", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
-  it.each([{}, { ok: true }, { ok: false, description: "secret" }])(
+  it.each([{}, { ok: true }, { ok: false, message: "secret" }])(
     "requires a real Telegram message result: %j",
     async (payload) => {
       vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json(payload)))

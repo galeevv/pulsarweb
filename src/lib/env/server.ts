@@ -15,3 +15,12 @@ export function getServerEnv(): ServerEnv {
   cached = result.data
   return cached
 }
+
+export function getTelegramOwnerContact() {
+  const configured = getServerEnv().TELEGRAM_OWNER_USERNAME
+  const username =
+    configured && /^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(configured)
+      ? configured
+      : "galeev66"
+  return { username, url: `https://t.me/${username}` }
+}

@@ -25,8 +25,8 @@ describe("lead schema", () => {
     { email: "not-an-email" },
     { phone: "hello1234567" },
     { telegram: "https://evil.example/user" },
-    { message: "small" },
-    { message: "x".repeat(5001) },
+    { description: "small" },
+    { description: "x".repeat(5001) },
     { submissionId: "reuse-this" },
   ])("rejects invalid input: %j", (fields) => {
     expect(createLeadSchema.safeParse(validLead(fields)).success).toBe(false)
@@ -40,4 +40,53 @@ describe("lead schema", () => {
       createLeadSchema.safeParse({ ...validLead(), service: "unknown" }).success
     ).toBe(false)
   })
+})
+
+describe("project request fields", () => {
+  it.each([
+    "landing-pages",
+    "corporate-websites",
+    "ecommerce",
+    "websites",
+    "web-systems",
+    "telegram",
+    "desktop",
+    "support",
+    "other",
+  ])("accepts %s and ignores spoofed lifecycle fields", (service) => {
+    const result = createLeadSchema.parse({
+      ...validLead(),
+      service,
+      status: "WON",
+      requestKind: "SUPPORT",
+    })
+    expect(result).not.toHaveProperty("status")
+    expect(result).not.toHaveProperty("requestKind")
+  })
+  it("rejects infrastructure as an order and invalid budget or timeline", () => {
+    for (const values of [
+      { service: "infrastructure" },
+      { budget: "free" },
+      { timeline: "tomorrow" },
+      { companyContext: "x".repeat(3001) },
+    ])
+      expect(
+        createLeadSchema.safeParse({ ...validLead(), ...values }).success
+      ).toBe(false)
+  })
+  it("normalizes international phone and Telegram handles", () => {
+    const result = createLeadSchema.parse(
+      validLead({ telegram: "GaLeeV66", phone: "+44 (20) 1234-5678" })
+    )
+    expect(result.telegram).toBe("@galeev66")
+    expect(result.phone).toBe("+442012345678")
+  })
+})
+
+it("accepts a callback request without a description", () => {
+  const result = createLeadSchema.parse({
+    ...validLead(),
+    description: undefined,
+  })
+  expect(result.description).toBe("")
 })

@@ -1,27 +1,13 @@
 import { randomUUID } from "node:crypto"
-import type { Page } from "@playwright/test"
 import { expect, test } from "./fixtures"
+import {
+  expectSuccess,
+  fillContacts,
+  nextStep,
+  submitRequest,
+} from "./request-helpers"
 
-async function fillBrief(page: Page, contact = true) {
-  await page.getByLabel("Ваше имя", { exact: true }).fill("Тестовый клиент")
-  if (contact)
-    await page.getByLabel("Email", { exact: true }).fill("e2e@example.com")
-  await page.getByRole("combobox", { name: "Направление" }).click()
-  await page
-    .getByRole("option", { name: "Разработка сайтов", exact: true })
-    .click()
-  await page
-    .getByLabel("Что хотите сделать?", { exact: true })
-    .fill("Нужен корпоративный сайт с каталогом и формой обращения.")
-  await page
-    .getByRole("checkbox", {
-      name: "Согласен на обработку персональных данных",
-      exact: true,
-    })
-    .check()
-}
-
-test("посетитель переходит с главной и отправляет реальную заявку", async ({
+test("главная → магазин → Telegram → реальная заявка", async ({
   page,
   database,
 }) => {
@@ -30,84 +16,237 @@ test("посетитель переходит с главной и отправ�
     .getByRole("link", { name: "Обсудить проект", exact: true })
     .first()
     .click()
-  await expect(page).toHaveURL(/\/contacts$/)
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Начнём с вашей задачи."
-  )
-  await fillBrief(page)
-
-  const saved = page.waitForResponse(
-    (response) =>
-      response.url().endsWith("/api/leads") &&
-      response.request().method() === "POST"
-  )
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  const response = await saved
-  expect(response.status()).toBe(201)
-  expect(await response.json()).toMatchObject({
-    ok: true,
-    leadId: expect.any(String),
-  })
+  await expect(page).toHaveURL(/\/start$/)
   await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
-  ).toBeVisible()
-  await expect(
-    page.getByRole("button", { name: "Отправить заявку", exact: true })
+    page.getByRole("button", { name: /Инфраструктура/ })
   ).toHaveCount(0)
+  await page
+    .getByRole("button", { name: "Интернет-магазин", exact: true })
+    .click()
+  await nextStep(page)
+  await expect(page.getByRole("checkbox")).not.toBeChecked()
+  await fillContacts(page)
+  await expect(page.getByRole("region", { name: "Ваш проект" })).toHaveCount(0)
+  const responsePromise = page.waitForResponse("**/api/leads")
+  await submitRequest(page)
+  const response = await responsePromise
+  expect(response.status()).toBe(201)
+  const result = await response.json()
+  await expectSuccess(page)
   expect(
     database
       .prepare(
-        'SELECT name, email, notificationStatus, consentVersion FROM "Lead"'
+        'SELECT id, publicId, service, requestKind, status, message, budget, timeline, telegram, email, phone, consent, sourceUrl, notificationStatus FROM "Lead"'
       )
       .all()
   ).toEqual([
     {
-      name: "Тестовый клиент",
-      email: "e2e@example.com",
+      id: result.leadId,
+      publicId: result.publicId,
+      service: "ecommerce",
+      requestKind: "PROJECT",
+      status: "NEW",
+      message: "",
+      budget: null,
+      timeline: null,
+      telegram: "@pulsar_client",
+      email: null,
+      phone: null,
+      consent: 1,
+      sourceUrl: "/start",
       notificationStatus: "skipped",
-      consentVersion: "2026-10-06",
     },
   ])
-  await page.getByRole("button", { name: "Отправить ещё одну заявку" }).click()
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toHaveValue("")
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toBeFocused()
-  await expect(page.getByRole("checkbox")).not.toBeChecked()
 })
 
-test("юридические документы открываются отдельно и не стирают заполненную заявку", async ({
+test("мобильное сопровождение пропускает выбор и сохраняет проект и UTM", async ({
   page,
   database,
 }) => {
-  await page.goto("/contacts")
-  await fillBrief(page)
-  for (const href of ["/legal/privacy", "/legal/personal-data-consent"]) {
-    const [document] = await Promise.all([
-      page.waitForEvent("popup"),
-      page.locator(`form a[href="${href}"]`).click(),
-    ])
-    await expect(document.getByRole("heading", { level: 1 })).toBeVisible()
-    await expect(document.getByRole("note")).toContainText(
-      "Документ не утверждён"
+  await page.setViewportSize({ width: 320, height: 844 })
+  await page.goto(
+    "/start?service=support&source=%2Fservices%2Fsupport&utm_source=telegram&utm_medium=social&utm_campaign=launch"
+  )
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Как с вами связаться?"
+  )
+  await fillContacts(page)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth
     )
-    await document.close()
-    await expect(page.getByLabel("Ваше имя", { exact: true })).toHaveValue(
-      "Тестовый клиент"
-    )
-    await expect(page.getByLabel("Email", { exact: true })).toHaveValue(
-      "e2e@example.com"
-    )
-    await expect(page.getByRole("checkbox")).toBeChecked()
-  }
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
+  ).toBe(true)
+  await submitRequest(page)
+  await expectSuccess(page)
+  expect(
+    database
+      .prepare(
+        'SELECT service, requestKind, projectReference, companyContext, budget, timeline, sourceUrl, utmSource, utmMedium, utmCampaign FROM "Lead"'
+      )
+      .all()
+  ).toEqual([
+    {
+      service: "support",
+      requestKind: "SUPPORT",
+      projectReference: null,
+      companyContext: null,
+      budget: null,
+      timeline: null,
+      sourceUrl: "/services/support",
+      utmSource: "telegram",
+      utmMedium: "social",
+      utmCampaign: "launch",
+    },
+  ])
+})
+
+test("возврат по шагам и legal сохраняют черновик, перезагрузка очищает", async ({
+  page,
+  database,
+}) => {
+  await page.goto("/start?service=websites")
+
+  await fillContacts(page)
+  await page.getByRole("button", { name: "Назад", exact: true }).click()
+  await nextStep(page)
+  await expect(page.getByLabel("Имя", { exact: true })).toHaveValue(
+    "Тестовый клиент"
+  )
+  const [document] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.getByRole("link", { name: "Условия обработки данных" }).click(),
+  ])
+  await expect(document.getByRole("heading", { level: 1 })).toBeVisible()
+  await document.close()
+  await expect(page.getByRole("checkbox")).toBeChecked()
+  await submitRequest(page)
+  await expectSuccess(page)
+  expect(database.prepare('SELECT id FROM "Lead"').all()).toHaveLength(1)
+  await page.reload()
+  await expect(page.getByLabel("Имя", { exact: true })).toHaveValue("")
+})
+
+test("валидация шагов, контакт и согласие не отправляют ошибочную форму", async ({
+  page,
+}) => {
+  const requests: string[] = []
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/leads")) requests.push(request.url())
+  })
+  await page.goto("/start?service=websites")
+
+  await submitRequest(page)
+  await expect(page.getByLabel("Имя", { exact: true })).toBeFocused()
+  await fillContacts(page, false)
+  await submitRequest(page)
   await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
+    page.getByText("Укажите корректную почту или Telegram в формате @username")
   ).toBeVisible()
+  await expect(
+    page.getByLabel("Почта или Telegram", { exact: true })
+  ).toBeFocused()
+  await page
+    .getByLabel("Почта или Telegram", { exact: true })
+    .pressSequentially("pulsar_client")
+  await expect(
+    page.getByLabel("Почта или Telegram", { exact: true })
+  ).toHaveValue("pulsar_client")
+  await page.getByRole("checkbox").uncheck()
+  await submitRequest(page)
+  await expect(page.getByRole("checkbox")).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
+  expect(requests).toHaveLength(0)
+})
+
+test("потерянный ответ повторяет сохранённую заявку без нового номера", async ({
+  page,
+  database,
+}) => {
+  const ids: string[] = []
+  let saved: { ok: boolean; leadId: string; publicId: string } | undefined
+  await page.route("**/api/leads", async (route) => {
+    ids.push(route.request().postDataJSON().submissionId)
+    if (!saved) {
+      const response = await route.fetch()
+      expect(response.status()).toBe(201)
+      saved = await response.json()
+      await route.abort("failed")
+    } else await route.continue()
+  })
+  await page.goto("/start?service=websites")
+
+  await fillContacts(page)
+  await submitRequest(page)
+  await expect(
+    page.getByRole("form", { name: "Заявка на проект" }).getByRole("alert")
+  ).toContainText("Не удалось получить ответ")
+  const replay = page.waitForResponse("**/api/leads")
+  await submitRequest(page)
+  const response = await replay
+  expect(response.status()).toBe(200)
+  expect(await response.json()).toEqual(saved)
+  await expectSuccess(page)
+  expect(ids).toHaveLength(2)
+  expect(ids[0]).toBe(ids[1])
+  expect(database.prepare('SELECT id, publicId FROM "Lead"').all()).toEqual([
+    { id: saved?.leadId, publicId: saved?.publicId },
+  ])
+})
+
+test("pending блокирует повторную отправку и поля", async ({
+  page,
+  database,
+}) => {
+  let release: () => void = () => {}
+  const gate = new Promise<void>((resolve) => {
+    release = resolve
+  })
+  let requests = 0
+  await page.route("**/api/leads", async (route) => {
+    requests++
+    await gate
+    await route.continue()
+  })
+  await page.goto("/start?service=other")
+
+  await fillContacts(page)
+  await submitRequest(page)
+  await expect(page.getByRole("button", { name: "Отправляем…" })).toBeDisabled()
+  await expect(page.getByRole("status")).toContainText("Отправляем заявку")
+  await expect(page.getByLabel("Имя", { exact: true })).toBeDisabled()
+  await page
+    .getByRole("form", { name: "Заявка на проект" })
+    .evaluate((form) => (form as HTMLFormElement).requestSubmit())
+  release()
+  await expectSuccess(page)
+  expect(requests).toBe(1)
   expect(database.prepare('SELECT id FROM "Lead"').all()).toHaveLength(1)
 })
+
+for (const status of [200, 503]) {
+  test(`неверный контракт ответа ${status} не показывает ложный успех`, async ({
+    page,
+  }) => {
+    await page.route("**/api/leads", (route) =>
+      route.fulfill({ status, json: { ok: true } })
+    )
+    await page.goto("/start?service=telegram")
+
+    await fillContacts(page)
+    await submitRequest(page)
+    await expect(
+      page.getByRole("form", { name: "Заявка на проект" }).getByRole("alert")
+    ).toContainText("Не удалось получить ответ")
+    await expect(page.getByLabel("Имя", { exact: true })).toHaveValue(
+      "Тестовый клиент"
+    )
+    await expect(
+      page.getByRole("button", { name: "Отправить заявку" })
+    ).toBeEnabled()
+  })
+}
 
 test("конкурентные HTTP-повторы сохраняют одну заявку, чужой Origin отклоняется", async ({
   request,
@@ -117,16 +256,18 @@ test("конкурентные HTTP-повторы сохраняют одну �
     name: "Тест параллельной отправки",
     email: "parallel@example.com",
     service: "websites",
-    message: "Нужен сайт для компании.",
+    description: "Нужен сайт для компании.",
     consent: true,
     submissionId: randomUUID(),
   }
-  const rejected = await request.post("/api/leads", {
-    data,
-    headers: { Origin: "https://foreign.example" },
-  })
-  expect(rejected.status()).toBe(403)
-  expect(database.prepare('SELECT id FROM "Lead"').all()).toHaveLength(0)
+  expect(
+    (
+      await request.post("/api/leads", {
+        data,
+        headers: { Origin: "https://foreign.example" },
+      })
+    ).status()
+  ).toBe(403)
   const responses = await Promise.all(
     [0, 1].map(() =>
       request.post("/api/leads", {
@@ -141,196 +282,19 @@ test("конкурентные HTTP-повторы сохраняют одну �
   const bodies = await Promise.all(responses.map((response) => response.json()))
   expect(bodies[0]).toEqual(bodies[1])
   expect(
-    database.prepare('SELECT id, notificationStatus FROM "Lead"').all()
-  ).toEqual([{ id: bodies[0].leadId, notificationStatus: "skipped" }])
-})
-
-test("форма объясняет ошибки, фокусирует поле и требует один контакт", async ({
-  page,
-}) => {
-  const requests: string[] = []
-  page.on("request", (request) => {
-    if (request.url().endsWith("/api/leads")) requests.push(request.url())
-  })
-
-  await page.goto("/contacts")
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(
-    page.getByText("Укажите ваше имя", { exact: true })
-  ).toBeVisible()
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toBeFocused()
-
-  await fillBrief(page, false)
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(
-    page.getByText(
-      "Оставьте хотя бы один способ связи: email, телефон или Telegram",
-      { exact: true }
-    )
-  ).toBeVisible()
-  await expect(page.getByLabel("Email", { exact: true })).toBeFocused()
-  expect(requests).toHaveLength(0)
-})
-
-test("повтор после потерянного ответа использует ту же сохранённую заявку", async ({
-  page,
-  database,
-}) => {
-  const submissionIds: string[] = []
-  let originalLeadId: string | undefined
-  let dropped = false
-
-  await page.route("**/api/leads", async (route) => {
-    const payload = route.request().postDataJSON() as { submissionId: string }
-    submissionIds.push(payload.submissionId)
-    if (!dropped) {
-      dropped = true
-      // The real endpoint saves the lead; only its delivery to the browser fails.
-      const response = await route.fetch()
-      expect(response.status()).toBe(201)
-      const result = (await response.json()) as { ok: boolean; leadId: string }
-      expect(result.ok).toBe(true)
-      originalLeadId = result.leadId
-      await route.abort("failed")
-      return
-    }
-    await route.continue()
-  })
-
-  await page.goto("/contacts")
-  await fillBrief(page)
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(
-    page.getByText("Не получилось отправить", { exact: true })
-  ).toBeVisible()
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toHaveValue(
-    "Тестовый клиент"
-  )
-
-  const replay = page.waitForResponse(
-    (response) =>
-      response.url().endsWith("/api/leads") && response.status() === 200
-  )
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  expect(await (await replay).json()).toEqual({
-    ok: true,
-    leadId: originalLeadId,
-  })
-  await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
-  ).toBeVisible()
-  expect(submissionIds).toHaveLength(2)
-  expect(submissionIds[0]).toBe(submissionIds[1])
-  expect(database.prepare('SELECT id FROM "Lead"').all()).toEqual([
-    { id: originalLeadId },
-  ])
-})
-
-test("мобильная форма принимает только Telegram и сохраняет выбранное из ссылки направление", async ({
-  page,
-  database,
-}) => {
-  await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto("/contacts?service=telegram")
-  await expect(
-    page.getByRole("combobox", { name: "Направление" })
-  ).toContainText("Telegram")
-  await page.getByLabel("Ваше имя", { exact: true }).fill("Анна")
-  await page.getByLabel("Telegram", { exact: true }).fill("@pulsar_client")
-  await page
-    .getByLabel("Что хотите сделать?", { exact: true })
-    .fill("Нужен Telegram-бот для приёма заявок.")
-  await page.getByRole("checkbox").check()
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
-  ).toBeVisible()
-  expect(
-    database.prepare('SELECT email, phone, telegram, service FROM "Lead"').all()
+    database
+      .prepare('SELECT id, publicId, notificationStatus FROM "Lead"')
+      .all()
   ).toEqual([
     {
-      email: null,
-      phone: null,
-      telegram: "@pulsar_client",
-      service: "telegram",
+      id: bodies[0].leadId,
+      publicId: bodies[0].publicId,
+      notificationStatus: "skipped",
     },
   ])
 })
 
-test("пока запрос выполняется, форма блокирует повторную отправку", async ({
-  page,
-  database,
-}) => {
-  let release: (() => void) | undefined
-  const gate = new Promise<void>((resolve) => {
-    release = resolve
-  })
-  let requests = 0
-  await page.route("**/api/leads", async (route) => {
-    requests++
-    await gate
-    await route.continue()
-  })
-  await page.goto("/contacts")
-  await fillBrief(page)
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(page.getByRole("button", { name: "Отправляем…" })).toBeDisabled()
-  await expect(
-    page.getByRole("status").filter({ hasText: "Отправляем заявку." })
-  ).toHaveText("Отправляем заявку. Пожалуйста, подождите.")
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toBeDisabled()
-  await expect(page.getByRole("checkbox")).toBeDisabled()
-  await page
-    .getByRole("form", { name: "Заявка на проект" })
-    .evaluate((form) => (form as HTMLFormElement).requestSubmit())
-  release?.()
-  await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
-  ).toBeVisible()
-  expect(requests).toBe(1)
-  expect(database.prepare('SELECT id FROM "Lead"').all()).toHaveLength(1)
-})
-
-for (const status of [200, 503]) {
-  test(`ответ ${status} с неверным контрактом не показывает ложный успех`, async ({
-    page,
-  }) => {
-    await page.route("**/api/leads", (route) =>
-      route.fulfill({ status, json: { ok: true } })
-    )
-    await page.goto("/contacts")
-    await fillBrief(page)
-    await page
-      .getByRole("button", { name: "Отправить заявку", exact: true })
-      .click()
-    await expect(
-      page.getByText("Не получилось отправить", { exact: true })
-    ).toBeVisible()
-    await expect(
-      page.getByText("Спасибо. Заявка у нас.", { exact: true })
-    ).toHaveCount(0)
-    await expect(page.getByLabel("Email", { exact: true })).toHaveValue(
-      "e2e@example.com"
-    )
-    await expect(
-      page.getByRole("button", { name: "Отправить заявку", exact: true })
-    ).toBeEnabled()
-  })
-}
-
-test("API сам проверяет согласие, honeypot, повтор, конфликт и лимит запросов", async ({
+test("API проверяет согласие, honeypot, повтор, конфликт и лимит", async ({
   request,
   database,
 }) => {
@@ -338,7 +302,7 @@ test("API сам проверяет согласие, honeypot, повтор, к
     name: "Тест API",
     phone: "+7 (999) 123-45-67",
     service: "websites",
-    message: "Нужен новый сайт для нашей компании.",
+    description: "Нужен новый сайт для нашей компании.",
     consent: true,
     submissionId: randomUUID(),
   }
@@ -347,9 +311,7 @@ test("API сам проверяет согласие, honeypot, повтор, к
       data: body,
       headers: { Origin: "http://127.0.0.1:3100" },
     })
-  const invalid = await post({ ...data, consent: false })
-  expect(invalid.status()).toBe(422)
-  expect((await invalid.json()).error.fieldErrors.consent).toHaveLength(1)
+  expect((await post({ ...data, consent: false })).status()).toBe(422)
   expect((await post({ ...data, website: "spam" })).status()).toBe(400)
   const saved = await post(data)
   expect(saved.status()).toBe(201)
@@ -360,7 +322,7 @@ test("API сам проверяет согласие, honeypot, повтор, к
     (
       await post({
         ...data,
-        message: "Другая задача с тем же идентификатором.",
+        description: "Другая задача с тем же идентификатором.",
       })
     ).status()
   ).toBe(409)
@@ -368,4 +330,73 @@ test("API сам проверяет согласие, honeypot, повтор, к
   expect(limited.status()).toBe(429)
   expect(Number(limited.headers()["retry-after"])).toBeGreaterThan(0)
   expect(database.prepare('SELECT id FROM "Lead"').all()).toHaveLength(1)
+})
+
+test("выбор услуги и повторный возврат не вызывают ошибок DOM", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/start")
+  await expect(page.locator("footer")).toHaveCount(0)
+  await expect(
+    page.getByRole("button", { name: "Сопровождение", exact: true })
+  ).toHaveCount(0)
+  await expect(page.getByText("Шаг 1 из 4")).toHaveCount(0)
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page
+      .getByRole("button", { name: "Интернет-магазин", exact: true })
+      .click()
+    await nextStep(page)
+    await page.getByRole("button", { name: "Назад", exact: true }).click()
+    await expect(
+      page.getByRole("heading", { name: "Что хотите создать?" })
+    ).toBeVisible()
+    // Clear the selection so each iteration starts in the same state.
+    await page
+      .getByRole("button", { name: "Интернет-магазин", exact: true })
+      .click()
+  }
+  expect(errors).toEqual([])
+})
+
+test("единое поле сохраняет почту", async ({ page, database }) => {
+  await page.goto("/start?service=ecommerce")
+  await fillContacts(page, false)
+  await page.getByLabel("Почта или Telegram").fill("client@example.com")
+  await submitRequest(page)
+  await expectSuccess(page)
+  expect(
+    database.prepare('SELECT email, telegram, message FROM "Lead"').get()
+  ).toEqual({
+    email: "client@example.com",
+    telegram: null,
+    message: "",
+  })
+})
+
+test("пустые имя, контакт и согласие показывают ошибки одновременно", async ({
+  page,
+}) => {
+  await page.goto("/start?service=ecommerce")
+  await submitRequest(page)
+  await expect(page.getByLabel("Имя", { exact: true })).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
+  await expect(page.getByLabel("Почта или Telegram")).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
+  await expect(page.getByRole("checkbox")).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
+  await page.getByLabel("Имя", { exact: true }).fill("Анна")
+  await submitRequest(page)
+  await expect(page.getByLabel("Почта или Telegram")).toBeFocused()
+  await expect(page.getByRole("checkbox")).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
 })

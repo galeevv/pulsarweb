@@ -3,6 +3,20 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ["better-sqlite3"],
+  async redirects() {
+    return [
+      {
+        source: "/services/websites",
+        destination: "/services/landing-pages",
+        permanent: true,
+      },
+      {
+        source: "/services/infrastructure",
+        destination: "/services",
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

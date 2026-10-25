@@ -33,7 +33,10 @@ function optionalChannel<T extends z.ZodRawShape>(
 
 export function resolveNotificationConfig(env: ServerEnv) {
   return {
-    telegram: optionalChannel(telegramSchema, env),
+    telegram: optionalChannel(telegramSchema, {
+      ...env,
+      TELEGRAM_CHAT_ID: env.TELEGRAM_OWNER_CHAT_ID ?? env.TELEGRAM_CHAT_ID,
+    }),
     email: optionalChannel(emailSchema, env),
   }
 }

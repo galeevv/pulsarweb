@@ -5,7 +5,9 @@ import { validLead } from "./fixtures"
 import { IdempotencyConflictError, SpamSubmissionError } from "../domain/ports"
 
 function setup(trustProxy = false) {
-  const execute = vi.fn().mockResolvedValue({ leadId: "lead-1", created: true })
+  const execute = vi
+    .fn()
+    .mockResolvedValue({ leadId: "lead-1", publicId: "PW-1001", created: true })
   const consume = vi
     .fn()
     .mockResolvedValue({ allowed: true, retryAfterSeconds: 600 })
@@ -59,11 +61,19 @@ describe("lead HTTP boundary", () => {
   })
   it("returns 200 for a previously saved request without leaking its payload", async () => {
     const { handler, request, execute } = setup()
-    execute.mockResolvedValue({ leadId: "lead-1", created: false })
+    execute.mockResolvedValue({
+      leadId: "lead-1",
+      publicId: "PW-1001",
+      created: false,
+    })
     const response = await handler(request(JSON.stringify(validLead())))
     expect(response.status).toBe(200)
     expect(response.headers.get("Cache-Control")).toBe("no-store")
-    expect(await response.json()).toEqual({ ok: true, leadId: "lead-1" })
+    expect(await response.json()).toEqual({
+      ok: true,
+      leadId: "lead-1",
+      publicId: "PW-1001",
+    })
   })
 
   it.each([
@@ -120,7 +130,11 @@ describe("lead HTTP boundary", () => {
     const response = await handler(request(JSON.stringify(validLead())))
     expect(response.status).toBe(201)
     expect(response.headers.get("X-Request-Id")).toBeTruthy()
-    expect(await response.json()).toEqual({ ok: true, leadId: "lead-1" })
+    expect(await response.json()).toEqual({
+      ok: true,
+      leadId: "lead-1",
+      publicId: "PW-1001",
+    })
   })
 
   it("rejects another origin before executing or touching rate limits", async () => {
@@ -162,7 +176,7 @@ describe("lead HTTP boundary", () => {
       request(JSON.stringify(validLead({ email: "" })))
     )
     expect(response.status).toBe(422)
-    expect((await response.json()).error.fieldErrors.email).toHaveLength(1)
+    expect((await response.json()).error.fieldErrors.telegram).toHaveLength(1)
   })
 
   it("does not reveal infrastructure error details", async () => {

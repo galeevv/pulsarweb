@@ -1,19 +1,28 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test, type Page } from "@playwright/test"
+import {
+  expectSuccess,
+  fillContacts,
+  nextStep,
+  submitRequest,
+} from "./request-helpers"
 
 const routes = [
   "/",
   "/services",
-  "/services/websites",
+  "/services/landing-pages",
+  "/services/corporate-websites",
+  "/services/ecommerce",
   "/services/web-systems",
   "/services/telegram",
   "/services/desktop",
-  "/services/infrastructure",
+  "/services/other",
   "/services/support",
   "/projects",
   "/projects/pulsar-cloud",
   "/about",
   "/contacts",
+  "/start",
   "/legal/privacy",
   "/legal/personal-data-consent",
   "/legal/cookies",
@@ -85,38 +94,37 @@ test("skip link, короткий экран и фокус внутри моби
   await expect(trigger).toBeFocused()
 })
 
-test("форма, Select и ошибки доступны с клавиатуры при reduced motion", async ({
+test("wizard доступен с клавиатуры на 320px на всех шагах", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" })
   await page.setViewportSize({ width: 320, height: 844 })
-  await page.goto("/contacts")
-  const select = page.getByRole("combobox", { name: "Направление" })
-  await select.focus()
-  await page.keyboard.press("ArrowDown")
-  await expect(page.getByRole("listbox")).toBeVisible()
+  await page.goto("/start")
+  const service = page.getByRole("button", {
+    name: "Лендинг под рекламу",
+    exact: true,
+  })
+  await service.focus()
+  await page.keyboard.press("Space")
+  await expect(service).toHaveAttribute("aria-pressed", "true")
+  await checkAccessibility(page)
+  await nextStep(page)
+  await nextStep(page)
+  await expect(page.getByLabel("Задача и желаемый результат")).toBeFocused()
+  await checkAccessibility(page)
+  await page
+    .getByLabel("Задача и желаемый результат")
+    .fill("Нужен новый сайт для компании с каталогом услуг.")
+  await nextStep(page)
   await checkAccessibility(page)
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth
     )
   ).toBe(true)
-  const duration = await page
-    .locator('[data-slot="select-content"]')
-    .evaluate((node) =>
-      Math.max(
-        ...getComputedStyle(node).animationDuration.split(",").map(parseFloat)
-      )
-    )
-  expect(duration).toBeLessThanOrEqual(0.00001)
-  await page.keyboard.press("Escape")
-  await expect(select).toBeFocused()
-  await page.keyboard.press("Tab")
-  await expect(page.getByLabel("Бюджет · необязательно")).toBeFocused()
-  await page
-    .getByRole("button", { name: "Отправить заявку", exact: true })
-    .click()
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toBeFocused()
+  await nextStep(page)
+  await submitRequest(page)
+  await expect(page.getByLabel("Имя", { exact: true })).toBeFocused()
   await checkAccessibility(page)
 })
 
@@ -139,80 +147,46 @@ test("ошибка сервера сохраняет поля и фокус, п�
               requestId: "refinement-test",
             },
           }
-        : { status: 201, json: { ok: true, leadId: "refinement-test" } }
+        : {
+            status: 201,
+            json: { ok: true, leadId: "refinement-test", publicId: "PW-1042" },
+          }
     )
   })
-  await page.goto("/contacts?service=websites")
-  await page.getByLabel("Ваше имя", { exact: true }).fill("Анна")
-  await page.getByLabel("Email", { exact: true }).fill("anna@example.com")
-  await page
-    .getByLabel("Что хотите сделать?", { exact: true })
-    .fill("Нужен сайт для нового проекта.")
-  await page.getByRole("checkbox").check()
-  const submit = page.getByRole("button", {
-    name: "Отправить заявку",
-    exact: true,
-  })
-  await submit.click()
+  await page.goto("/start?service=websites")
+
+  await fillContacts(page)
+  await submitRequest(page)
   const alert = page
     .getByRole("form", { name: "Заявка на проект" })
     .getByRole("alert")
   await expect(alert).toContainText("Сервис временно недоступен")
-  await expect(alert.locator("..")).toBeFocused()
-  await expect(page.getByLabel("Email", { exact: true })).toHaveValue(
-    "anna@example.com"
+  await expect(alert).toBeFocused()
+  await expect(page.getByLabel("Имя", { exact: true })).toHaveValue(
+    "Тестовый клиент"
   )
   await checkAccessibility(page)
-  await submit.click()
-  await expect(
-    page.getByText("Спасибо. Заявка у нас.", { exact: true })
-  ).toBeVisible()
+  await submitRequest(page)
+  await expectSuccess(page)
   await checkAccessibility(page)
-  await page.getByRole("button", { name: "Отправить ещё одну заявку" }).click()
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toHaveValue("")
-  await expect(page.getByLabel("Ваше имя", { exact: true })).toBeFocused()
 })
 
-test("загрузка контактов показывает skeleton, затем доступную форму", async ({
+test("query выбирает услугу, неизвестный тип возвращает к выбору", async ({
   page,
 }) => {
-  const prefetched = page.waitForResponse(
-    (response) =>
-      new URL(response.url()).pathname === "/contacts" &&
-      response.request().headers()["next-router-prefetch"] === "1" &&
-      !response.request().headers()["next-router-segment-prefetch"]
-  )
-  await page.goto("/")
-  await prefetched
-  let release: () => void = () => {}
-  const gate = new Promise<void>((resolve) => {
-    release = resolve
-  })
-  await page.route("**/contacts?*", async (route) => {
-    const headers = route.request().headers()
-    if (headers.rsc === "1" && headers["next-router-prefetch"] !== "1")
-      await gate
-    await route.continue()
-  })
-  try {
-    await page
-      .getByRole("link", { name: "Обсудить проект", exact: true })
-      .first()
-      .click()
-    await expect(page.getByRole("status")).toHaveText("Загружаем форму…")
+  for (const query of [
+    "?service=infrastructure",
+    "?service=wrong",
+    "?service=websites&service=support",
+  ]) {
+    await page.goto("/start" + query)
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Начнём с вашей задачи."
+      "Что хотите создать?"
     )
-    await checkAccessibility(page)
-  } finally {
-    release()
   }
-  await expect(
-    page.getByRole("combobox", { name: "Направление" })
-  ).toBeVisible()
-  await expect(page.getByText("Загружаем форму…", { exact: true })).toHaveCount(
-    0
-  )
+  await page.goto("/contacts?service=telegram")
+  await expect(page).toHaveURL(/\/start\?service=telegram/)
+  await expect(page.getByLabel("Задача и желаемый результат")).toBeVisible()
 })
 
 test("SEO: уникальные заголовки, canonical без query и изображения для соцсетей", async ({
@@ -221,7 +195,7 @@ test("SEO: уникальные заголовки, canonical без query и и
 }) => {
   const titles = new Set<string>()
   for (const path of routes) {
-    await page.goto(path === "/contacts" ? "/contacts?service=telegram" : path)
+    await page.goto(path === "/start" ? "/start?service=telegram" : path)
     const canonical = page.locator('link[rel="canonical"]')
     await expect(canonical).toHaveCount(1)
     const url = new URL((await canonical.getAttribute("href"))!)

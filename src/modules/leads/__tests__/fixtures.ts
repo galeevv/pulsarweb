@@ -8,7 +8,7 @@ export function validLead(
     name: "Тестовый клиент",
     email: "client@example.com",
     service: "web-systems",
-    message: "Нужна система для обработки входящих заявок.",
+    description: "Нужна система для обработки входящих заявок.",
     consent: true,
     website: "",
     submissionId: randomUUID(),

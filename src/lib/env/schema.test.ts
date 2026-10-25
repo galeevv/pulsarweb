@@ -1,8 +1,33 @@
 import { describe, expect, it } from "vitest"
 import { serverEnvSchema } from "./schema"
 import { resolveDatabaseUrl } from "./database-url"
+import { resolveNotificationConfig } from "./notifications"
 
 describe("server environment", () => {
+  it("routes Telegram notifications to the configured owner before legacy chat settings", () => {
+    const result = resolveNotificationConfig(
+      serverEnvSchema.parse({
+        TELEGRAM_BOT_TOKEN: "123456:test_token",
+        TELEGRAM_OWNER_CHAT_ID: "885112484",
+        TELEGRAM_CHAT_ID: "999999",
+      })
+    )
+    expect(result.telegram).toEqual({
+      state: "ready",
+      config: {
+        TELEGRAM_BOT_TOKEN: "123456:test_token",
+        TELEGRAM_CHAT_ID: "885112484",
+      },
+    })
+    expect(
+      resolveNotificationConfig(serverEnvSchema.parse({})).telegram.state
+    ).toBe("disabled")
+    expect(
+      resolveNotificationConfig(
+        serverEnvSchema.parse({ TELEGRAM_OWNER_CHAT_ID: "885112484" })
+      ).telegram.state
+    ).toBe("invalid")
+  })
   it("starts with all integrations absent", () => {
     expect(serverEnvSchema.parse({}).RESEND_API_KEY).toBeUndefined()
     expect(serverEnvSchema.parse({}).TRUST_PROXY).toBe(false)

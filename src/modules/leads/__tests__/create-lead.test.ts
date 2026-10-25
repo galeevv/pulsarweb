@@ -15,6 +15,8 @@ function setup(notifications: LeadNotification[] = []) {
   const lead: Lead = {
     ...createLeadSchema.parse(input),
     id: "lead-1",
+    publicId: "PW-1001",
+    requestKind: "PROJECT",
     consentVersion: "2026-10-06",
     createdAt: new Date(),
   }
@@ -77,6 +79,7 @@ describe("CreateLead", () => {
     const { input, repository, useCase } = setup()
     await expect(useCase.execute(input, "request-1")).resolves.toEqual({
       leadId: "lead-1",
+      publicId: "PW-1001",
       created: true,
     })
     expect(repository.setNotificationStatus).toHaveBeenCalledWith(
@@ -111,6 +114,7 @@ describe("CreateLead", () => {
     vi.mocked(repository.create).mockResolvedValue({ lead, created: false })
     await expect(useCase.execute(input, "request-2")).resolves.toEqual({
       leadId: "lead-1",
+      publicId: "PW-1001",
       created: false,
     })
     expect(send).not.toHaveBeenCalled()

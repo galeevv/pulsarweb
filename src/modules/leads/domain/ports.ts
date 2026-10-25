@@ -5,6 +5,8 @@ export type Lead = Omit<
   "website" | "submissionId" | "consent"
 > & {
   id: string
+  publicId: string
+  requestKind: "PROJECT" | "SUPPORT"
   consentVersion: string
   createdAt: Date
 }

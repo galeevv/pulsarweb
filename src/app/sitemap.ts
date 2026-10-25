@@ -6,6 +6,8 @@ import { pulsarCloud } from "@/config/projects"
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "/",
+    "/start",
+    "/projects/form",
     ...navigation.map(({ href }) => href),
     ...services.map((service) => `/services/${service.slug}`),
     ...(pulsarCloud.casePublished ? [pulsarCloud.href] : []),

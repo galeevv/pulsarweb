@@ -1,14 +1,14 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
-import { services } from "@/config/services"
+import { primaryServices } from "@/config/services"
 import { cn } from "@/lib/utils"
 
 export function ServiceList({ compact = false }: { compact?: boolean }) {
   const Heading = compact ? "h3" : "h2"
   return (
     <div className={cn("grid", compact && "md:grid-cols-2 md:gap-x-16")}>
-      {services.map((service, index) => (
+      {primaryServices.map((service, index) => (
         <article key={service.slug}>
           <Separator />
           <Link

@@ -9,7 +9,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-4 z-40 mt-4 shrink-0">
       <Container>
-        <div className="glass-panel flex h-20 items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="glass-panel flex h-16 items-center justify-between gap-4 rounded-full pr-2.5 pl-5">
           <Logo />
           <nav
             aria-label="Основная навигация"
@@ -18,7 +18,7 @@ export function SiteHeader() {
             <NavigationLinks />
           </nav>
           <div className="hidden md:block">
-            <ButtonLink href="/contacts" size="lg" className="min-h-11">
+            <ButtonLink href="/start" size="lg" className="min-h-11">
               Обсудить проект
               <ArrowUpRight data-icon="inline-end" />
             </ButtonLink>

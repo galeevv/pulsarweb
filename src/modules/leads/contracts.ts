@@ -1,9 +1,13 @@
 import { z } from "zod"
-import { leadServiceSchema } from "./domain/schema"
+import { resolveRequestService } from "@/config/service-catalog"
 
 // Delivery contracts are shared with the browser, but are not domain entities.
 export const leadApiResponseSchema = z.discriminatedUnion("ok", [
-  z.object({ ok: z.literal(true), leadId: z.string().min(1) }),
+  z.object({
+    ok: z.literal(true),
+    leadId: z.string().min(1),
+    publicId: z.string().regex(/^PW-\d+$/),
+  }),
   z.object({
     ok: z.literal(false),
     error: z.object({
@@ -16,7 +20,7 @@ export const leadApiResponseSchema = z.discriminatedUnion("ok", [
 ])
 
 export const contactQuerySchema = z.object({
-  service: leadServiceSchema.optional().catch(undefined),
+  service: z.unknown().transform(resolveRequestService).optional(),
 })
 
 export type LeadApiResponse = z.infer<typeof leadApiResponseSchema>

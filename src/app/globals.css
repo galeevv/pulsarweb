@@ -150,6 +150,114 @@
   }
 }
 
+.home-dark-panel {
+  position: relative;
+  isolation: isolate;
+}
+.comparison-standard {
+  --background: oklch(0.94 0 0);
+  --foreground: oklch(0.36 0 0);
+  --muted-foreground: oklch(0.48 0 0);
+  --border: oklch(0.84 0 0);
+}
+.home-dark-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 12px;
+  border-radius: 2rem;
+  background: var(--background);
+}
+body:has(.home-motion) > footer {
+  background: var(--background);
+}
+@media (max-width: 680px) {
+  .home-dark-panel::before {
+    inset-inline: 0;
+    border-radius: 0;
+  }
+  .home-hero-shell {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+  .home-hero {
+    border-radius: 0;
+  }
+}
+
+.service-grid {
+  display: grid;
+  gap: 24px;
+}
+.service-visual {
+  aspect-ratio: 16 / 9;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-image {
+  transform: none;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-arrow {
+  transition: transform 0.35s ease;
+}
+.home-section-title {
+  font-size: clamp(2.25rem, 4vw, 3.75rem);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+.project-card-link,
+.project-card-arrow {
+  transition: transform 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card-link:hover {
+    transform: translateY(-3px);
+  }
+  .project-card-link:hover .project-card-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+@media (min-width: 768px) {
+  .service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 28px;
+    align-items: stretch;
+    container-type: inline-size;
+  }
+  .service-tile {
+    display: flex;
+    flex-direction: column;
+  }
+  .service-tile:nth-child(4n + 1),
+  .service-tile:nth-child(4n) {
+    grid-column: span 2;
+  }
+  .service-visual {
+    aspect-ratio: auto;
+    height: clamp(240px, 28cqw, 320px);
+    flex-shrink: 0;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-tile:hover .service-visual {
+    transform: scale(1.015);
+  }
+  .service-tile:hover .service-arrow {
+    transform: translate(3px, -3px);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .service-tile:focus-visible .service-visual {
+    transform: scale(1.015);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-image {
+    transform: none;
+  }
+}
+
 /* Keep field text legible on the input surface, including invalid fields. */
 [data-slot="input"],
 [data-slot="textarea"],
@@ -198,5 +306,22 @@ textarea:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Short, non-blocking entry transitions for the request flow. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="true"] > .request-step,
+  .request-success[data-motion="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(6px);
+    }
   }
 }

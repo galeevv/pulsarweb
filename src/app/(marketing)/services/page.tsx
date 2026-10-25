@@ -5,12 +5,13 @@ import { ButtonLink } from "@/components/shared/button-link"
 import { CTA } from "@/components/shared/cta"
 import { PageHeader } from "@/components/shared/page-header"
 import { SectionHeader } from "@/components/shared/section-header"
+import { SupportOffer } from "@/components/shared/support-offer"
 import { ServiceList } from "@/components/shared/service-list"
 import { pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata(
   "Услуги",
-  "Разработка сайтов, web-систем, Telegram-автоматизации и desktop-приложений. Инфраструктура, запуск и сопровождение цифровых продуктов.",
+  "Лендинги под рекламу, корпоративные сайты, интернет-магазины и бизнес в Telegram. Разработка и запуск под ключ.",
   "/services"
 )
 
@@ -20,10 +21,15 @@ export default function ServicesPage() {
       <PageHeader
         eyebrow="Наши направления"
         title="От первой задачи до работающего продукта."
-        description="Подключимся на нужном этапе или возьмём весь технический цикл: проектирование, разработку, интеграции, запуск и сопровождение."
+        description="Создаём новые проекты с нуля под ключ. Инфраструктура и запуск входят в реализацию, дальнейшее сопровождение оплачивается отдельно."
       />
       <Section className="pt-4 md:pt-4" aria-label="Направления разработки">
         <ServiceList />
+        <div className="mt-8">
+          <ButtonLink href="/services/other" variant="ghost">
+            Другой проект <ArrowUpRight data-icon="inline-end" />
+          </ButtonLink>
+        </div>
       </Section>
       <Section className="bg-muted/40">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
@@ -41,12 +47,13 @@ export default function ServicesPage() {
               Заранее продумываем обработку ошибок, повторные запросы и доступ к
               данным, чтобы связь между сервисами была предсказуемой.
             </p>
-            <ButtonLink href="/contacts" variant="outline">
-              Обсудить интеграцию <ArrowUpRight data-icon="inline-end" />
+            <ButtonLink href="/start" variant="outline">
+              Обсудить новый проект <ArrowUpRight data-icon="inline-end" />
             </ButtonLink>
           </div>
         </div>
       </Section>
+      <SupportOffer />
       <CTA
         title="Начнём с вашей задачи."
         description="Необязательно заранее выбирать технологию или направление. Опишите текущий процесс и результат, который хотите получить."

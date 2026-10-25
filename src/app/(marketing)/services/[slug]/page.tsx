@@ -1,4 +1,9 @@
+import {
+  projectRequestConfig,
+  projectRequestHref,
+} from "@/modules/leads/domain/request-config"
 import Link from "next/link"
+import { resolveRequestService } from "@/config/service-catalog"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react"
 
@@ -14,24 +19,32 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Separator } from "@/components/ui/separator"
-import { getService, services } from "@/config/services"
+import { getService, primaryServices, legacyPageIds } from "@/config/services"
 import { pageMetadata } from "@/lib/seo"
 
 type ServicePageProps = { params: Promise<{ slug: string }> }
 
 export function generateStaticParams() {
-  return services.map(({ slug }) => ({ slug }))
+  return [
+    ...primaryServices.map(({ slug }) => slug),
+    "support",
+    "other",
+    ...legacyPageIds,
+  ].map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: ServicePageProps) {
   const { slug } = await params
   const service = getService(slug)
   if (!service) notFound()
-  return pageMetadata(
+  const metadata = pageMetadata(
     service.shortTitle,
     service.description,
     `/services/${service.slug}`
   )
+  return legacyPageIds.some((id) => id === slug)
+    ? { ...metadata, robots: { index: false, follow: true } }
+    : metadata
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -48,13 +61,21 @@ export default async function ServicePage({ params }: ServicePageProps) {
       />
       <Section className="pt-0 md:pt-0">
         <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href={`/contacts?service=${service.slug}`}>
-            Обсудить проект <ArrowUpRight data-icon="inline-end" />
+          <ButtonLink href={projectRequestHref(service.slug)}>
+            {projectRequestConfig[resolveRequestService(service.slug)!].cta}{" "}
+            <ArrowUpRight data-icon="inline-end" />
           </ButtonLink>
           <ButtonLink href="/services" variant="ghost">
             <ArrowLeft data-icon="inline-start" /> Все услуги
           </ButtonLink>
         </div>
+      </Section>
+      <Section className="pt-0 md:pt-0">
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          {service.slug === "support"
+            ? "Сопровождение — отдельная платная опция после запуска, прежде всего для проектов PulsarWeb."
+            : "Проектируем, разрабатываем и запускаем продукт целиком. Запуск входит в стоимость разработки. Постоянное сопровождение после запуска — отдельно, по желанию."}
+        </p>
       </Section>
       <Separator />
       <Section>
@@ -137,7 +158,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <Section className="pt-0 md:pt-0" aria-label="Другие направления">
         <p className="eyebrow mb-6">Другие направления</p>
         <nav className="flex flex-wrap gap-x-8 gap-y-4" aria-label="Услуги">
-          {services
+          {primaryServices
             .filter((item) => item.slug !== service.slug)
             .map((item) => (
               <Link
@@ -150,7 +171,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
             ))}
         </nav>
       </Section>
-      <CTA href={`/contacts?service=${service.slug}`} />
+      <CTA
+        href={projectRequestHref(service.slug)}
+        label={projectRequestConfig[resolveRequestService(service.slug)!].cta}
+      />
     </>
   )
 }

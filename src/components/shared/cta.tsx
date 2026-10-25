@@ -6,12 +6,14 @@ import { Separator } from "@/components/ui/separator"
 export function CTA({
   title = "С чего начнём?",
   description = "Расскажите о задаче. Обсудим, что нужно бизнесу, и предложим понятный следующий шаг.",
-  href = "/contacts",
+  href = "/start",
+  label = "Обсудить проект",
   className,
 }: {
   title?: string
   description?: string
   href?: string
+  label?: string
   className?: string
 }) {
   return (
@@ -29,7 +31,7 @@ export function CTA({
             </p>
           </div>
           <ButtonLink href={href} className="h-12 px-6">
-            Обсудить проект
+            {label}
             <ArrowUpRight data-icon="inline-end" />
           </ButtonLink>
         </div>

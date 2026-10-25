@@ -37,9 +37,22 @@ describe("SEO foundation", () => {
     expect(urls.some((url) => /^\/(api|legal)\//.test(url.pathname))).toBe(
       false
     )
-    expect(urls.some((url) => url.pathname === "/services/web-systems")).toBe(
+    expect(urls.some((url) => url.pathname === "/services/ecommerce")).toBe(
       true
     )
+    for (const slug of ["websites", "web-systems", "desktop", "infrastructure"])
+      expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
+        false
+      )
+    for (const slug of [
+      "landing-pages",
+      "corporate-websites",
+      "telegram",
+      "support",
+    ])
+      expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
+        true
+      )
     expect(urls.some((url) => url.pathname === "/projects/pulsar-cloud")).toBe(
       false
     )

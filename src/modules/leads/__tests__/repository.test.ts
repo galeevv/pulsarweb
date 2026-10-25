@@ -291,7 +291,7 @@ describe("HTTP → SQLite → configured notification adapters", () => {
       })
       expect(saved).toMatchObject({
         email: input.email,
-        message: input.message,
+        description: input.description,
         notificationStatus: status,
         consentVersion,
       })
@@ -302,7 +302,7 @@ describe("HTTP → SQLite → configured notification adapters", () => {
       ])
       for (const privateValue of [
         input.email!,
-        input.message,
+        input.description,
         env.TELEGRAM_BOT_TOKEN!,
         env.RESEND_API_KEY!,
         "private Telegram failure",
@@ -350,7 +350,7 @@ describe("SQLite lead repository", () => {
         where: { id: result.leadId },
       })
       expect(row.notificationStatus).toBe(status)
-      expect(row.message).toBeTruthy()
+      expect(row.description).toBeTruthy()
     }
   )
 
@@ -395,7 +395,7 @@ describe("SQLite lead repository", () => {
     await repository.create(input, consentVersion)
     await expect(
       repository.create(
-        { ...input, message: "A different project request" },
+        { ...input, description: "A different project request" },
         consentVersion
       )
     ).rejects.toBeInstanceOf(IdempotencyConflictError)
@@ -441,5 +441,58 @@ describe("SQLite rate limiter", () => {
       Array.from({ length: 8 }, () => limiter.consume("concurrent"))
     )
     expect(results.filter((result) => result.allowed)).toHaveLength(3)
+  })
+})
+
+describe("project request persistence", () => {
+  it("allocates distinct public numbers to concurrent leads and preserves the number on retry", async () => {
+    const repository = new PrismaLeadRepository(database)
+    const inputs = Array.from({ length: 5 }, () =>
+      createLeadSchema.parse(validLead())
+    )
+    const results = await Promise.all(
+      inputs.map((input) => repository.create(input, consentVersion))
+    )
+    expect(new Set(results.map((result) => result.lead.publicId)).size).toBe(5)
+    for (const result of results)
+      expect(result.lead.publicId).toMatch(/^PW-\d+$/)
+    const retry = await repository.create(inputs[0], consentVersion)
+    expect(retry.lead.publicId).toBe(results[0].lead.publicId)
+    expect(retry.created).toBe(false)
+  })
+  it("stores support, consent and attribution before Telegram can fail", async () => {
+    const input = validLead({
+      service: "support",
+      projectReference: "Pulsar Example",
+      sourceUrl: "/services/support",
+      referrer: "https://studio.example/services/support",
+      utmSource: "newsletter",
+      timeline: "Как можно скорее",
+    })
+    const result = await new CreateLead(
+      new PrismaLeadRepository(database),
+      [
+        {
+          name: "telegram",
+          send: async () => {
+            throw new Error("offline")
+          },
+        },
+      ],
+      { info() {}, warn() {}, error() {} }
+    ).execute(input, "test")
+    const row = await database.lead.findUniqueOrThrow({
+      where: { id: result.leadId },
+    })
+    expect(row).toMatchObject({
+      publicId: result.publicId,
+      requestKind: "SUPPORT",
+      status: "NEW",
+      consent: true,
+      projectReference: "Pulsar Example",
+      sourceUrl: "/services/support",
+      utmSource: "newsletter",
+      notificationStatus: "failed",
+    })
   })
 })

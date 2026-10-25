@@ -9,6 +9,19 @@ datasource db {
 
 model Lead {
   id                 String   @id @default(cuid())
+  publicId           String   @unique
+  requestKind        String
+  status             String   @default("NEW")
+  consent            Boolean  @default(true)
+  companyContext     String?
+  projectReference   String?
+  timeline           String?
+  sourceUrl          String?
+  referrer           String?
+  utmSource          String?
+  utmMedium          String?
+  utmCampaign        String?
+  updatedAt          DateTime @updatedAt
   submissionId       String   @unique
   payloadHash        String
   name               String
@@ -18,7 +31,7 @@ model Lead {
   telegram           String?
   service            String
   budget             String?
-  message            String
+  description        String   @map("message")
   consentVersion     String
   consentAt          DateTime @default(now())
   notificationStatus String   @default("pending")
@@ -34,4 +47,9 @@ model RateLimitBucket {
   expiresAt BigInt
 
   @@index([expiresAt])
+}
+
+model LeadSequence {
+  id Int @id
+  value Int
 }

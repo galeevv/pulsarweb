@@ -61,7 +61,7 @@ export default function AboutPage() {
                 Помогаем пройти путь от общей идеи до продукта, которым можно
                 пользоваться каждый день.
               </p>
-              <ButtonLink href="/contacts" variant="outline">
+              <ButtonLink href="/start" variant="outline">
                 Обсудить проект{" "}
                 <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
               </ButtonLink>

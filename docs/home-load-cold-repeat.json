@@ -1,0 +1,44 @@
+[
+  {
+    "mode": "normal",
+    "ttfb": 19.699999928474426,
+    "domReady": 45.199999928474426,
+    "load": 151.10000002384186,
+    "fcp": 280,
+    "lcp": 280,
+    "longTaskMs": 5242,
+    "blockingMs": 5142,
+    "maxTaskMs": 5192,
+    "frameP95": 5094.5,
+    "firstDraw": 5365.399999976158,
+    "gl": {
+      "contextMs": 125.60000002384186,
+      "compileShader": {
+        "ms": 0,
+        "count": 2,
+        "max": 0
+      },
+      "linkProgram": {
+        "ms": 0,
+        "count": 1,
+        "max": 0
+      },
+      "getShaderParameter": {
+        "ms": 5.6000001430511475,
+        "count": 2,
+        "max": 5.300000071525574
+      },
+      "getProgramParameter": {
+        "ms": 5049.199999928474,
+        "count": 1,
+        "max": 5049.199999928474
+      },
+      "drawArrays": {
+        "ms": 0,
+        "count": 6,
+        "max": 0
+      }
+    },
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  }
+]

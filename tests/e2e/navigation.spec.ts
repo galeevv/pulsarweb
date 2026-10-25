@@ -1,5 +1,55 @@
 import { expect, test } from "@playwright/test"
 
+test("четыре продукта, отдельное сопровождение и совместимость старых ссылок", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/")
+  await expect(page.locator("#services a")).toHaveCount(4)
+  await expect(
+    page.locator('#services a[href="/services/ecommerce"]')
+  ).toBeVisible()
+  await expect(page.locator("#why-pulsarweb")).toContainText(
+    "Инфраструктура и запуск включены"
+  )
+  for (const [legacy, current] of [
+    ["websites", "landing-pages"],
+    ["desktop", "other"],
+    ["web-systems", "other"],
+  ]) {
+    await page.goto(`/start?service=${legacy}`)
+    await expect(page.getByLabel("Задача и желаемый результат")).toBeVisible()
+    await page.getByRole("button", { name: "Назад", exact: true }).click()
+    await expect(
+      page.getByRole("button", {
+        name:
+          current === "landing-pages" ? "Лендинг под рекламу" : "Другой проект",
+        exact: true,
+      })
+    ).toHaveAttribute("aria-pressed", "true")
+  }
+  for (const [legacy, current] of [
+    ["websites", "landing-pages"],
+    ["infrastructure", ""],
+  ]) {
+    const response = await request.get(`/services/${legacy}`, {
+      maxRedirects: 0,
+    })
+    expect(response.status()).toBe(308)
+    expect(response.headers().location).toBe(
+      `/services${current ? `/${current}` : ""}`
+    )
+  }
+  for (const legacy of ["desktop", "web-systems"]) {
+    await page.goto(`/services/${legacy}`)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      /noindex/
+    )
+    await expect(page.locator('main a[href*="service=other"]')).toHaveCount(2)
+  }
+})
+
 test("мобильная навигация поддерживает клавиатуру и переход к контактам", async ({
   page,
 }) => {
@@ -36,11 +86,12 @@ for (const width of [320, 768, 1024, 1440, 1920]) {
     for (const path of [
       "/",
       "/services",
-      "/services/web-systems",
+      "/services/ecommerce",
       "/projects",
       "/projects/pulsar-cloud",
       "/about",
       "/contacts",
+      "/start",
       "/legal/privacy",
       "/legal/personal-data-consent",
       "/legal/cookies",
@@ -59,30 +110,33 @@ test("каждая услуга ведёт к форме с выбранным �
   page,
 }) => {
   for (const slug of [
-    "websites",
-    "web-systems",
+    "landing-pages",
+    "corporate-websites",
+    "ecommerce",
     "telegram",
-    "desktop",
-    "infrastructure",
+    "other",
     "support",
   ]) {
     await page.goto("/services")
     const service = page.locator(`main a[href="/services/${slug}"]`)
-    const title = await service.locator("h2").innerText()
     await service.click()
     await expect(page).toHaveURL(`/services/${slug}`)
     const faq = page.locator("main button[aria-expanded]").first()
     await faq.focus()
     await page.keyboard.press("Enter")
     await expect(faq).toHaveAttribute("aria-expanded", "true")
-    const callsToAction = page.locator(
-      `main a[href="/contacts?service=${slug}"]`
-    )
+    const callsToAction = page.locator(`main a[href^="/start"]`)
     await expect(callsToAction).toHaveCount(2)
     await callsToAction.last().click()
+    await expect(page).toHaveURL(/\/start\?/)
     await expect(
-      page.getByRole("combobox", { name: "Направление" })
-    ).toContainText(title)
+      page.getByLabel(
+        slug === "support"
+          ? "Задачи по сопровождению"
+          : "Задача и желаемый результат",
+        { exact: true }
+      )
+    ).toBeVisible()
   }
 })
 
@@ -103,6 +157,8 @@ test("юридические черновики имеют содержание,
       .click()
     await expect(page).toHaveURL(/#legal-section-\d+$/)
     await page.getByRole("link", { name: "Вернуться к форме" }).click()
-    await expect(page.getByLabel("Ваше имя", { exact: true })).toBeVisible()
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "Что хотите создать?"
+    )
   }
 })

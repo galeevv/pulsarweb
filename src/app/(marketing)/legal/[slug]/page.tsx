@@ -119,7 +119,7 @@ export default async function LegalPage({ params }: LegalPageProps) {
               соответствовать фактическим процессам обработки данных.
             </p>
             <ButtonLink
-              href="/contacts"
+              href="/start"
               variant="outline"
               className="self-start"
             >

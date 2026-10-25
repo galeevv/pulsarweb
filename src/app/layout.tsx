@@ -1,5 +1,6 @@
 import { Inter, Geist_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/layout/site-header"
+import { FooterVisibility } from "@/components/layout/footer-visibility"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { rootMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
@@ -31,10 +32,12 @@ export default function RootLayout({
           Перейти к содержимому
         </a>
         <SiteHeader />
-        <main id="main" tabIndex={-1} className="flex-1">
+        <main id="main" tabIndex={-1} className="flex flex-1 flex-col">
           {children}
         </main>
-        <SiteFooter />
+        <FooterVisibility>
+          <SiteFooter />
+        </FooterVisibility>
       </body>
     </html>
   )

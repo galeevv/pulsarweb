@@ -18,13 +18,18 @@ export class CreateLead {
   async execute(
     input: unknown,
     requestId: string
-  ): Promise<{ leadId: string; created: boolean }> {
+  ): Promise<{ leadId: string; publicId: string; created: boolean }> {
     const data = createLeadSchema.parse(input)
     if (data.website) throw new SpamSubmissionError()
 
     const { lead, created } = await this.repository.create(data, consentVersion)
-    if (!created) return { leadId: lead.id, created: false }
-    this.logger.info("lead.created", { leadId: lead.id, requestId })
+    if (!created)
+      return { leadId: lead.id, publicId: lead.publicId, created: false }
+    this.logger.info("lead.created", {
+      leadId: lead.id,
+      publicId: lead.publicId,
+      requestId,
+    })
 
     const results = await Promise.allSettled(
       this.notifications.map((notification) =>
@@ -44,6 +49,17 @@ export class CreateLead {
             : "partial"
 
     results.forEach((result, index) => {
+      if (this.notifications[index].name === "telegram") {
+        const event =
+          result.status === "fulfilled"
+            ? "lead.telegram_notification.sent"
+            : "lead.telegram_notification.failed"
+        this.logger[result.status === "fulfilled" ? "info" : "warn"](event, {
+          leadId: lead.id,
+          publicId: lead.publicId,
+          requestId,
+        })
+      }
       if (result.status === "rejected") {
         // Provider errors may contain tokens, URLs or customer data. Log only metadata.
         this.logger.warn("lead.notification_failed", {
@@ -68,6 +84,6 @@ export class CreateLead {
       })
     }
 
-    return { leadId: lead.id, created: true }
+    return { leadId: lead.id, publicId: lead.publicId, created: true }
   }
 }

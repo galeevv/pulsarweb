@@ -1,10 +1,10 @@
 // Publish only confirmed facts. Add verified case material here when supplied.
 export const pulsarCloud = {
-  casePublished: false,
-  name: "Pulsar Cloud",
+  casePublished: true,
+  name: "Pulsar VPN",
   alternateName: "Pulsar VPN",
   href: "/projects/pulsar-cloud",
-  status: "Кейс готовится к публикации",
+  status: "Запущен",
   description:
-    "Первый проект PulsarWeb. Отдельный разбор продукта, его устройства и принятых решений готовится к публикации.",
+    "VPN-сервис с личным кабинетом, управлением подпиской и интеграцией с Telegram.",
 } as const

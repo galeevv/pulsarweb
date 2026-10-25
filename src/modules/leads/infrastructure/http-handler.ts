@@ -123,7 +123,11 @@ export function createLeadHttpHandler(dependencies: Dependencies) {
         requestId
       )
       return Response.json(
-        { ok: true, leadId: result.leadId } satisfies LeadApiResponse,
+        {
+          ok: true,
+          leadId: result.leadId,
+          publicId: result.publicId,
+        } satisfies LeadApiResponse,
         { status: result.created ? 201 : 200, headers }
       )
     } catch (error) {
