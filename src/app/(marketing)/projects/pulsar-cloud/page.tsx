@@ -23,7 +23,7 @@ export default function PulsarCloudPage() {
       <Section className="pt-0 md:pt-0">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <Badge variant="secondary">Запущен</Badge>
-          <ButtonLink href="/projects" variant="outline">
+          <ButtonLink href="/projects" variant="outline" className="h-12">
             Все проекты
           </ButtonLink>
         </div>
@@ -32,7 +32,8 @@ export default function PulsarCloudPage() {
           alt="Мобильный личный кабинет Pulsar VPN на смартфоне на металлической поверхности."
           width={1600}
           height={900}
-          className="aspect-video w-full rounded-3xl object-cover"
+          sizes="(max-width: 680px) 100vw, 1400px"
+          className="aspect-video w-full rounded-3xl object-cover sm:rounded-[2rem]"
         />
         <p className="mt-4 text-sm text-muted-foreground">
           AI-мокап на основе реального интерфейса с демонстрационными данными.
@@ -47,7 +48,7 @@ export default function PulsarCloudPage() {
           </ButtonLink>
         </div>
       </Section>
-      <Section className="bg-muted/40">
+      <Section className="dark home-dark-panel text-foreground">
         <div className="grid gap-10 md:grid-cols-2">
           <div className="flex flex-col gap-4">
             <h2 className="text-3xl font-medium">Задача</h2>

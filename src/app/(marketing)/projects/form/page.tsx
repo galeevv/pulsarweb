@@ -23,7 +23,7 @@ export default function FormProjectPage() {
       <Section className="pt-0 md:pt-0">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <Badge variant="secondary">Концепт</Badge>
-          <ButtonLink href="/projects" variant="outline">
+          <ButtonLink href="/projects" variant="outline" className="h-12">
             Все проекты
           </ButtonLink>
         </div>
@@ -32,14 +32,15 @@ export default function FormProjectPage() {
           alt="Визуальный концепт сайта FORM на мониторе: сфера, куб и терракотовое кольцо."
           width={1600}
           height={900}
-          className="aspect-video w-full rounded-3xl object-cover"
+          sizes="(max-width: 680px) 100vw, 1400px"
+          className="aspect-video w-full rounded-3xl object-cover sm:rounded-[2rem]"
         />
         <p className="mt-4 text-sm text-muted-foreground">
           Концептуальная визуализация, созданная с помощью AI. FORM —
           вымышленный бренд; это не клиентский заказ и не запущенный сайт.
         </p>
       </Section>
-      <Section className="bg-muted/40">
+      <Section className="dark home-dark-panel text-foreground">
         <div className="grid gap-10 md:grid-cols-3">
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-medium">Идея</h2>

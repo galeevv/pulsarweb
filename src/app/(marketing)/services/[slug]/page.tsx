@@ -1,8 +1,10 @@
+import { LandingService } from "@/components/shared/landing-service"
 import {
   projectRequestConfig,
   projectRequestHref,
 } from "@/modules/leads/domain/request-config"
 import Link from "next/link"
+import Image from "next/image"
 import { resolveRequestService } from "@/config/service-catalog"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react"
@@ -52,6 +54,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const service = getService(slug)
   if (!service) notFound()
 
+  if (slug === "landing-pages") return <LandingService />
+
   return (
     <>
       <PageHeader
@@ -61,7 +65,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       />
       <Section className="pt-0 md:pt-0">
         <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href={projectRequestHref(service.slug)}>
+          <ButtonLink href={projectRequestHref(service.slug)} className="h-12">
             {projectRequestConfig[resolveRequestService(service.slug)!].cta}{" "}
             <ArrowUpRight data-icon="inline-end" />
           </ButtonLink>
@@ -69,16 +73,31 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <ArrowLeft data-icon="inline-start" /> Все услуги
           </ButtonLink>
         </div>
-      </Section>
-      <Section className="pt-0 md:pt-0">
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {service.slug === "support"
             ? "Сопровождение — отдельная платная опция после запуска, прежде всего для проектов PulsarWeb."
             : "Проектируем, разрабатываем и запускаем продукт целиком. Запуск входит в стоимость разработки. Постоянное сопровождение после запуска — отдельно, по желанию."}
         </p>
       </Section>
-      <Separator />
-      <Section>
+      {"image" in service &&
+        service.slug !== "support" &&
+        service.slug !== "other" && (
+          <Section className="pt-0 md:pt-0">
+            <Image
+              src={`/images/services/${service.image}.webp`}
+              alt={`Визуальное направление: ${service.shortTitle}`}
+              width={1600}
+              height={900}
+              sizes="(max-width: 680px) 100vw, 1400px"
+              className="aspect-[16/10] w-full rounded-3xl object-cover sm:aspect-[2/1] sm:rounded-[2rem]"
+            />
+            <p className="mt-3 text-xs text-muted-foreground">
+              Иллюстрация направления. Дизайн вашего проекта создаём под его
+              задачи.
+            </p>
+          </Section>
+        )}
+      <Section className="pt-0 md:pt-0">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div>
             <p className="eyebrow mb-6">Подход к задаче</p>
@@ -86,9 +105,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
               {service.intro}
             </h2>
           </div>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8">
             {service.outcomes.map((outcome) => (
-              <div key={outcome.title} className="flex flex-col gap-3">
+              <div
+                key={outcome.title}
+                className="flex flex-col gap-3 border-t border-border pt-6"
+              >
                 <h3 className="text-xl font-medium tracking-tight">
                   {outcome.title}
                 </h3>
@@ -100,11 +122,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </div>
       </Section>
-      <Section className="bg-muted/40">
+      <Section className="dark home-dark-panel text-foreground">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <SectionHeader
             eyebrow="Что можем сделать"
-            title="Конкретные решения. Согласованный объём."
+            title={
+              service.slug === "support"
+                ? "Забота о работающем проекте."
+                : "Всё, что нужно для запуска."
+            }
             description="Состав проекта определяем после знакомства с задачей. Начинаем с необходимого и оставляем понятный путь для дальнейшего развития."
           />
           <ul className="flex flex-col gap-6 lg:pt-10">
@@ -124,7 +150,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <SectionHeader eyebrow="Процесс" title="Понятно на каждом этапе." />
         <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {service.process.map((step, index) => (
-            <li key={step.title} className="flex flex-col gap-5">
+            <li
+              key={step.title}
+              className="flex flex-col gap-5 rounded-3xl border border-border/70 bg-muted/30 p-6"
+            >
               <p
                 className="font-mono text-xs text-muted-foreground"
                 aria-hidden="true"

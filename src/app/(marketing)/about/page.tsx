@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { ButtonLink } from "@/components/shared/button-link"
 import { CTA } from "@/components/shared/cta"
-import { PulsarMark } from "@/components/shared/logo"
+import Image from "next/image"
 import { Separator } from "@/components/ui/separator"
 import { pageMetadata } from "@/lib/seo"
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
       <Container>
         <section
           aria-labelledby="about-title"
-          className="py-16 md:py-24 lg:py-32"
+          className="pt-12 pb-16 md:pt-20 md:pb-24"
         >
           <p className="eyebrow mb-8">О PulsarWeb</p>
           <h1
@@ -57,11 +57,11 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col items-start gap-6">
               <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Создаём сайты, внутренние системы и автоматизацию для бизнеса.
-                Помогаем пройти путь от общей идеи до продукта, которым можно
-                пользоваться каждый день.
+                Создаём сайты, интернет-магазины и Telegram Mini Apps для
+                бизнеса. Помогаем пройти путь от общей идеи до продукта, которым
+                можно пользоваться каждый день.
               </p>
-              <ButtonLink href="/start" variant="outline">
+              <ButtonLink href="/start" variant="outline" className="h-12">
                 Обсудить проект{" "}
                 <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
               </ButtonLink>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         </section>
       </Container>
 
-      <Section className="bg-muted/40">
+      <Section className="dark home-dark-panel text-foreground">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div className="flex flex-col gap-6">
             <p className="eyebrow">Формат работы</p>
@@ -105,11 +105,18 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
-          <div
-            aria-hidden="true"
-            className="flex aspect-square max-h-96 items-center justify-center rounded-3xl bg-primary text-primary-foreground"
-          >
-            <PulsarMark size={240} className="size-1/2" />
+          <div className="flex flex-col gap-3">
+            <Image
+              src="/images/projects/pulsar-vpn-diagonal-16x9.webp"
+              alt="Личный кабинет собственного сервиса Pulsar VPN"
+              width={1600}
+              height={900}
+              sizes="(max-width: 1023px) 100vw, 640px"
+              className="aspect-video w-full rounded-3xl object-cover"
+            />
+            <p className="text-xs text-muted-foreground">
+              Pulsar VPN · AI-мокап реального интерфейса
+            </p>
           </div>
           <div className="flex flex-col items-start gap-6">
             <p className="eyebrow">Собственный опыт</p>
@@ -118,12 +125,16 @@ export default function AboutPage() {
               <br /> И работаем с ними дальше.
             </h2>
             <p className="leading-relaxed text-muted-foreground">
-              Pulsar Cloud — собственный проект PulsarWeb. Опыт его разработки и
+              Pulsar VPN — собственный проект PulsarWeb. Опыт его разработки и
               эксплуатации помогает учитывать то, что происходит с системой
               после запуска: обновления, поддержку и новые задачи.
             </p>
-            <ButtonLink href="/projects" variant="outline">
-              Посмотреть проекты{" "}
+            <ButtonLink
+              href="/projects/pulsar-cloud"
+              variant="outline"
+              className="h-12"
+            >
+              Посмотреть проект{" "}
               <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
             </ButtonLink>
           </div>
@@ -133,7 +144,6 @@ export default function AboutPage() {
       <CTA
         title="Начнём с вашей задачи."
         description="Готовое техническое задание не требуется. Коротко опишите идею — уточним детали в переписке, а при необходимости договоримся о созвоне."
-        className="bg-muted/40"
       />
     </>
   )

@@ -325,3 +325,8 @@ textarea:focus-visible {
     }
   }
 }
+
+/* Preserve readable secondary copy on the muted project-card surface. */
+.project-card-link {
+  --muted-foreground: oklch(0.5 0 0);
+}

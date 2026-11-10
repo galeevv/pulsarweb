@@ -13,12 +13,18 @@ const homeServices = primaryServices.toSorted(
   (a, b) => homeOrder.indexOf(a.slug) - homeOrder.indexOf(b.slug)
 )
 
-export function ServiceCards() {
+export function ServiceCards({
+  showHeading = true,
+}: {
+  showHeading?: boolean
+}) {
   return (
     <>
-      <h2 className="home-section-title mb-12 md:mb-16" data-home-heading>
-        Что мы делаем
-      </h2>
+      {showHeading && (
+        <h2 className="home-section-title mb-12 md:mb-16" data-home-heading>
+          Что мы делаем
+        </h2>
+      )}
       <div className="service-grid">
         {homeServices.map((service) => (
           <Link

@@ -25,10 +25,9 @@ export function SiteFooter() {
               </Link>
               <Link
                 href="/contacts"
-                title="Адрес почты скоро появится"
                 className="inline-flex min-h-11 items-center rounded-sm text-sm text-muted-foreground hover:text-foreground"
               >
-                Почта
+                Контакты
               </Link>
             </nav>
           </div>

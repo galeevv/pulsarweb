@@ -11,5 +11,6 @@ export const site = {
     address: null,
     email: null,
   } satisfies Record<string, string | null>,
+  telegramChannelUrl: "https://t.me/pulsarweb_dev",
   optionalCookies: false,
 } as const

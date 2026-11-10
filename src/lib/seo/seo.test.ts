@@ -54,7 +54,7 @@ describe("SEO foundation", () => {
         true
       )
     expect(urls.some((url) => url.pathname === "/projects/pulsar-cloud")).toBe(
-      false
+      true
     )
     expect(robots().rules).toMatchObject({ disallow: ["/api/"] })
   })
