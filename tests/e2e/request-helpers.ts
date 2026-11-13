@@ -12,7 +12,7 @@ export async function fillContacts(page: Page, contact = true) {
       .fill("Pulsar_Client")
   await page
     .getByRole("checkbox", {
-      name: "Я соглашаюсь на обработку персональных данных.",
+      name: "Соглашаюсь на обработку персональных данных и политику конфиденциальности.",
     })
     .check()
 }

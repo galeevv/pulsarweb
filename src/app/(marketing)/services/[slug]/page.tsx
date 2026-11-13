@@ -21,18 +21,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Separator } from "@/components/ui/separator"
-import { getService, primaryServices, legacyPageIds } from "@/config/services"
+import { getService, primaryServices } from "@/config/services"
 import { pageMetadata } from "@/lib/seo"
 
 type ServicePageProps = { params: Promise<{ slug: string }> }
 
 export function generateStaticParams() {
-  return [
-    ...primaryServices.map(({ slug }) => slug),
-    "support",
-    "other",
-    ...legacyPageIds,
-  ].map((slug) => ({ slug }))
+  return primaryServices.map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: ServicePageProps) {
@@ -44,9 +39,7 @@ export async function generateMetadata({ params }: ServicePageProps) {
     service.description,
     `/services/${service.slug}`
   )
-  return legacyPageIds.some((id) => id === slug)
-    ? { ...metadata, robots: { index: false, follow: true } }
-    : metadata
+  return metadata
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -74,29 +67,25 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </ButtonLink>
         </div>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {service.slug === "support"
-            ? "Сопровождение — отдельная платная опция после запуска, прежде всего для проектов PulsarWeb."
-            : "Проектируем, разрабатываем и запускаем продукт целиком. Запуск входит в стоимость разработки. Постоянное сопровождение после запуска — отдельно, по желанию."}
+          Проектируем, разрабатываем и запускаем продукт целиком. Запуск входит
+          в стоимость разработки. Постоянное сопровождение после запуска —
+          отдельно, по желанию.
         </p>
       </Section>
-      {"image" in service &&
-        service.slug !== "support" &&
-        service.slug !== "other" && (
-          <Section className="pt-0 md:pt-0">
-            <Image
-              src={`/images/services/${service.image}.webp`}
-              alt={`Визуальное направление: ${service.shortTitle}`}
-              width={1600}
-              height={900}
-              sizes="(max-width: 680px) 100vw, 1400px"
-              className="aspect-[16/10] w-full rounded-3xl object-cover sm:aspect-[2/1] sm:rounded-[2rem]"
-            />
-            <p className="mt-3 text-xs text-muted-foreground">
-              Иллюстрация направления. Дизайн вашего проекта создаём под его
-              задачи.
-            </p>
-          </Section>
-        )}
+
+      <Section className="pt-0 md:pt-0">
+        <Image
+          src={`/images/services/${service.image}-wide.webp`}
+          alt={`Визуальное направление: ${service.shortTitle}`}
+          width={1600}
+          height={900}
+          sizes="(max-width: 680px) 100vw, 1400px"
+          className="aspect-[16/10] w-full rounded-3xl object-cover sm:aspect-[2/1] sm:rounded-[2rem]"
+        />
+        <p className="mt-3 text-xs text-muted-foreground">
+          Иллюстрация направления. Дизайн вашего проекта создаём под его задачи.
+        </p>
+      </Section>
       <Section className="pt-0 md:pt-0">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div>
@@ -126,11 +115,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <SectionHeader
             eyebrow="Что можем сделать"
-            title={
-              service.slug === "support"
-                ? "Забота о работающем проекте."
-                : "Всё, что нужно для запуска."
-            }
+            title="Всё, что нужно для запуска."
             description="Состав проекта определяем после знакомства с задачей. Начинаем с необходимого и оставляем понятный путь для дальнейшего развития."
           />
           <ul className="flex flex-col gap-6 lg:pt-10">

@@ -21,6 +21,8 @@ type ServiceSummary = {
   cta: string
   kind: "PROJECT" | "SUPPORT"
   image: string
+  priceLabel?: string
+  priceNote?: string
 }
 
 export const serviceCatalog = {
@@ -35,6 +37,7 @@ export const serviceCatalog = {
     cta: "Обсудить лендинг",
     kind: "PROJECT",
     image: "landing-form",
+    priceLabel: "от 25 000 ₽",
   },
   "corporate-websites": {
     title: "Корпоративный сайт",
@@ -47,6 +50,7 @@ export const serviceCatalog = {
     cta: "Обсудить сайт",
     kind: "PROJECT",
     image: "corporate-atelier",
+    priceLabel: "от 45 000 ₽",
   },
   ecommerce: {
     title: "Интернет-магазин",
@@ -59,6 +63,7 @@ export const serviceCatalog = {
     cta: "Обсудить магазин",
     kind: "PROJECT",
     image: "ecommerce-sound",
+    priceLabel: "от 70 000 ₽",
   },
   telegram: {
     title: "Бизнес в Telegram",
@@ -71,6 +76,8 @@ export const serviceCatalog = {
     cta: "Обсудить Telegram-проект",
     kind: "PROJECT",
     image: "telegram-bloom",
+    priceLabel: "от 20 000 ₽",
+    priceNote: "Для бота. Mini App — от 40 000 ₽.",
   },
   support: {
     title: "Сопровождение",

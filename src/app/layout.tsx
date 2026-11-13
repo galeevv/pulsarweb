@@ -25,7 +25,11 @@ export default function RootLayout({
   return (
     <html
       lang={site.language}
-      className={cn(inter.variable, mono.variable, "font-sans antialiased")}
+      className={cn(
+        inter.variable,
+        mono.variable,
+        "dark font-sans antialiased"
+      )}
     >
       <body className="flex min-h-dvh flex-col">
         <a href="#main" className="skip-link">

@@ -18,7 +18,7 @@ export function SiteHeader() {
             <NavigationLinks />
           </nav>
           <div className="hidden md:block">
-            <ButtonLink href="/start" size="lg" className="min-h-11">
+            <ButtonLink href="/start" size="lg" className="h-12">
               Обсудить проект
               <ArrowUpRight data-icon="inline-end" />
             </ButtonLink>

@@ -1,0 +1,82 @@
+[
+  {
+    "viewport": 1440,
+    "route": "/",
+    "label": "home-desktop",
+    "file": "landing-aer-home.webp",
+    "width": 644,
+    "height": 429.328125,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 1440,
+    "route": "/services",
+    "label": "catalog-desktop",
+    "file": "landing-aer-wide.webp",
+    "width": 881.328125,
+    "height": 320,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 1024,
+    "route": "/services",
+    "label": "catalog-1024",
+    "file": "landing-aer-wide.webp",
+    "width": 630.65625,
+    "height": 268.796875,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 768,
+    "route": "/services",
+    "label": "catalog-tablet",
+    "file": "landing-aer-wide.webp",
+    "width": 460,
+    "height": 240,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 1440,
+    "route": "/services/landing-pages",
+    "label": "hero-desktop",
+    "file": "landing-aer-hero.webp",
+    "width": 1336,
+    "height": 572.5625,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 360,
+    "route": "/",
+    "label": "home-mobile",
+    "file": "landing-aer-home.webp",
+    "width": 336,
+    "height": 224,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 360,
+    "route": "/services",
+    "label": "catalog-mobile",
+    "file": "landing-aer-catalog-mobile.webp",
+    "width": 336,
+    "height": 189,
+    "fit": "cover",
+    "position": "50% 50%"
+  },
+  {
+    "viewport": 360,
+    "route": "/services/landing-pages",
+    "label": "hero-mobile",
+    "file": "landing-aer-hero.webp",
+    "width": 336,
+    "height": 144,
+    "fit": "cover",
+    "position": "50% 50%"
+  }
+]

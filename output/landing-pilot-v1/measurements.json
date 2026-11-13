@@ -1,0 +1,197 @@
+[
+  {
+    "width": 1440,
+    "route": "/",
+    "images": [
+      {
+        "width": 644,
+        "height": 429.328125,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "route": "/services",
+    "images": [
+      {
+        "width": 881.328125,
+        "height": 320,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "route": "/services/landing-pages",
+    "images": [
+      {
+        "width": 1336,
+        "height": 572.5625,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "32px"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "route": "/",
+    "images": [
+      {
+        "width": 456,
+        "height": 304,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "route": "/services",
+    "images": [
+      {
+        "width": 630.65625,
+        "height": 268.796875,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "route": "/services/landing-pages",
+    "images": [
+      {
+        "width": 960,
+        "height": 411.421875,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "32px"
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "route": "/",
+    "images": [
+      {
+        "width": 704,
+        "height": 469.328125,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "route": "/services",
+    "images": [
+      {
+        "width": 460,
+        "height": 240,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "route": "/services/landing-pages",
+    "images": [
+      {
+        "width": 704,
+        "height": 301.703125,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "32px"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "route": "/",
+    "images": [
+      {
+        "width": 366,
+        "height": 244,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "route": "/services",
+    "images": [
+      {
+        "width": 366,
+        "height": 205.875,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "route": "/services/landing-pages",
+    "images": [
+      {
+        "width": 366,
+        "height": 156.84375,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "route": "/",
+    "images": [
+      {
+        "width": 336,
+        "height": 224,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "route": "/services",
+    "images": [
+      {
+        "width": 336,
+        "height": 189,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "route": "/services/landing-pages",
+    "images": [
+      {
+        "width": 336,
+        "height": 144,
+        "fit": "cover",
+        "position": "50% 50%",
+        "radius": "22px"
+      }
+    ]
+  }
+]

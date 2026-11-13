@@ -74,7 +74,6 @@ export const createLeadSchema = z
     description: z
       .string()
       .trim()
-      .min(20, "Расскажите о задаче чуть подробнее — от 20 символов")
       .max(5000, "Не более 5 000 символов")
       .or(z.literal(""))
       .default(""),

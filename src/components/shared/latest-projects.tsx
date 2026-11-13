@@ -24,16 +24,16 @@ export function LatestProjects() {
           }
         />
         <HomeProjectCard
-          id="project-form"
-          href="/projects/form"
-          title="FORM"
-          description="Концепт сайта коллекции интерьерных объектов."
-          category="Лендинг"
-          status="Концепт"
+          id="project-pulsar-web"
+          href="/projects/pulsar-web"
+          title="PULSAR WEB"
+          description="Сайт студии: услуги, проекты и удобный путь от знакомства до заявки."
+          category="Сайт студии"
+          status="Свой проект"
           cover={
             <Image
-              src="/images/projects/form-16x9.webp"
-              alt="Концепт FORM на мониторе: геометрические интерьерные объекты и минималистичный сайт."
+              src="/images/projects/pulsar-web-16x9.webp"
+              alt="Главная страница PulsarWeb на ноутбуке в металлической студийной сцене."
               fill
               unoptimized
               sizes="(max-width: 767px) 100vw, 50vw"

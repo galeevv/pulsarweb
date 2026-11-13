@@ -25,7 +25,6 @@ describe("lead schema", () => {
     { email: "not-an-email" },
     { phone: "hello1234567" },
     { telegram: "https://evil.example/user" },
-    { description: "small" },
     { description: "x".repeat(5001) },
     { submissionId: "reuse-this" },
   ])("rejects invalid input: %j", (fields) => {

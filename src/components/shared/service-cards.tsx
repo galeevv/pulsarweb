@@ -21,9 +21,7 @@ export function ServiceCards({
   return (
     <>
       {showHeading && (
-        <h2 className="home-section-title mb-12 md:mb-16" data-home-heading>
-          Что мы делаем
-        </h2>
+        <h2 className="home-section-title mb-12 md:mb-16">Что мы делаем</h2>
       )}
       <div className="service-grid">
         {homeServices.map((service) => (
@@ -32,20 +30,22 @@ export function ServiceCards({
             href={`/services/${service.slug}`}
             aria-labelledby={`service-card-${service.slug}`}
             className="service-tile group block min-w-0 rounded-3xl"
-            data-home-reveal
           >
-            <div
-              className="service-visual relative overflow-hidden rounded-3xl bg-muted"
-              data-home-media
-            >
-              <Image
-                src={`/images/services/${service.image}.webp`}
-                alt=""
-                fill
-                unoptimized
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 55vw, 720px"
-                className="service-image object-cover"
-              />
+            <div className="service-visual relative overflow-hidden rounded-3xl bg-muted">
+              <picture>
+                <source
+                  media="(min-width: 768px)"
+                  srcSet={`/images/services/${service.image}-catalog.webp`}
+                />
+                <Image
+                  src={`/images/services/${service.image}-mobile.webp`}
+                  alt=""
+                  fill
+                  unoptimized
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 55vw, 720px"
+                  className="service-image object-cover"
+                />
+              </picture>
             </div>
             <div className="mt-5 flex items-start justify-between gap-4">
               <div className="flex min-w-0 flex-col gap-2">
@@ -59,10 +59,17 @@ export function ServiceCards({
                   {service.cardDescription}
                 </p>
               </div>
-              <ArrowUpRight
-                aria-hidden="true"
-                className="service-arrow mt-1 size-5 shrink-0"
-              />
+              <div className="flex shrink-0 flex-col items-end gap-2 pt-1">
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="service-arrow size-5"
+                />
+                {"priceLabel" in service && (
+                  <p className="text-sm leading-relaxed whitespace-nowrap text-muted-foreground">
+                    {service.priceLabel}
+                  </p>
+                )}
+              </div>
             </div>
           </Link>
         ))}

@@ -1,0 +1,44 @@
+[
+  {
+    "file": "sonora-home-1536x1024.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 77924
+  },
+  {
+    "file": "sonora-mobile-768x512.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 20282
+  },
+  {
+    "file": "sonora-wide-1200x514.webp",
+    "width": 1200,
+    "height": 514,
+    "bytes": 44436
+  },
+  {
+    "file": "source-master.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1818586
+  },
+  {
+    "file": "source-master.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1137006
+  },
+  {
+    "file": "source-wide.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1666778
+  },
+  {
+    "file": "source-wide.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1005570
+  }
+]

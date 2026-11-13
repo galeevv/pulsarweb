@@ -17,6 +17,9 @@ test("главная → магазин → Telegram → реальная зая
     .first()
     .click()
   await expect(page).toHaveURL(/\/start$/)
+  await page
+    .getByRole("button", { name: "Оставить заявку", exact: true })
+    .click()
   await expect(
     page.getByRole("button", { name: /Инфраструктура/ })
   ).toHaveCount(0)
@@ -114,7 +117,7 @@ test("возврат по шагам и legal сохраняют чернови�
   )
   const [document] = await Promise.all([
     page.waitForEvent("popup"),
-    page.getByRole("link", { name: "Условия обработки данных" }).click(),
+    page.getByRole("link", { name: "обработку персональных данных" }).click(),
   ])
   await expect(document.getByRole("heading", { level: 1 })).toBeVisible()
   await document.close()
@@ -338,6 +341,20 @@ test("выбор услуги и повторный возврат не вызы
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/start")
+  await expect(page.getByRole("list", { name: "Этапы заявки" })).toHaveCount(0)
+  await expect(
+    page.getByRole("link", { name: "Написать разработчику" })
+  ).toHaveAttribute("href", "https://t.me/galeev66")
+  await page
+    .getByRole("button", { name: "Оставить заявку", exact: true })
+    .click()
+  await page.getByRole("button", { name: "Назад", exact: true }).click()
+  await expect(
+    page.getByRole("heading", { name: "Обсудим ваш проект?" })
+  ).toBeFocused()
+  await page
+    .getByRole("button", { name: "Оставить заявку", exact: true })
+    .click()
   await expect(page.locator("footer")).toHaveCount(0)
   await expect(
     page.getByRole("button", { name: "Сопровождение", exact: true })
@@ -399,4 +416,33 @@ test("пустые имя, контакт и согласие показываю
     "aria-invalid",
     "true"
   )
+})
+
+test("дополнительная задача сохраняется после возврата и отправки", async ({
+  page,
+  database,
+}) => {
+  await page.goto("/start?service=ecommerce")
+  await expect(page.getByLabel("Дополнительно", { exact: true })).toHaveCount(0)
+  await page
+    .getByRole("button", { name: "+ Уточнить задачу", exact: true })
+    .click()
+  await expect(page.getByLabel("Дополнительно", { exact: true })).toBeFocused()
+  await page
+    .getByLabel("Дополнительно", { exact: true })
+    .fill("Бюджет 50 000 ₽")
+  await page.getByRole("button", { name: "Назад", exact: true }).click()
+  await nextStep(page)
+  await expect(page.getByLabel("Дополнительно", { exact: true })).toHaveValue(
+    "Бюджет 50 000 ₽"
+  )
+  await expect(
+    page.getByRole("link", { name: "политику конфиденциальности", exact: true })
+  ).toHaveAttribute("href", "/legal/privacy")
+  await fillContacts(page)
+  await submitRequest(page)
+  await expectSuccess(page)
+  expect(database.prepare('SELECT message FROM "Lead"').get()).toEqual({
+    message: "Бюджет 50 000 ₽",
+  })
 })

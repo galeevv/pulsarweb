@@ -1,0 +1,98 @@
+[
+  {
+    "file": "corporate-atelier-catalog.webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 47472
+  },
+  {
+    "file": "corporate-atelier-mobile.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 26668
+  },
+  {
+    "file": "corporate-atelier-wide.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 42408
+  },
+  {
+    "file": "corporate-atelier.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 111048
+  },
+  {
+    "file": "ecommerce-sound-catalog.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 116980
+  },
+  {
+    "file": "ecommerce-sound-mobile.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 71336
+  },
+  {
+    "file": "ecommerce-sound-wide.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 116980
+  },
+  {
+    "file": "ecommerce-sound.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 183922
+  },
+  {
+    "file": "landing-form-catalog.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 61010
+  },
+  {
+    "file": "landing-form-mobile.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 33810
+  },
+  {
+    "file": "landing-form-wide.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 61010
+  },
+  {
+    "file": "landing-form.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 94256
+  },
+  {
+    "file": "telegram-bloom-catalog.webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 65756
+  },
+  {
+    "file": "telegram-bloom-mobile.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 42196
+  },
+  {
+    "file": "telegram-bloom-wide.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 69760
+  },
+  {
+    "file": "telegram-bloom.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 112028
+  }
+]

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react"
 import Link from "next/link"
 import {
   Globe2,
+  FileText,
   PanelsTopLeft,
   Send,
   ShoppingCart,
@@ -15,16 +16,21 @@ import {
   UserRound,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Field,
   FieldGroup,
+  FieldContent,
   FieldLabel,
   FieldError,
 } from "@/components/ui/field"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Separator } from "@/components/ui/separator"
+import { HomeHeroSurface } from "@/components/shared/home-hero-surface"
+import { PulsarMark } from "@/components/shared/logo"
 import { Spinner } from "@/components/ui/spinner"
 import { ButtonLink } from "@/components/shared/button-link"
 import { cn } from "@/lib/utils"
@@ -46,7 +52,10 @@ const icons = {
   other: Sparkles,
 }
 const steps = ["Тип проекта", "Контакты"]
-const stepFields = [["service"], ["name", "telegram", "email", "consent"]]
+const stepFields = [
+  ["service"],
+  ["name", "telegram", "email", "description", "consent"],
+]
 
 type Draft = Omit<CreateLeadInput, "service" | "consent" | "submissionId"> & {
   service?: RequestService
@@ -66,7 +75,7 @@ export function ProjectRequestWizard({
   attribution: Attribution
   telegramUrl: string
 }) {
-  const [step, setStep] = useState(initialService ? 1 : 0)
+  const [step, setStep] = useState(initialService ? 1 : -1)
   const [draft, setDraft] = useState<Draft>({
     service: initialService,
     description: "",
@@ -81,6 +90,11 @@ export function ProjectRequestWizard({
     website: "",
   })
   const [pointerMotion, setPointerMotion] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
+  const detailsRef = useRef<HTMLTextAreaElement>(null)
+  useEffect(() => {
+    if (detailsOpen) detailsRef.current?.focus()
+  }, [detailsOpen])
   const [contact, setContact] = useState("")
   const [errors, setErrors] = useState<Record<string, string[]>>({})
   const [error, setError] = useState<string>()
@@ -261,6 +275,7 @@ export function ProjectRequestWizard({
           onChange={(e) => update(key, e.target.value)}
           maxLength={maxLength}
           autoComplete={autoComplete}
+          placeholder={key === "name" ? "Ваше имя" : undefined}
           aria-invalid={!!errors[key]?.length}
           aria-describedby={errors[key]?.length ? `${key}-error` : undefined}
         />
@@ -295,6 +310,62 @@ export function ProjectRequestWizard({
           <ButtonLink href="/">Вернуться на главную</ButtonLink>
           <ButtonLink href={telegramUrl} variant="outline">
             Написать напрямую в Telegram
+          </ButtonLink>
+        </div>
+      </div>
+    )
+
+  if (step === -1)
+    return (
+      <div className="flex flex-col gap-6">
+        <div className="-mx-4 -mt-4 overflow-hidden rounded-t-3xl border-b border-border sm:-mx-6 sm:-mt-6">
+          <HomeHeroSurface>
+            <div className="flex h-44 items-center justify-center sm:h-50">
+              <PulsarMark size={112} />
+            </div>
+          </HomeHeroSurface>
+        </div>
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h1
+            ref={headingRef}
+            tabIndex={-1}
+            className="text-2xl font-medium tracking-tight outline-none sm:text-3xl"
+          >
+            Обсудим ваш проект?
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Выберите удобный способ связи.
+          </p>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Button
+            type="button"
+            size="lg"
+            variant="outline"
+            className="h-12 w-full rounded-2xl"
+            onClick={() => go(0)}
+          >
+            <FileText data-icon="inline-start" aria-hidden="true" />
+            <span className="flex-1 text-left">Оставить заявку</span>
+            <ArrowRight data-icon="inline-end" aria-hidden="true" />
+          </Button>
+          <div className="flex items-center gap-4">
+            <div className="flex-1">
+              <Separator />
+            </div>
+            <span className="text-xs text-muted-foreground">или</span>
+            <div className="flex-1">
+              <Separator />
+            </div>
+          </div>
+          <ButtonLink
+            href={telegramUrl}
+            variant="outline"
+            className="h-12 w-full rounded-2xl"
+          >
+            <Send data-icon="inline-start" aria-hidden="true" />
+            <span className="flex-1 text-left">Написать разработчику</span>
+            <ArrowRight data-icon="inline-end" aria-hidden="true" />
           </ButtonLink>
         </div>
       </div>
@@ -433,32 +504,83 @@ export function ProjectRequestWizard({
                     : null}
                 </FieldError>
               </Field>
+              {detailsOpen ? (
+                <Field data-invalid={!!errors.description?.length}>
+                  <FieldLabel htmlFor="description">Дополнительно</FieldLabel>
+                  <Textarea
+                    ref={detailsRef}
+                    id="description"
+                    name="description"
+                    rows={4}
+                    maxLength={5000}
+                    value={draft.description}
+                    onChange={(event) =>
+                      update("description", event.target.value)
+                    }
+                    placeholder="Всё, что важно знать о задаче — ссылки, бюджет, сроки, пожелания"
+                    aria-invalid={!!errors.description?.length}
+                    aria-describedby={
+                      errors.description?.length
+                        ? "description-error"
+                        : undefined
+                    }
+                  />
+                  <FieldError id="description-error">
+                    {errors.description?.join(" ")}
+                  </FieldError>
+                </Field>
+              ) : (
+                <Button
+                  type="button"
+                  variant="link"
+                  className="h-auto justify-start self-start p-0 text-muted-foreground"
+                  onClick={() => setDetailsOpen(true)}
+                >
+                  + Уточнить задачу
+                </Button>
+              )}
               <Field
                 orientation="horizontal"
                 data-invalid={!!errors.consent?.length}
               >
                 <Checkbox
                   id="consent"
+                  aria-labelledby="consent-label"
+                  required
                   checked={draft.consent}
                   onCheckedChange={(checked) => update("consent", checked)}
                   aria-invalid={!!errors.consent?.length}
                   aria-describedby="consent-error"
                 />
-                <div className="flex flex-col gap-2">
-                  <FieldLabel htmlFor="consent">
-                    Я соглашаюсь на обработку персональных данных.
-                  </FieldLabel>
-                  <Link
-                    href="/legal/personal-data-consent"
-                    target="_blank"
-                    className="text-sm text-muted-foreground underline underline-offset-4"
+                <FieldContent>
+                  <p
+                    id="consent-label"
+                    className="text-sm leading-relaxed text-muted-foreground"
                   >
-                    Условия обработки данных
-                  </Link>
+                    Соглашаюсь на{" "}
+                    <Link
+                      href="/legal/personal-data-consent"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4"
+                    >
+                      обработку персональных данных
+                    </Link>{" "}
+                    и{" "}
+                    <Link
+                      href="/legal/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4"
+                    >
+                      политику конфиденциальности
+                    </Link>
+                    .
+                  </p>
                   <FieldError id="consent-error">
                     {errors.consent?.join(" ")}
                   </FieldError>
-                </div>
+                </FieldContent>
               </Field>
             </>
           )}
@@ -483,8 +605,8 @@ export function ProjectRequestWizard({
       <span role="status" className="sr-only">
         {pending ? "Отправляем заявку. Пожалуйста, подождите." : ""}
       </span>
-      <div className={cn("mt-auto grid gap-3 pt-2", step > 0 && "grid-cols-2")}>
-        {step > 0 ? (
+      <div className="mt-auto grid grid-cols-2 gap-3 pt-2">
+        {step >= 0 ? (
           <Button
             type="button"
             variant="outline"

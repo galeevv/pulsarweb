@@ -1,0 +1,37 @@
+[
+  {
+    "key": "cycle",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 48756
+  },
+  {
+    "key": "contact",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 53926
+  },
+  {
+    "key": "solution",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 43614
+  },
+  {
+    "key": "support",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 41496
+  },
+  {
+    "key": "ads",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 56206
+  }
+]

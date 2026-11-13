@@ -40,16 +40,18 @@ describe("SEO foundation", () => {
     expect(urls.some((url) => url.pathname === "/services/ecommerce")).toBe(
       true
     )
-    for (const slug of ["websites", "web-systems", "desktop", "infrastructure"])
+    for (const slug of [
+      "websites",
+      "web-systems",
+      "desktop",
+      "infrastructure",
+      "support",
+      "other",
+    ])
       expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
         false
       )
-    for (const slug of [
-      "landing-pages",
-      "corporate-websites",
-      "telegram",
-      "support",
-    ])
+    for (const slug of ["landing-pages", "corporate-websites", "telegram"])
       expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
         true
       )

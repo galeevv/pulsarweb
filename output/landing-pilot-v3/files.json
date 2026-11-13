@@ -1,0 +1,44 @@
+[
+  {
+    "file": "landing-monolith-catalog-mobile.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 49272
+  },
+  {
+    "file": "landing-monolith-home.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 106524
+  },
+  {
+    "file": "landing-monolith-wide.webp",
+    "width": 1652,
+    "height": 708,
+    "bytes": 64098
+  },
+  {
+    "file": "source-main.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1924065
+  },
+  {
+    "file": "source-main.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1138254
+  },
+  {
+    "file": "source-wide.png",
+    "width": 1915,
+    "height": 821,
+    "bytes": 1762800
+  },
+  {
+    "file": "source-wide.webp",
+    "width": 1915,
+    "height": 821,
+    "bytes": 1067998
+  }
+]

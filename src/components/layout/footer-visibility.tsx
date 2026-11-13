@@ -5,5 +5,9 @@ import type { ReactNode } from "react"
 
 export function FooterVisibility({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  return pathname === "/start" || pathname === "/contacts" ? null : children
+  return ["/start", "/contacts", "/about", "/services", "/projects"].includes(
+    pathname
+  )
+    ? null
+    : children
 }

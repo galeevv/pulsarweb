@@ -1,0 +1,72 @@
+{
+  "errors": [],
+  "records": [
+    {
+      "width": 1440,
+      "route": "/",
+      "title": "PulsarWeb — Разработка сайтов и Telegram Mini Apps",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "route": "/projects",
+      "title": "Проекты — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "route": "/projects/pulsar-web",
+      "title": "PULSAR WEB — сайт студии — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "title": "PulsarWeb — Разработка сайтов и Telegram Mini Apps",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/projects",
+      "title": "Проекты — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/projects/pulsar-web",
+      "title": "PULSAR WEB — сайт студии — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "title": "PulsarWeb — Разработка сайтов и Telegram Mini Apps",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/projects",
+      "title": "Проекты — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/projects/pulsar-web",
+      "title": "PULSAR WEB — сайт студии — PulsarWeb",
+      "loaded": true,
+      "overflow": false
+    }
+  ],
+  "legacyDestination": "http://localhost:3000/projects/pulsar-web",
+  "canonical": "http://localhost:3000/projects/pulsar-web",
+  "sitemapHasNew": true,
+  "sitemapHasOld": false
+}

@@ -1,8 +1,8 @@
 "use client"
 
-import { ArrowLeft, RotateCcw, TriangleAlert } from "lucide-react"
+import { ArrowLeft, RotateCcw } from "lucide-react"
 import { useEffect, useRef, useTransition } from "react"
-import { Container } from "@/components/layout/container"
+import { PulsarMark } from "@/components/shared/logo"
 import { Button } from "@/components/ui/button"
 import { ButtonLink } from "@/components/shared/button-link"
 import { Spinner } from "@/components/ui/spinner"
@@ -14,28 +14,28 @@ export function ErrorState({ retry }: { retry: () => void }) {
     headingRef.current?.focus()
   }, [])
   return (
-    <Container className="py-20 md:py-28">
-      <TriangleAlert
-        className="mb-8 size-9 text-muted-foreground"
-        aria-hidden="true"
-      />
-      <p className="eyebrow mb-6">Временная ошибка</p>
+    <section
+      className="error-page relative isolate m-2 flex min-h-[calc(100dvh-1rem)] flex-col items-center justify-center rounded-3xl border border-border px-6 py-16 text-center"
+      aria-labelledby="error-title"
+    >
+      <PulsarMark className="mb-6 size-16" />
       <h1
+        id="error-title"
         ref={headingRef}
         tabIndex={-1}
-        className="max-w-2xl text-4xl font-medium tracking-tight outline-none sm:text-5xl"
+        className="max-w-4xl text-4xl font-medium tracking-tight text-balance outline-none sm:text-6xl"
       >
-        Не удалось открыть страницу.
+        Не удалось открыть страницу
       </h1>
-      <p className="mt-6 mb-10 max-w-lg leading-relaxed text-muted-foreground">
-        Попробуйте ещё раз. Если ошибка повторится, вернитесь немного позже.
+      <p className="mt-6 max-w-lg leading-relaxed text-muted-foreground">
+        Попробуйте ещё раз или вернитесь на главную.
       </p>
-      <div className="flex flex-wrap gap-3">
+      <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:w-auto sm:flex-row">
         <Button
           onClick={() => startTransition(retry)}
           disabled={pending}
           size="lg"
-          className="min-h-11"
+          className="h-12 px-6"
         >
           {pending ? (
             <Spinner data-icon="inline-start" aria-hidden="true" />
@@ -44,7 +44,7 @@ export function ErrorState({ retry }: { retry: () => void }) {
           )}
           {pending ? "Пробуем снова…" : "Попробовать снова"}
         </Button>
-        <ButtonLink href="/" variant="outline" className="min-h-11">
+        <ButtonLink href="/" variant="outline" className="h-12 px-6">
           <ArrowLeft data-icon="inline-start" />
           На главную
         </ButtonLink>
@@ -52,6 +52,6 @@ export function ErrorState({ retry }: { retry: () => void }) {
       <p role="status" className="sr-only">
         {pending ? "Повторно загружаем страницу." : ""}
       </p>
-    </Container>
+    </section>
   )
 }

@@ -248,7 +248,7 @@ const icons: Record<ServiceId, LucideIcon> = {
   support: Wrench,
   other: Lightbulb,
 }
-export const services = requestServiceIds.map((slug) => {
+export const services = primaryServiceIds.map((slug) => {
   const content =
     slug in newPages
       ? newPages[slug as keyof typeof newPages]
@@ -259,25 +259,11 @@ export const services = requestServiceIds.map((slug) => {
     title: content.title,
     slug,
     icon: icons[slug],
-    eyebrow:
-      slug === "telegram"
-        ? "04 / Telegram"
-        : slug === "support"
-          ? "После запуска"
-          : content.eyebrow,
+    eyebrow: slug === "telegram" ? "04 / Telegram" : content.eyebrow,
   }
 })
-export const primaryServices = services.filter(({ slug }) =>
-  primaryServiceIds.some((id) => id === slug)
-)
+export const primaryServices = services
+
 export function getService(slug: string) {
-  return (
-    services.find((service) => service.slug === slug) ??
-    legacyServices.find(
-      (service) =>
-        (service.slug === "desktop" || service.slug === "web-systems") &&
-        service.slug === slug
-    )
-  )
+  return services.find((service) => service.slug === slug)
 }
-export const legacyPageIds = ["desktop", "web-systems"] as const

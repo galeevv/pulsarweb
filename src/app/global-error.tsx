@@ -11,7 +11,7 @@ export default function GlobalError({
   retry: () => void
 }) {
   return (
-    <html lang={site.language}>
+    <html lang={site.language} className="dark">
       <head>
         <title>Временная ошибка — {site.name}</title>
         <meta name="robots" content="noindex" />

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { HomeBadge } from "@/components/shared/home-badge"
 import {
   Card,
   CardHeader,
@@ -30,21 +30,16 @@ export function HomeProjectCard({
   status = "В разработке",
 }: Props) {
   return (
-    <article aria-labelledby={id} data-home-reveal>
+    <article aria-labelledby={id}>
       <Link
         href={href}
         aria-labelledby={id}
         className="project-card-link block h-full rounded-3xl sm:rounded-[2rem]"
       >
         <Card className="h-full gap-4 rounded-3xl bg-muted pt-0 ring-0 sm:gap-5 sm:rounded-[2rem]">
-          <div
-            className="relative aspect-video overflow-hidden rounded-3xl sm:rounded-[2rem]"
-            data-home-media
-          >
+          <div className="relative aspect-video overflow-hidden rounded-3xl sm:rounded-[2rem]">
             <div className="service-image absolute inset-0">{cover}</div>
-            <Badge variant="secondary" className="absolute top-4 left-4">
-              {status}
-            </Badge>
+            <HomeBadge className="absolute top-4 left-4">{status}</HomeBadge>
           </div>
           <CardHeader>
             <CardTitle>
@@ -62,7 +57,7 @@ export function HomeProjectCard({
             <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Badge variant="outline">{category}</Badge>
+            <HomeBadge>{category}</HomeBadge>
           </CardContent>
         </Card>
       </Link>

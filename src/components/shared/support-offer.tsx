@@ -63,9 +63,6 @@ export function SupportOffer() {
         <ButtonLink href="/start?service=support" className="h-12">
           Обсудить сопровождение <ArrowUpRight data-icon="inline-end" />
         </ButtonLink>
-        <ButtonLink href="/services/support" variant="outline" className="h-12">
-          Как это работает
-        </ButtonLink>
       </div>
     </Section>
   )

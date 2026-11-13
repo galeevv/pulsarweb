@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo"
 
 export const metadata = pageMetadata(
   "Проекты",
-  "Проекты PulsarWeb: действующий сервис Pulsar VPN и дизайн-концепт FORM.",
+  "Проекты PulsarWeb: сервис Pulsar VPN и собственный сайт студии PULSAR WEB.",
   "/projects"
 )
 
