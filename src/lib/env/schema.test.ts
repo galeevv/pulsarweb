@@ -29,16 +29,13 @@ describe("server environment", () => {
     ).toBe("invalid")
   })
   it("starts with all integrations absent", () => {
-    expect(serverEnvSchema.parse({}).RESEND_API_KEY).toBeUndefined()
+    expect(serverEnvSchema.parse({}).TELEGRAM_BOT_TOKEN).toBeUndefined()
     expect(serverEnvSchema.parse({}).TRUST_PROXY).toBe(false)
   })
   it("keeps the core application available with partial optional provider configuration", () => {
     expect(
       serverEnvSchema.safeParse({ TELEGRAM_BOT_TOKEN: "token" }).success
     ).toBe(true)
-    expect(serverEnvSchema.safeParse({ RESEND_API_KEY: "key" }).success).toBe(
-      true
-    )
   })
   it("does not treat arbitrary strings as booleans or unsafe protocols as site URLs", () => {
     expect(serverEnvSchema.safeParse({ TRUST_PROXY: "yes" }).success).toBe(

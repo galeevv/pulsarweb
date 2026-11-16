@@ -33,9 +33,6 @@ export const serverEnvSchema = z.object({
     .enum(["true", "false"])
     .default("false")
     .transform((value) => value === "true"),
-  RESEND_API_KEY: optionalString,
-  EMAIL_FROM: optionalString,
-  LEAD_NOTIFICATION_EMAIL: optionalString,
   TELEGRAM_BOT_TOKEN: optionalString,
   TELEGRAM_CHAT_ID: optionalString,
   TELEGRAM_OWNER_CHAT_ID: optionalString,

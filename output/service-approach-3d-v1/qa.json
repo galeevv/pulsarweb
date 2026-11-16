@@ -1,0 +1,341 @@
+{
+  "errors": [],
+  "records": [
+    {
+      "viewport": 1440,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 1440,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 1440,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 1440,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 435,
+          "height": 217,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 768,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 768,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 768,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 768,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 448,
+          "height": 352,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=640&q=75",
+          "width": 366,
+          "height": 183,
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    }
+  ]
+}

@@ -34,6 +34,8 @@ import { PulsarMark } from "@/components/shared/logo"
 import { Spinner } from "@/components/ui/spinner"
 import { ButtonLink } from "@/components/shared/button-link"
 import { cn } from "@/lib/utils"
+import { getFirstTouchAttribution } from "@/lib/attribution"
+import { trackFunnelEvent } from "@/lib/analytics"
 import {
   createLeadSchema,
   leadServiceIds,
@@ -63,7 +65,14 @@ type Draft = Omit<CreateLeadInput, "service" | "consent" | "submissionId"> & {
 }
 type Attribution = Pick<
   CreateLeadInput,
-  "sourceUrl" | "referrer" | "utmSource" | "utmMedium" | "utmCampaign"
+  | "sourceUrl"
+  | "landingPage"
+  | "referrer"
+  | "utmSource"
+  | "utmMedium"
+  | "utmCampaign"
+  | "utmContent"
+  | "utmTerm"
 >
 
 export function ProjectRequestWizard({
@@ -108,14 +117,30 @@ export function ProjectRequestWizard({
   const pendingRef = useRef(false)
   const attemptRef = useRef<{ id: string; signature: string } | null>(null)
   const sourceRef = useRef(attribution)
+  const openedRef = useRef(false)
+  const begunRef = useRef(false)
+  const completedRef = useRef(false)
+
+  useEffect(() => {
+    if (!openedRef.current) {
+      openedRef.current = true
+      trackFunnelEvent({ name: "start_opened", service: initialService })
+    }
+  }, [initialService])
+
+  function markBegun(service = draft.service) {
+    if (begunRef.current) return
+    begunRef.current = true
+    trackFunnelEvent({ name: "start_begun", service })
+  }
 
   useEffect(() => {
     sourceRef.current = {
       ...attribution,
+      ...getFirstTouchAttribution(),
       sourceUrl:
         attribution.sourceUrl ??
         `${location.pathname}${location.search}`.slice(0, 2048),
-      referrer: document.referrer.slice(0, 2048) || undefined,
     }
   }, [attribution])
   useEffect(() => {
@@ -138,6 +163,9 @@ export function ProjectRequestWizard({
   }, [error, publicId])
 
   function update<K extends keyof Draft>(key: K, value: Draft[K]) {
+    if (key !== "website") {
+      markBegun(key === "service" ? (value as RequestService) : draft.service)
+    }
     setDraft((current) => ({ ...current, [key]: value }))
     setErrors((current) => {
       const next = { ...current }
@@ -243,6 +271,10 @@ export function ProjectRequestWizard({
         return
       }
       if (!response.ok) throw new Error("Unexpected response")
+      if (!completedRef.current) {
+        completedRef.current = true
+        trackFunnelEvent({ name: "start_completed", service: draft.service })
+      }
       setPublicId(result.publicId)
     } catch {
       setError(
@@ -478,6 +510,7 @@ export function ProjectRequestWizard({
                   className="min-h-11"
                   value={contact}
                   onChange={(event) => {
+                    markBegun()
                     setContact(event.target.value)
                     setErrors((current) => {
                       const next = { ...current }

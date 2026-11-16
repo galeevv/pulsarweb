@@ -208,12 +208,11 @@ afterEach(async () => {
 
 describe("HTTP → SQLite → configured notification adapters", () => {
   it.each([
-    [true, true, "sent"],
-    [false, true, "partial"],
-    [false, false, "failed"],
+    [true, "sent"],
+    [false, "failed"],
   ] as const)(
-    "persists a lead before delivery and retains %s / %s → %s on replay",
-    async (telegram, email, status) => {
+    "persists a lead before delivery and retains %s → %s on replay",
+    async (telegram, status) => {
       const input = validLead()
       const logger = { info: vi.fn(), warn: vi.fn(), error: vi.fn() }
       const deliverySnapshots: { url: string; status: string }[] = []
@@ -226,23 +225,16 @@ describe("HTTP → SQLite → configured notification adapters", () => {
           url: String(url),
           status: saved.notificationStatus,
         })
-        if (String(url).startsWith("https://api.telegram.org/")) {
-          return telegram
-            ? Response.json({ ok: true, result: { message_id: 1 } })
-            : new Response("private Telegram failure", { status: 401 })
-        }
-        return email
-          ? Response.json({ id: "test-email" })
-          : new Response("private email failure", { status: 401 })
+        expect(String(url)).toMatch(/^https:\/\/api\.telegram\.org\//)
+        return telegram
+          ? Response.json({ ok: true, result: { message_id: 1 } })
+          : new Response("private Telegram failure", { status: 401 })
       })
       vi.stubGlobal("fetch", network)
       const env = serverEnvSchema.parse({
         SITE_URL: "https://studio.example",
         TELEGRAM_BOT_TOKEN: "123456:test_only_token",
         TELEGRAM_CHAT_ID: "-100123456789",
-        RESEND_API_KEY: "re_test_only_key",
-        EMAIL_FROM: "studio@example.com",
-        LEAD_NOTIFICATION_EMAIL: "owner@example.com",
       })
       const handler = createLeadHttpHandler({
         createLead: new CreateLead(
@@ -270,21 +262,20 @@ describe("HTTP → SQLite → configured notification adapters", () => {
       const created = await post()
       expect(created.status).toBe(201)
       const result = await created.json()
-      expect(network).toHaveBeenCalledTimes(2)
+      expect(network).toHaveBeenCalledTimes(1)
       expect(deliverySnapshots).toEqual(
         expect.arrayContaining([
           {
             url: `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
             status: "pending",
           },
-          { url: "https://api.resend.com/emails", status: "pending" },
         ])
       )
       await database.$disconnect()
       const replay = await post()
       expect(replay.status).toBe(200)
       expect(await replay.json()).toEqual(result)
-      expect(network).toHaveBeenCalledTimes(2)
+      expect(network).toHaveBeenCalledTimes(1)
       expect(await database.lead.count()).toBe(1)
       const saved = await database.lead.findUniqueOrThrow({
         where: { id: result.leadId },
@@ -304,9 +295,7 @@ describe("HTTP → SQLite → configured notification adapters", () => {
         input.email!,
         input.description,
         env.TELEGRAM_BOT_TOKEN!,
-        env.RESEND_API_KEY!,
         "private Telegram failure",
-        "private email failure",
       ]) {
         expect(diagnostics).not.toContain(privateValue)
       }
@@ -316,12 +305,11 @@ describe("HTTP → SQLite → configured notification adapters", () => {
 
 describe("SQLite lead repository", () => {
   it.each([
-    [true, true, "sent"],
-    [false, true, "partial"],
-    [false, false, "failed"],
+    [true, "sent"],
+    [false, "failed"],
   ] as const)(
-    "retains the actual lead and notification outcome: %s / %s → %s",
-    async (telegram, email, status) => {
+    "retains the actual lead and notification outcome: %s → %s",
+    async (telegram, status) => {
       const repository = new PrismaLeadRepository(database)
       const useCase = new CreateLead(
         repository,
@@ -330,12 +318,6 @@ describe("SQLite lead repository", () => {
             name: "telegram",
             send: async () => {
               if (!telegram) throw new Error("provider offline")
-            },
-          },
-          {
-            name: "email",
-            send: async () => {
-              if (!email) throw new Error("provider offline")
             },
           },
         ],
@@ -467,6 +449,11 @@ describe("project request persistence", () => {
       sourceUrl: "/services/support",
       referrer: "https://studio.example/services/support",
       utmSource: "newsletter",
+      utmMedium: "email-link",
+      utmCampaign: "launch",
+      utmContent: "link1",
+      utmTerm: "site",
+      landingPage: "/services/landing-pages",
       timeline: "Как можно скорее",
     })
     const result = await new CreateLead(
@@ -492,6 +479,11 @@ describe("project request persistence", () => {
       projectReference: "Pulsar Example",
       sourceUrl: "/services/support",
       utmSource: "newsletter",
+      utmMedium: "email-link",
+      utmCampaign: "launch",
+      utmContent: "link1",
+      utmTerm: "site",
+      landingPage: "/services/landing-pages",
       notificationStatus: "failed",
     })
   })

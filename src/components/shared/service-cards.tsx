@@ -32,20 +32,14 @@ export function ServiceCards({
             className="service-tile group block min-w-0 rounded-3xl"
           >
             <div className="service-visual relative overflow-hidden rounded-3xl bg-muted">
-              <picture>
-                <source
-                  media="(min-width: 768px)"
-                  srcSet={`/images/services/${service.image}-catalog.webp`}
-                />
                 <Image
-                  src={`/images/services/${service.image}-mobile.webp`}
+                  src={`/images/services2/${service.image.split("-")[0]}.webp`}
                   alt=""
                   fill
                   unoptimized
                   sizes="(max-width: 767px) 100vw, (max-width: 1279px) 55vw, 720px"
                   className="service-image object-cover"
                 />
-              </picture>
             </div>
             <div className="mt-5 flex items-start justify-between gap-4">
               <div className="flex min-w-0 flex-col gap-2">

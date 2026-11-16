@@ -32,9 +32,6 @@ export default async function StartPage({
               source?.startsWith("/") && !source.startsWith("//")
                 ? source
                 : undefined,
-            utmSource: text("utm_source", 200),
-            utmMedium: text("utm_medium", 200),
-            utmCampaign: text("utm_campaign", 200),
           }}
         />
       </div>

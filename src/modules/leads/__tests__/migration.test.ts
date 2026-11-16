@@ -45,6 +45,11 @@ it("preserves legacy leads, consent and delivery data and continues public numbe
       )
       .all()
     database.exec(migration("20261015000100_project_requests"))
+    database.exec(migration("20261114000100_lead_attribution"))
+    expect(database.prepare("SELECT landingPage, utmContent, utmTerm FROM Lead").all()).toEqual([
+      { landingPage: null, utmContent: null, utmTerm: null },
+      { landingPage: null, utmContent: null, utmTerm: null },
+    ])
     expect(
       database
         .prepare(

@@ -23,9 +23,6 @@ const env = {
   TELEGRAM_CHAT_ID: "",
   TELEGRAM_OWNER_CHAT_ID: "",
   TELEGRAM_OWNER_USERNAME: "galeev66",
-  RESEND_API_KEY: partialIntegrations ? "re_test_only_key" : "",
-  EMAIL_FROM: "",
-  LEAD_NOTIFICATION_EMAIL: "",
 }
 
 function run(module, args) {

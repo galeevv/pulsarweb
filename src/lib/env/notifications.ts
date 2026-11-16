@@ -5,11 +5,6 @@ const telegramSchema = z.object({
   TELEGRAM_BOT_TOKEN: z.string().regex(/^\d+:[A-Za-z0-9_-]+$/),
   TELEGRAM_CHAT_ID: z.string().regex(/^(?:-?\d+|@[A-Za-z][A-Za-z0-9_]{4,31})$/),
 })
-const emailSchema = z.object({
-  RESEND_API_KEY: z.string().regex(/^re_[A-Za-z0-9_]+$/),
-  EMAIL_FROM: z.email(),
-  LEAD_NOTIFICATION_EMAIL: z.email(),
-})
 
 function optionalChannel<T extends z.ZodRawShape>(
   schema: z.ZodObject<T>,
@@ -37,6 +32,5 @@ export function resolveNotificationConfig(env: ServerEnv) {
       ...env,
       TELEGRAM_CHAT_ID: env.TELEGRAM_OWNER_CHAT_ID ?? env.TELEGRAM_CHAT_ID,
     }),
-    email: optionalChannel(emailSchema, env),
   }
 }

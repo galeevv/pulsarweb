@@ -1,26 +1,8 @@
 import { LandingService } from "@/components/shared/landing-service"
-import {
-  projectRequestConfig,
-  projectRequestHref,
-} from "@/modules/leads/domain/request-config"
-import Link from "next/link"
-import Image from "next/image"
-import { resolveRequestService } from "@/config/service-catalog"
+import { CorporateService } from "@/components/shared/corporate-service"
+import { ServicePageTemplate } from "@/components/shared/service-page-template"
+import { additionalServiceContent } from "@/config/service-page-content"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react"
-
-import { Section } from "@/components/layout/section"
-import { ButtonLink } from "@/components/shared/button-link"
-import { CTA } from "@/components/shared/cta"
-import { PageHeader } from "@/components/shared/page-header"
-import { SectionHeader } from "@/components/shared/section-header"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Separator } from "@/components/ui/separator"
 import { getService, primaryServices } from "@/config/services"
 import { pageMetadata } from "@/lib/seo"
 
@@ -48,147 +30,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
   if (!service) notFound()
 
   if (slug === "landing-pages") return <LandingService />
+  if (slug === "corporate-websites") return <CorporateService />
 
-  return (
-    <>
-      <PageHeader
-        eyebrow={service.eyebrow}
-        title={service.title}
-        description={service.description}
-      />
-      <Section className="pt-0 md:pt-0">
-        <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href={projectRequestHref(service.slug)} className="h-12">
-            {projectRequestConfig[resolveRequestService(service.slug)!].cta}{" "}
-            <ArrowUpRight data-icon="inline-end" />
-          </ButtonLink>
-          <ButtonLink href="/services" variant="ghost">
-            <ArrowLeft data-icon="inline-start" /> Все услуги
-          </ButtonLink>
-        </div>
-        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Проектируем, разрабатываем и запускаем продукт целиком. Запуск входит
-          в стоимость разработки. Постоянное сопровождение после запуска —
-          отдельно, по желанию.
-        </p>
-      </Section>
-
-      <Section className="pt-0 md:pt-0">
-        <Image
-          src={`/images/services/${service.image}-wide.webp`}
-          alt={`Визуальное направление: ${service.shortTitle}`}
-          width={1600}
-          height={900}
-          sizes="(max-width: 680px) 100vw, 1400px"
-          className="aspect-[16/10] w-full rounded-3xl object-cover sm:aspect-[2/1] sm:rounded-[2rem]"
-        />
-        <p className="mt-3 text-xs text-muted-foreground">
-          Иллюстрация направления. Дизайн вашего проекта создаём под его задачи.
-        </p>
-      </Section>
-      <Section className="pt-0 md:pt-0">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-          <div>
-            <p className="eyebrow mb-6">Подход к задаче</p>
-            <h2 className="text-2xl leading-snug font-medium tracking-tight md:text-3xl">
-              {service.intro}
-            </h2>
-          </div>
-          <div className="flex flex-col gap-8">
-            {service.outcomes.map((outcome) => (
-              <div
-                key={outcome.title}
-                className="flex flex-col gap-3 border-t border-border pt-6"
-              >
-                <h3 className="text-xl font-medium tracking-tight">
-                  {outcome.title}
-                </h3>
-                <p className="max-w-xl leading-relaxed text-muted-foreground">
-                  {outcome.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-      <Section className="dark home-dark-panel text-foreground">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <SectionHeader
-            eyebrow="Что можем сделать"
-            title="Всё, что нужно для запуска."
-            description="Состав проекта определяем после знакомства с задачей. Начинаем с необходимого и оставляем понятный путь для дальнейшего развития."
-          />
-          <ul className="flex flex-col gap-6 lg:pt-10">
-            {service.deliverables.map((deliverable) => (
-              <li key={deliverable} className="flex items-start gap-4 text-lg">
-                <Check
-                  className="mt-1 size-5 shrink-0 text-muted-foreground"
-                  aria-hidden="true"
-                />
-                {deliverable}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader eyebrow="Процесс" title="Понятно на каждом этапе." />
-        <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {service.process.map((step, index) => (
-            <li
-              key={step.title}
-              className="flex flex-col gap-5 rounded-3xl border border-border/70 bg-muted/30 p-6"
-            >
-              <p
-                className="font-mono text-xs text-muted-foreground"
-                aria-hidden="true"
-              >
-                0{index + 1}
-              </p>
-              <Separator />
-              <h3 className="text-xl font-medium tracking-tight">
-                {step.title}
-              </h3>
-              <p className="leading-relaxed text-muted-foreground">
-                {step.description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
-      <Section className="pt-0 md:pt-0">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-20">
-          <SectionHeader eyebrow="Перед началом" title="Частые вопросы." />
-          <Accordion>
-            {service.faq.map((item) => (
-              <AccordionItem key={item.question} value={item.question}>
-                <AccordionTrigger>{item.question}</AccordionTrigger>
-                <AccordionContent>{item.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </Section>
-      <Section className="pt-0 md:pt-0" aria-label="Другие направления">
-        <p className="eyebrow mb-6">Другие направления</p>
-        <nav className="flex flex-wrap gap-x-8 gap-y-4" aria-label="Услуги">
-          {primaryServices
-            .filter((item) => item.slug !== service.slug)
-            .map((item) => (
-              <Link
-                key={item.slug}
-                href={`/services/${item.slug}`}
-                className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-              >
-                {item.shortTitle}
-              </Link>
-            ))}
-        </nav>
-      </Section>
-      <CTA
-        href={projectRequestHref(service.slug)}
-        label={projectRequestConfig[resolveRequestService(service.slug)!].cta}
-      />
-    </>
-  )
+  if (slug === "ecommerce" || slug === "telegram") {
+    return <ServicePageTemplate content={additionalServiceContent[slug]} />
+  }
+  notFound()
 }

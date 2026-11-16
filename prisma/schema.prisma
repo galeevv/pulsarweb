@@ -17,10 +17,13 @@ model Lead {
   projectReference   String?
   timeline           String?
   sourceUrl          String?
+  landingPage        String?
   referrer           String?
   utmSource          String?
   utmMedium          String?
   utmCampaign        String?
+  utmContent         String?
+  utmTerm            String?
   updatedAt          DateTime @updatedAt
   submissionId       String   @unique
   payloadHash        String

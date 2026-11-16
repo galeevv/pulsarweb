@@ -1,0 +1,23 @@
+[
+  {
+    "key": "structure",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 49536
+  },
+  {
+    "key": "mobile",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 33702
+  },
+  {
+    "key": "speed",
+    "width": 900,
+    "height": 600,
+    "alpha": true,
+    "bytes": 41210
+  }
+]

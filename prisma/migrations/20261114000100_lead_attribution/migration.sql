@@ -1,0 +1,3 @@
+ALTER TABLE "Lead" ADD COLUMN "landingPage" TEXT;
+ALTER TABLE "Lead" ADD COLUMN "utmContent" TEXT;
+ALTER TABLE "Lead" ADD COLUMN "utmTerm" TEXT;

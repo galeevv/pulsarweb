@@ -98,10 +98,13 @@ export const createLeadSchema = z
       error: "Нужно согласие на обработку персональных данных",
     }),
     sourceUrl: optionalUrl,
+    landingPage: optionalUrl,
     referrer: optionalUrl,
     utmSource: optionalText(200),
     utmMedium: optionalText(200),
     utmCampaign: optionalText(200),
+    utmContent: optionalText(200),
+    utmTerm: optionalText(200),
     website: z.string().max(200).optional().default(""),
     submissionId: z.uuid({ error: "Обновите страницу и попробуйте снова" }),
   })

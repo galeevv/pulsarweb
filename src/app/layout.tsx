@@ -2,6 +2,7 @@ import { Inter, Geist_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/layout/site-header"
 import { FooterVisibility } from "@/components/layout/footer-visibility"
 import { SiteFooter } from "@/components/layout/site-footer"
+import { AttributionCapture } from "@/components/layout/attribution-capture"
 import { rootMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 import { site } from "@/config/site"
@@ -32,6 +33,7 @@ export default function RootLayout({
       )}
     >
       <body className="flex min-h-dvh flex-col">
+        <AttributionCapture />
         <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>

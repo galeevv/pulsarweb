@@ -28,10 +28,13 @@ function toLead(record: DatabaseLead): Lead {
     companyContext: record.companyContext ?? undefined,
     projectReference: record.projectReference ?? undefined,
     sourceUrl: record.sourceUrl ?? undefined,
+    landingPage: record.landingPage ?? undefined,
     referrer: record.referrer ?? undefined,
     utmSource: record.utmSource ?? undefined,
     utmMedium: record.utmMedium ?? undefined,
     utmCampaign: record.utmCampaign ?? undefined,
+    utmContent: record.utmContent ?? undefined,
+    utmTerm: record.utmTerm ?? undefined,
     consentVersion: record.consentVersion,
     createdAt: record.createdAt,
   }
