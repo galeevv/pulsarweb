@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "env": { "NEXT_PUBLIC_DEMO_MODE": "true" },
+  "build": { "env": { "NEXT_PUBLIC_DEMO_MODE": "true" } }
+}

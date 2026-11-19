@@ -33,6 +33,9 @@ export default function RootLayout({
       )}
     >
       <body className="flex min-h-dvh flex-col">
+        {process.env.NEXT_PUBLIC_DEMO_MODE === "true" && (
+          <div className="pointer-events-none fixed bottom-4 left-4 z-50 rounded-full border border-white/15 bg-background/40 px-4 py-2 font-mono text-xs tracking-widest text-foreground backdrop-blur-xl" aria-label="Демонстрационная версия">DEMO</div>
+        )}
         <AttributionCapture />
         <a href="#main" className="skip-link">
           Перейти к содержимому

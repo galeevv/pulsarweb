@@ -245,6 +245,10 @@ export function ProjectRequestWizard({
     }
     const data = validate(true)
     if (!data || data === true) return
+    if (process.env.NEXT_PUBLIC_DEMO_MODE === "true") {
+      setError("Демоверсия: заявки не отправляются и не сохраняются.")
+      return
+    }
     const signature = JSON.stringify({ ...data, submissionId: undefined })
     if (!attemptRef.current || attemptRef.current.signature !== signature)
       attemptRef.current = { id: crypto.randomUUID(), signature }
