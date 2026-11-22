@@ -65,6 +65,15 @@ export function captureAttribution(
   }
 }
 
+export function clearFirstTouchAttribution() {
+  memory = undefined
+  try {
+    window.sessionStorage.removeItem(attributionStorageKey)
+  } catch {
+    // The browser may deny access to storage.
+  }
+}
+
 // First touch is immutable for this tab's session, including direct visits.
 // Storage restrictions must never prevent a visitor from submitting a lead.
 export function getFirstTouchAttribution(): Attribution | undefined {

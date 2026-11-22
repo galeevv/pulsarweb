@@ -88,7 +88,7 @@ for (const width of [320, 768, 1024, 1440, 1920]) {
       "/services",
       "/services/ecommerce",
       "/projects",
-      "/projects/pulsar-cloud",
+      "/projects/pulsar-vpn",
       "/about",
       "/contacts",
       "/start",
@@ -140,7 +140,7 @@ test("каждая услуга ведёт к форме с выбранным �
   }
 })
 
-test("юридические черновики имеют содержание, noindex и путь обратно к форме", async ({
+test("правовые документы имеют дату, содержание и noindex", async ({
   page,
 }) => {
   for (const slug of ["privacy", "personal-data-consent", "cookies"]) {
@@ -149,16 +149,21 @@ test("юридические черновики имеют содержание,
       "content",
       /noindex/
     )
-    await expect(page.getByRole("note")).toContainText("Документ не утверждён")
+    await expect(
+      page.getByText("Дата последнего обновления: 22 ноября 2026 года.")
+    ).toBeVisible()
+    const contentsToggle = page
+      .locator("details summary")
+      .filter({ hasText: "Содержание" })
+    if (await contentsToggle.isVisible()) await contentsToggle.click()
     await page
       .getByRole("navigation", { name: "Содержание документа" })
       .getByRole("link")
       .last()
       .click()
     await expect(page).toHaveURL(/#legal-section-\d+$/)
-    await page.getByRole("link", { name: "Вернуться к форме" }).click()
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Что хотите создать?"
-    )
+    await expect(
+      page.getByRole("link", { name: "Вернуться к форме" })
+    ).toHaveCount(0)
   }
 })

@@ -73,6 +73,7 @@ test("мобильное сопровождение пропускает выб�
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Как с вами связаться?"
   )
+  await page.getByRole("button", { name: "Принять", exact: true }).click()
   await fillContacts(page)
   expect(
     await page.evaluate(

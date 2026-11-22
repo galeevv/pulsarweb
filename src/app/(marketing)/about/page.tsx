@@ -24,10 +24,10 @@ const technologies = [
   "Resend",
 ]
 const benefits = [
-  { title: "SEO", description: "Техническая оптимизация" },
-  { title: "Яндекс.Директ", description: "Настройка рекламы" },
-  { title: "Интеграции", description: "Telegram, CRM, API" },
-  { title: "Production", description: "Сервер, домен, запуск" },
+  { title: "Прямой контакт", description: "Общение с разработчиком" },
+  { title: "Веб-аналитика", description: "Метрика и цели" },
+  { title: "Запуск", description: "На вашем домене" },
+  { title: "Поддержка", description: "Два месяца включены" },
 ]
 
 export default function AboutPage() {

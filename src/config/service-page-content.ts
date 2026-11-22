@@ -1,5 +1,5 @@
 import type { ServicePageContent } from "@/components/shared/service-page-template"
-import { serviceCatalog } from "@/config/service-catalog"
+import { serviceBadges, serviceCatalog } from "@/config/service-catalog"
 
 type AdditionalService = "corporate-websites" | "ecommerce" | "telegram"
 
@@ -14,8 +14,9 @@ function basics(service: AdditionalService) {
     service,
     title: item.shortTitle,
     description: item.description,
+    badges: serviceBadges[service],
     image: {
-      src: `/images/services2/${item.image.split("-")[0]}.webp`,
+      src: `/images/services/covers/${item.image.split("-")[0]}.webp`,
       alt: `Концепт проекта: ${item.shortTitle}`,
     },
     price: item.priceLabel,
@@ -28,11 +29,10 @@ function basics(service: AdditionalService) {
 export const additionalServiceContent = {
   "corporate-websites": {
     ...basics("corporate-websites"),
-    badges: ["Индивидуальный дизайн", "Удобно на мобильном", "Формы заявок"],
     approach: [
       { title: "Понятная структура", visual: "structure", description: "Объединяем услуги, кейсы и контакты. Помогаем клиенту быстро найти нужное и познакомиться с компанией." },
       { title: "Удобно на любом экране", visual: "mobile", description: "Продумываем навигацию, тексты и формы для компьютера и телефона. Сохраняем единый стиль на каждой странице." },
-      { title: "Готов к развитию", visual: "speed", description: "Создаём основу для новых разделов и интеграций. Оптимизируем изображения и скорость загрузки страниц." },
+      { title: "Готов к развитию", image: "/images/services/approach/corporate-growth.webp", description: "Создаём основу для новых разделов и интеграций. Оптимизируем изображения и скорость загрузки страниц." },
     ],
     included: [
       { title: "Дизайн и содержание", items: ["Структура разделов и страниц", "Индивидуальный адаптивный дизайн", "Услуги, о компании, кейсы и контакты"] },
@@ -43,11 +43,10 @@ export const additionalServiceContent = {
   },
   ecommerce: {
     ...basics("ecommerce"),
-    badges: ["Каталог и корзина", "Онлайн-оплата", "Управление заказами"],
     approach: [
-      { title: "Легко найти товар", visual: "structure", description: "Продумываем категории, поиск и фильтры. Показываем в карточке товара всё, что нужно для решения о покупке." },
-      { title: "Удобно покупать", visual: "mobile", description: "Соединяем корзину, оформление и оплату в понятный путь. Уделяем внимание покупкам с телефона." },
-      { title: "Готов к заказам", visual: "speed", description: "Проверяем оплату, статусы и уведомления. Помогаем команде магазина начать работу после запуска." },
+      { title: "Легко найти товар", image: "/images/services/approach/shop-search.webp", description: "Продумываем категории, поиск и фильтры. Показываем в карточке товара всё, что нужно для решения о покупке." },
+      { title: "Удобно покупать", image: "/images/services/approach/shop-checkout.webp", description: "Соединяем корзину, оформление и оплату в понятный путь. Уделяем внимание покупкам с телефона." },
+      { title: "Готов к заказам", image: "/images/services/approach/shop-orders.webp", description: "Проверяем оплату, статусы и уведомления. Помогаем команде магазина начать работу после запуска." },
     ],
     included: [
       { title: "Витрина", items: ["Каталог и карточки товаров", "Поиск и фильтры", "Адаптивный дизайн"] },
@@ -59,11 +58,10 @@ export const additionalServiceContent = {
   telegram: {
     ...basics("telegram"),
     price: `Бот ${serviceCatalog.telegram.priceLabel}. Mini App — от 40 000 ₽`,
-    badges: ["Боты и Mini Apps", "Заявки и продажи", "Интеграции с вашими сервисами"],
     approach: [
       { title: "Начинаем со сценария", visual: "structure", description: "Разбираемся, что нужно клиентам и команде. Подбираем формат: бот для простых действий или Mini App для полноценного интерфейса." },
-      { title: "В привычном Telegram", visual: "mobile", description: "Каталог, запись или заказ доступны внутри мессенджера. Делаем действия понятными, а путь до результата — коротким." },
-      { title: "Меньше ручной работы", visual: "speed", description: "Связываем заявки, уведомления и ваши сервисы. Проверяем основные сценарии и обработку ошибок перед запуском." },
+      { title: "В привычном Telegram", image: "/images/services/approach/telegram-app.webp", description: "Каталог, запись или заказ доступны внутри мессенджера. Делаем действия понятными, а путь до результата — коротким." },
+      { title: "Меньше ручной работы", image: "/images/services/approach/telegram-automation.webp", description: "Связываем заявки, уведомления и ваши сервисы. Проверяем основные сценарии и обработку ошибок перед запуском." },
     ],
     included: [
       { title: "Сценарии и интерфейс", items: ["Логика диалога или экраны Mini App", "Дизайн под задачи проекта", "Каталог, запись или заявки — по задаче"] },

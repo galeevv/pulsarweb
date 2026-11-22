@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/start",
     "/projects/pulsar-web",
+    "/services/support",
     ...navigation.map(({ href }) => href),
     ...services.map((service) => `/services/${service.slug}`),
     ...(pulsarCloud.casePublished ? [pulsarCloud.href] : []),

@@ -1,3 +1,4 @@
+import { serviceBadges, serviceCatalog } from "@/config/service-catalog"
 import {
   ServicePageTemplate,
   type ServicePageContent,
@@ -6,17 +7,12 @@ import {
 const landingContent = {
   service: "landing-pages",
   title: "Лендинги под рекламу",
-  description:
-    "От вашего предложения — к первым заявкам. Создадим лендинг и подготовим его к запуску рекламы.",
+  description: serviceCatalog["landing-pages"].description,
   image: {
-    src: "/images/services2/landing.webp",
+    src: "/images/services/covers/landing.webp",
     alt: "Пример лендинга на ноутбуке",
   },
-  badges: [
-    "Загрузка < 1 сек",
-    "Mobile-first архитектура",
-    "Готов к Яндекс.Метрике и целям",
-  ],
+  badges: serviceBadges["landing-pages"],
   approach: [
     {
       title: "Сначала смыслы",

@@ -90,6 +90,7 @@ export const serviceCatalog = {
     cta: "Обсудить сопровождение",
     kind: "SUPPORT",
     image: "support",
+    priceLabel: "от 10 000 ₽/мес.",
   },
   other: {
     title: "Другой проект",
@@ -132,3 +133,14 @@ export function serviceLabel(value: string): string {
   const service = resolveRequestService(value)
   return service ? serviceCatalog[service].title : value
 }
+
+export const serviceBadges = {
+  "landing-pages": ["Адаптивный дизайн", "Яндекс Метрика", "Уведомления в Telegram"],
+  "corporate-websites": ["Каталог услуг", "Кейсы и команда", "Формы заявок"],
+  "ecommerce": [
+    "Каталог и карточки товаров",
+    "Корзина и оплата",
+    "Управление заказами",
+  ],
+  "telegram": ["Telegram-боты", "Mini Apps", "Оплата и уведомления"],
+} as const satisfies Record<(typeof primaryServiceIds)[number], readonly string[]>

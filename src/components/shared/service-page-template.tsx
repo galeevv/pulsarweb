@@ -17,17 +17,24 @@ import { projectRequestHref } from "@/modules/leads/domain/request-config"
 import type { primaryServiceIds } from "@/config/service-catalog"
 
 export type ServicePageContent = {
-  service: (typeof primaryServiceIds)[number]
+  service: (typeof primaryServiceIds)[number] | "support"
   title: string
   description: string
-  image: { src: string; alt: string }
+  image?: { src: string; alt: string }
   badges: readonly string[]
-  approach: readonly { title: string; description: string; visual: ApproachVisual }[]
+  approach: readonly {
+    title: string
+    description: string
+    visual?: ApproachVisual
+    image?: string
+  }[]
   support: { title: string; description: string }
   included: readonly { title: string; items: readonly string[] }[]
+  includedTitle?: string
   duration: string
   price: string
   cta: { title: string; label: string }
+  showPriceBesideCta?: boolean
 }
 
 export function ServicePageTemplate({
@@ -41,16 +48,21 @@ export function ServicePageTemplate({
         className="pt-6 pb-0 md:pt-10 md:pb-0"
         aria-labelledby="service-title"
       >
-        <Card className="gap-4 rounded-3xl bg-muted pt-0 ring-0 sm:rounded-[2rem]">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-3xl sm:rounded-[2rem]">
-            <Image
-              src={content.image.src}
-              alt={content.image.alt}
-              fill
-              unoptimized
-              className="object-cover"
-              preload
-            />
+        <Card className="gap-4 marketing-surface bg-muted pt-0 ring-0">
+          <div className="relative aspect-[21/9] overflow-hidden marketing-surface">
+            {content.image && (
+              <Image
+                src={content.image.src}
+                alt={content.image.alt}
+                fill
+                unoptimized
+                className="object-cover"
+                preload
+              />
+            )}
+            {!content.image && (
+              <div aria-hidden="true" className="absolute inset-0 bg-background/50" />
+            )}
           </div>
           <CardHeader className="gap-4">
               <CardTitle>
@@ -59,6 +71,9 @@ export function ServicePageTemplate({
               <CardDescription className="max-w-2xl text-base leading-relaxed sm:text-lg">
                 {content.description}
               </CardDescription>
+              {content.showPriceBesideCta && (
+                <p className="text-base font-medium">{content.price}</p>
+              )}
           </CardHeader>
           <CardContent className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
@@ -72,8 +87,12 @@ export function ServicePageTemplate({
               </Badge>
             ))}
             </div>
-            <ButtonLink href={projectRequestHref(content.service)} className="h-12 w-full shrink-0 px-6 md:w-auto">
-              {content.cta.label}
+            <ButtonLink
+              href={projectRequestHref(content.service)}
+              aria-label={`${content.cta.label} — ${content.price}`}
+              className="h-12 w-full shrink-0 px-6 md:w-auto"
+            >
+              {content.showPriceBesideCta ? content.cta.label : content.price}
               <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
             </ButtonLink>
           </CardContent>
@@ -89,7 +108,7 @@ export function ServicePageTemplate({
               key={item.title}
               className="h-full gap-5 rounded-3xl pt-0 ring-0 sm:rounded-[2rem]"
             >
-              <ServiceApproachVisual kind={item.visual} />
+              <ServiceApproachVisual kind={item.visual} image={item.image} />
               <CardHeader>
                 <CardTitle>
                   <h3 className="text-2xl tracking-tight">{item.title}</h3>
@@ -104,7 +123,7 @@ export function ServicePageTemplate({
       </Section>
       <Section className="pb-0 md:pb-0" aria-labelledby="service-included">
         <h2 id="service-included" className="home-section-title mb-10 md:mb-12">
-          Что входит в проект
+          {content.includedTitle ?? "Что входит в проект"}
         </h2>
         <Separator />
         <div className="grid gap-8 py-8 md:py-10 lg:grid-cols-3 lg:gap-10">
@@ -125,7 +144,7 @@ export function ServicePageTemplate({
         <Separator />
       </Section>
       <Section aria-labelledby="service-cta">
-        <div className="overflow-hidden rounded-3xl bg-card sm:rounded-[2rem]">
+        <div className="overflow-hidden marketing-surface bg-card">
           <HomeHeroSurface>
             <div className="bg-linear-to-r from-card via-card/90 to-transparent px-6 py-10 sm:px-12 sm:py-12 lg:px-16">
               <div className="flex max-w-xl flex-col items-start gap-5">

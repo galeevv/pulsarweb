@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { CookieSettingsButton } from "@/components/layout/cookie-consent-banner"
 import { Container } from "@/components/layout/container"
 import { Logo } from "@/components/shared/logo"
 import { legalNavigation } from "@/config/navigation"
@@ -31,6 +32,7 @@ export function SiteFooter() {
                   {item.label}
                 </Link>
               ))}
+              <CookieSettingsButton />
             </nav>
           </div>
         </div>

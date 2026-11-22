@@ -26,7 +26,7 @@ export const leadStatuses = [
   "LOST",
   "SPAM",
 ] as const
-export const consentVersion = "2026-10-15"
+export const consentVersion = "2026-11-22"
 export const leadServiceSchema = z.enum(leadServiceIds, {
   error: "Выберите направление",
 })

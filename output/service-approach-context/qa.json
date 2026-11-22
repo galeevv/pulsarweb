@@ -1,0 +1,290 @@
+{
+  "rows": [
+    {
+      "width": 1440,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fcorporate-growth.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-search.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-checkout.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-orders.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-app.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-automation.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "support",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fcorporate-growth.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-search.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-checkout.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-orders.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-app.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-automation.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "support",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "landing-pages",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "corporate-websites",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fcorporate-growth.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "ecommerce",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-search.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-checkout.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fshop-orders.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "telegram",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-app.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Ftelegram-automation.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "support",
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true
+        }
+      ],
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

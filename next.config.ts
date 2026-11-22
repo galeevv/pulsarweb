@@ -2,9 +2,15 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  images: { qualities: [75, 100] },
   serverExternalPackages: ["better-sqlite3"],
   async redirects() {
     return [
+      {
+        source: "/projects/pulsar-cloud",
+        destination: "/projects/pulsar-vpn",
+        permanent: true,
+      },
       {
         source: "/services/websites",
         destination: "/services/landing-pages",

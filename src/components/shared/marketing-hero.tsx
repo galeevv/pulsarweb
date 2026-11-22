@@ -16,7 +16,7 @@ export function MarketingHero({
         className="home-hero dark relative isolate overflow-hidden rounded-3xl bg-background text-foreground sm:rounded-[2rem]"
       >
         <HomeHeroSurface>
-          <Container className="home-hero-content relative flex min-h-[calc(100svh-6.5rem)] items-center justify-center px-4 py-24 sm:min-h-[calc(100svh-7rem)] sm:px-6 lg:px-8 xl:px-16">
+          <Container className="home-hero-content relative flex items-center justify-center px-4 py-24 sm:px-6 lg:px-8 xl:px-16">
             <div className="hero-intro-content flex w-full flex-col items-center gap-8 text-center">
               {children}
             </div>

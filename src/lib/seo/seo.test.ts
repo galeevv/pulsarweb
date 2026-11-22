@@ -45,17 +45,16 @@ describe("SEO foundation", () => {
       "web-systems",
       "desktop",
       "infrastructure",
-      "support",
       "other",
     ])
       expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
         false
       )
-    for (const slug of ["landing-pages", "corporate-websites", "telegram"])
+    for (const slug of ["landing-pages", "corporate-websites", "telegram", "support"])
       expect(urls.some((url) => url.pathname === `/services/${slug}`)).toBe(
         true
       )
-    expect(urls.some((url) => url.pathname === "/projects/pulsar-cloud")).toBe(
+    expect(urls.some((url) => url.pathname === "/projects/pulsar-vpn")).toBe(
       true
     )
     expect(robots().rules).toMatchObject({ disallow: ["/api/"] })

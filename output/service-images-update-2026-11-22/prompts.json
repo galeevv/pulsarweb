@@ -1,0 +1,17 @@
+{
+  "tool": "built-in imagegen",
+  "prompts": [
+    {
+      "name": "support-connect",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D illustration for a dark website service card. Satin silver aluminum, graphite glass and rich blue #0071e3. Actual transparent alpha background, no backdrop rectangle or floor. Soft studio light upper left, realistic reflections, rounded machined edges. Orthographic three-quarter view slightly above. Centered compact composition in landscape 3:2 canvas with 12% safe margins, entirely visible, readable at 300x150. Few large forms, no text, letters, numbers, logos, watermark, tiny details, neon or busy decoration. Subject: connecting a web project for technical maintenance. One graphite browser window with polished silver rim and a large blue center panel, beside a compact silver server block, linked by one short clean blue cable with a precise connector. Balanced cohesive physical objects, clear single visual idea."
+    },
+    {
+      "name": "support-monitor",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D illustration for a dark website service card. Satin silver aluminum, graphite glass and rich blue #0071e3. Actual transparent alpha background, no backdrop rectangle or floor. Soft studio light upper left, realistic reflections, rounded machined edges. Orthographic three-quarter view slightly above. Centered compact composition in landscape 3:2 canvas with 12% safe margins, entirely visible, readable at 300x150. Few large forms, no text, letters, numbers, logos, watermark, tiny details, neon or busy decoration. Subject: monitoring a website's availability. A single wide graphite monitoring panel in a thick satin silver rounded frame, elevated blue pulse line across its screen and one small blue circular status badge with silver checkmark at lower right. No stand, no extra objects. Crisp restrained physical product render."
+    },
+    {
+      "name": "support-updates",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D illustration for a dark website service card. Satin silver aluminum, graphite glass and rich blue #0071e3. Actual transparent alpha background, no backdrop rectangle or floor. Soft studio light upper left, realistic reflections, rounded machined edges. Orthographic three-quarter view slightly above. Centered compact composition in landscape 3:2 canvas with 12% safe margins, entirely visible, readable at 300x150. Few large forms, no text, letters, numbers, logos, watermark, tiny details, neon or busy decoration. Subject: careful small website improvements and configuration. One rounded graphite control panel with silver rim, containing three substantial parallel slider rails with precisely aligned silver and blue slider knobs, with a single satin silver precision screwdriver diagonally beside it. Minimal industrial product render, no extra badges."
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest"
+import { setCookieConsent } from "./cookie-consent"
 import {
   setAnalyticsAdapter,
   trackFunnelEvent,
@@ -6,7 +7,17 @@ import {
 } from "./analytics"
 
 beforeEach(() => {
-  vi.stubGlobal("window", new EventTarget())
+  const values = new Map<string, string>()
+  vi.stubGlobal(
+    "window",
+    Object.assign(new EventTarget(), {
+      localStorage: {
+        getItem: (key: string) => values.get(key),
+        setItem: (key: string, value: string) => values.set(key, value),
+      },
+    })
+  )
+  setCookieConsent("accepted")
 })
 afterEach(() => {
   vi.unstubAllGlobals()
@@ -24,6 +35,21 @@ it("emits typed funnel events without requiring a provider or including arbitrar
     name: "start_completed",
     service: "telegram",
   })
+})
+
+it("suppresses events and delivery after analytics consent is declined", () => {
+  const listener = vi.fn()
+  const adapter = vi.fn()
+  window.addEventListener("pulsarweb:analytics", listener)
+  const detach = setAnalyticsAdapter(adapter)
+  try {
+    setCookieConsent("declined")
+    trackFunnelEvent({ name: "start_opened" })
+    expect(listener).not.toHaveBeenCalled()
+    expect(adapter).not.toHaveBeenCalled()
+  } finally {
+    detach()
+  }
 })
 
 it("supports an optional adapter and unregistering it", () => {

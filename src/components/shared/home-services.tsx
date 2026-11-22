@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
-import { serviceCatalog } from "@/config/service-catalog"
+import { serviceBadges, serviceCatalog } from "@/config/service-catalog"
 import { ButtonLink } from "@/components/shared/button-link"
 import { HomeBadge } from "@/components/shared/home-badge"
 import { Separator } from "@/components/ui/separator"
@@ -9,26 +9,18 @@ const services = [
   {
     id: "landing-pages",
     image: "landing",
-    features: ["Адаптивный дизайн", "Яндекс Метрика", "Уведомления в Telegram"],
   },
   {
     id: "corporate-websites",
     image: "corporate",
-    features: ["Каталог услуг", "Кейсы и команда", "Формы заявок"],
   },
   {
     id: "ecommerce",
     image: "ecommerce",
-    features: [
-      "Каталог и карточки товаров",
-      "Корзина и оплата",
-      "Управление заказами",
-    ],
   },
   {
     id: "telegram",
     image: "telegram",
-    features: ["Telegram-боты", "Mini Apps", "Оплата и уведомления"],
   },
 ] as const
 
@@ -36,7 +28,7 @@ export function HomeServices() {
   return (
     <div>
       <h2 className="home-section-title mb-12 md:mb-16">Что мы делаем</h2>
-      {services.map(({ id, image, features }) => {
+      {services.map(({ id, image }) => {
         const service = serviceCatalog[id]
         return (
           <article
@@ -48,7 +40,7 @@ export function HomeServices() {
             <div className="grid items-stretch gap-8 py-10 lg:grid-cols-2 lg:gap-12 lg:py-12">
               <div className="relative aspect-[3/2] self-start overflow-hidden rounded-3xl bg-card">
                 <Image
-                  src={`/images/services2/${image}.webp`}
+                  src={`/images/services/covers/${image}.webp`}
                   alt=""
                   fill
                   unoptimized
@@ -69,7 +61,7 @@ export function HomeServices() {
                   className="flex flex-wrap gap-2"
                   aria-label="Возможности услуги"
                 >
-                  {features.map((feature) => (
+                  {serviceBadges[id].map((feature) => (
                     <li key={feature}>
                       <HomeBadge>{feature}</HomeBadge>
                     </li>

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "shop-search",
+    "bytes": 48940,
+    "alpha": true
+  },
+  {
+    "name": "shop-checkout",
+    "bytes": 24308,
+    "alpha": true
+  },
+  {
+    "name": "shop-orders",
+    "bytes": 35290,
+    "alpha": true
+  },
+  {
+    "name": "corporate-growth",
+    "bytes": 37844,
+    "alpha": true
+  },
+  {
+    "name": "telegram-app",
+    "bytes": 27344,
+    "alpha": true
+  },
+  {
+    "name": "telegram-automation",
+    "bytes": 37878,
+    "alpha": true
+  }
+]

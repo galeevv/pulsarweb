@@ -200,15 +200,15 @@ body:has(.homepage) > footer {
   font-weight: 500;
   letter-spacing: -0.045em;
 }
-body:not(:has(.homepage)) .project-card-link,
-body:not(:has(.homepage)) .project-card-arrow {
+.project-card-link,
+.project-card-arrow {
   transition: transform 200ms ease;
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  body:not(:has(.homepage)) .project-card-link:hover {
+  .project-card-link:hover {
     transform: translateY(-3px);
   }
-  body:not(:has(.homepage)) .project-card-link:hover .project-card-arrow {
+  .project-card-link:hover .project-card-arrow {
     transform: translate(2px, -2px);
   }
 }
@@ -480,3 +480,13 @@ body:has(.not-found-page, .error-page) > footer {
     transform: scaleY(1);
   }
 }
+
+/* One owner for hero viewport sizing; utilities must not override mobile height. */
+.home-hero-content { min-height: calc(100svh - 7rem); }
+@media (max-width: 639px) {
+  .home-hero-content { min-height: 100svh; min-height: 100dvh; padding-bottom: max(96px, env(safe-area-inset-bottom)); }
+}
+
+:root { --marketing-radius: 1.5rem; }
+@media (min-width: 640px) { :root { --marketing-radius: 2rem; } }
+.marketing-surface { border-radius: var(--marketing-radius); }

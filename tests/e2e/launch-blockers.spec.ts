@@ -13,6 +13,7 @@ test("direct first touch wins over later tags; a lost response emits success onl
     )
   })
   await page.goto("/")
+  await page.getByRole("button", { name: "Принять", exact: true }).click()
   await expect
     .poll(() =>
       page.evaluate(() => sessionStorage.getItem("pulsarweb:first-touch:v1"))
@@ -73,6 +74,7 @@ test("first-touch UTM survives landing reload and navigation; submit stores it a
       referer: "https://search.example/results?q=private",
     }
   )
+  await page.getByRole("button", { name: "Принять", exact: true }).click()
   // Capture has run when the initial snapshot is visible in sessionStorage.
   await expect
     .poll(() =>

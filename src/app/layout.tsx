@@ -1,5 +1,6 @@
 import { Inter, Geist_Mono } from "next/font/google"
 import { SiteHeader } from "@/components/layout/site-header"
+import { CookieConsentBanner } from "@/components/layout/cookie-consent-banner"
 import { FooterVisibility } from "@/components/layout/footer-visibility"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { AttributionCapture } from "@/components/layout/attribution-capture"
@@ -44,9 +45,11 @@ export default function RootLayout({
         <main id="main" tabIndex={-1} className="flex flex-1 flex-col">
           {children}
         </main>
-        <FooterVisibility>
-          <SiteFooter />
-        </FooterVisibility>
+        <CookieConsentBanner>
+          <FooterVisibility>
+            <SiteFooter />
+          </FooterVisibility>
+        </CookieConsentBanner>
       </body>
     </html>
   )

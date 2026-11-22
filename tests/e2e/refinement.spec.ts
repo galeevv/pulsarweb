@@ -15,7 +15,7 @@ const routes = [
   "/services/ecommerce",
   "/services/telegram",
   "/projects",
-  "/projects/pulsar-cloud",
+  "/projects/pulsar-vpn",
   "/about",
   "/contacts",
   "/start",
@@ -224,7 +224,7 @@ test("SEO: уникальные заголовки, canonical без query и и
       .locator('meta[property="og:url"]')
       .getAttribute("content")
     expect(new URL(socialUrl!).href).toBe(url.href)
-    if (path.startsWith("/legal/") || path === "/projects/pulsar-cloud") {
+    if (path.startsWith("/legal/")) {
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
         "content",
         /noindex/
@@ -233,6 +233,7 @@ test("SEO: уникальные заголовки, canonical без query и и
   }
   const sitemap = await (await request.get("/sitemap.xml")).text()
   expect(sitemap).not.toContain("/legal/")
+  expect(sitemap).toContain("/projects/pulsar-vpn")
   expect(sitemap).not.toContain("/projects/pulsar-cloud")
   const image = await request.get("/opengraph-image")
   expect(image.headers()["content-type"]).toBe("image/png")

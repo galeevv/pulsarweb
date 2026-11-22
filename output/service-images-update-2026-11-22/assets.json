@@ -1,0 +1,65 @@
+[
+  {
+    "file": "public/images/approach/support-connect.webp",
+    "bytes": 58810,
+    "metadata": {
+      "format": "webp",
+      "mediaType": "image/webp",
+      "width": 900,
+      "height": 600,
+      "space": "srgb",
+      "channels": 4,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": true,
+      "autoOrient": {
+        "width": 900,
+        "height": 600
+      }
+    }
+  },
+  {
+    "file": "public/images/approach/support-monitor.webp",
+    "bytes": 39184,
+    "metadata": {
+      "format": "webp",
+      "mediaType": "image/webp",
+      "width": 900,
+      "height": 600,
+      "space": "srgb",
+      "channels": 4,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": true,
+      "autoOrient": {
+        "width": 900,
+        "height": 600
+      }
+    }
+  },
+  {
+    "file": "public/images/approach/support-updates.webp",
+    "bytes": 54582,
+    "metadata": {
+      "format": "webp",
+      "mediaType": "image/webp",
+      "width": 900,
+      "height": 600,
+      "space": "srgb",
+      "channels": 4,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": true,
+      "autoOrient": {
+        "width": 900,
+        "height": 600
+      }
+    }
+  }
+]

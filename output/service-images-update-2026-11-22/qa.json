@@ -1,0 +1,452 @@
+{
+  "rows": [
+    {
+      "width": 1440,
+      "slug": "landing-pages",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "corporate-websites",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "ecommerce",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "telegram",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "slug": "support",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "route": "/services",
+      "images": [
+        {
+          "src": "/images/services2/support.webp",
+          "loaded": true
+        },
+        {
+          "src": "/images/services2/other.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "route": "/projects",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "slug": "landing-pages",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "corporate-websites",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "ecommerce",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "telegram",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "slug": "support",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/services",
+      "images": [
+        {
+          "src": "/images/services2/support.webp",
+          "loaded": true
+        },
+        {
+          "src": "/images/services2/other.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/projects",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "slug": "landing-pages",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "corporate-websites",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "ecommerce",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "telegram",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fstructure.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fmobile.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fspeed.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "slug": "support",
+      "count": 3,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-connect.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-monitor.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fapproach%2Fsupport-updates.webp&w=3840&q=75",
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "route": "/services",
+      "images": [
+        {
+          "src": "/images/services2/support.webp",
+          "loaded": true
+        },
+        {
+          "src": "/images/services2/other.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/projects",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "images": [
+        {
+          "src": "/images/projects/pulsarweb.webp",
+          "loaded": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

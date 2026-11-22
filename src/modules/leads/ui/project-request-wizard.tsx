@@ -36,6 +36,7 @@ import { ButtonLink } from "@/components/shared/button-link"
 import { cn } from "@/lib/utils"
 import { getFirstTouchAttribution } from "@/lib/attribution"
 import { trackFunnelEvent } from "@/lib/analytics"
+import { getCookieConsent } from "@/lib/cookie-consent"
 import {
   createLeadSchema,
   leadServiceIds,
@@ -116,7 +117,6 @@ export function ProjectRequestWizard({
   const validationFocusRequested = useRef(false)
   const pendingRef = useRef(false)
   const attemptRef = useRef<{ id: string; signature: string } | null>(null)
-  const sourceRef = useRef(attribution)
   const openedRef = useRef(false)
   const begunRef = useRef(false)
   const completedRef = useRef(false)
@@ -134,15 +134,6 @@ export function ProjectRequestWizard({
     trackFunnelEvent({ name: "start_begun", service })
   }
 
-  useEffect(() => {
-    sourceRef.current = {
-      ...attribution,
-      ...getFirstTouchAttribution(),
-      sourceUrl:
-        attribution.sourceUrl ??
-        `${location.pathname}${location.search}`.slice(0, 2048),
-    }
-  }, [attribution])
   useEffect(() => {
     if (validationFocusRequested.current) {
       formRef.current
@@ -182,7 +173,8 @@ export function ProjectRequestWizard({
   function parse() {
     return createLeadSchema.safeParse({
       ...draft,
-      ...sourceRef.current,
+      ...(getCookieConsent() === "accepted" ? getFirstTouchAttribution() : undefined),
+      sourceUrl: (attribution.sourceUrl ?? location.pathname).split(/[?#]/, 1)[0].slice(0, 2048),
       phone: undefined,
       email:
         contact.trim().includes("@") && !contact.trim().startsWith("@")
@@ -488,7 +480,7 @@ export function ProjectRequestWizard({
                         value={service}
                         aria-label={item.title}
                         className={cn(
-                          "h-auto min-h-20 w-full min-w-0 flex-col gap-2 rounded-2xl px-3 py-4 whitespace-normal",
+                          "h-auto min-h-20 w-full min-w-0 flex-col gap-2 rounded-2xl px-3 py-4 whitespace-normal aria-pressed:bg-accent aria-pressed:text-accent-foreground aria-pressed:border-muted-foreground aria-pressed:hover:bg-accent aria-pressed:hover:text-accent-foreground",
                           service === "other" && "col-span-2 min-h-14 flex-row"
                         )}
                       >
@@ -582,6 +574,7 @@ export function ProjectRequestWizard({
               >
                 <Checkbox
                   id="consent"
+                  className="size-6 rounded-md after:-inset-2.5 [&_svg]:size-4"
                   aria-labelledby="consent-label"
                   required
                   checked={draft.consent}

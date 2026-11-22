@@ -1,0 +1,35 @@
+{
+  "tool": "built-in imagegen",
+  "assets": [
+    {
+      "name": "shop-search",
+      "subject": "Finding products: one graphite product catalog panel with three large silver product tiles and a prominent blue-handled magnifying glass in front. Recognizable shopping catalog and search, no text.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Finding products: one graphite product catalog panel with three large silver product tiles and a prominent blue-handled magnifying glass in front. Recognizable shopping catalog and search, no text."
+    },
+    {
+      "name": "shop-checkout",
+      "subject": "Mobile purchase: one upright satin silver smartphone with graphite screen showing a single blue shopping bag symbol and large blue payment button, with a small silver bank card overlapping lower corner. No digits or letters. Phone and payment clearly recognizable.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Mobile purchase: one upright satin silver smartphone with graphite screen showing a single blue shopping bag symbol and large blue payment button, with a small silver bank card overlapping lower corner. No digits or letters. Phone and payment clearly recognizable."
+    },
+    {
+      "name": "shop-orders",
+      "subject": "Order processing: one beautiful silver shipping parcel with a blue tape band, beside a graphite order-status panel containing three large silver checkmarks in blue circles. No text. Parcel and completed orders, not speed.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Order processing: one beautiful silver shipping parcel with a blue tape band, beside a graphite order-status panel containing three large silver checkmarks in blue circles. No text. Parcel and completed orders, not speed."
+    },
+    {
+      "name": "corporate-growth",
+      "subject": "Website expansion and integrations: three thick rounded graphite and silver modular blocks precisely joining into a coherent structure, with a blue module hovering just above its matching slot and a clean blue plus sign on its face. Elegant architectural modular product system.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Website expansion and integrations: three thick rounded graphite and silver modular blocks precisely joining into a coherent structure, with a blue module hovering just above its matching slot and a clean blue plus sign on its face. Elegant architectural modular product system."
+    },
+    {
+      "name": "telegram-app",
+      "subject": "Mini App within Telegram: one silver upright smartphone with graphite screen, unmistakable white Telegram paper-plane emblem on a blue circular app header, below it two large rounded content tiles and one blue action button. Small overlapping graphite chat bubble at side. No text or letters.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Mini App within Telegram: one silver upright smartphone with graphite screen, unmistakable white Telegram paper-plane emblem on a blue circular app header, below it two large rounded content tiles and one blue action button. Small overlapping graphite chat bubble at side. No text or letters."
+    },
+    {
+      "name": "telegram-automation",
+      "subject": "Workflow automation: a central large satin silver gear with blue hub connected by two short clean silver rails to a graphite notification bubble and a graphite database cylinder with blue details. Three objects arranged horizontally, clear integrated automated system. No text.",
+      "prompt": "Use case: stylized-concept. Premium clean Apple-like 3D website card illustration. Consistent satin silver aluminum, graphite glass, blue #0071e3. Transparent alpha background, no backdrop or ground plane. Soft upper-left studio light, restrained reflections, rounded machined edges. Slight three-quarter orthographic view. Landscape 3:2 composition with 12% margins, centered compact group, entirely visible. Few large forms legible at 300x150 pixels. No text, watermark, neon, decoration or tiny UI. Subject: Workflow automation: a central large satin silver gear with blue hub connected by two short clean silver rails to a graphite notification bubble and a graphite database cylinder with blue details. Three objects arranged horizontally, clear integrated automated system. No text."
+    }
+  ]
+}

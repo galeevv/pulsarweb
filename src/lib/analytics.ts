@@ -1,4 +1,5 @@
 import type { RequestService } from "@/config/service-catalog"
+import { getCookieConsent } from "./cookie-consent"
 
 export type FunnelEvent = {
   name: "start_opened" | "start_begun" | "start_completed"
@@ -19,7 +20,7 @@ export function setAnalyticsAdapter(next: AnalyticsAdapter) {
 }
 
 export function trackFunnelEvent(event: FunnelEvent) {
-  if (typeof window === "undefined") return
+  if (getCookieConsent() !== "accepted") return
   const safeEvent: FunnelEvent = {
     name: event.name,
     ...(event.service && { service: event.service }),
