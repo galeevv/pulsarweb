@@ -15,9 +15,10 @@ type Props = {
   href: string
   title: string
   description: string
-  category: string
+  badges: readonly string[]
   cover: ReactNode
-  status?: string
+  releaseYear: number
+  headingLevel?: "h2" | "h3"
 }
 
 export function HomeProjectCard({
@@ -25,9 +26,10 @@ export function HomeProjectCard({
   href,
   title,
   description,
-  category,
+  badges,
   cover,
-  status = "В разработке",
+  releaseYear,
+  headingLevel: Heading = "h3",
 }: Props) {
   return (
     <article aria-labelledby={id}>
@@ -39,11 +41,11 @@ export function HomeProjectCard({
         <Card className="h-full gap-4 rounded-3xl bg-muted pt-0 ring-0 sm:gap-5 sm:rounded-[2rem]">
           <div className="relative aspect-video overflow-hidden rounded-3xl sm:rounded-[2rem]">
             <div className="service-image absolute inset-0">{cover}</div>
-            <HomeBadge className="absolute top-4 left-4">{status}</HomeBadge>
+            <HomeBadge className="absolute top-4 left-4"><time dateTime={String(releaseYear)}>{releaseYear}</time></HomeBadge>
           </div>
           <CardHeader>
             <CardTitle>
-              <h3
+              <Heading
                 id={id}
                 className="flex items-center justify-between gap-4 text-2xl tracking-tight"
               >
@@ -52,12 +54,12 @@ export function HomeProjectCard({
                   aria-hidden="true"
                   className="project-card-arrow size-5 shrink-0"
                 />
-              </h3>
+              </Heading>
             </CardTitle>
             <CardDescription>{description}</CardDescription>
           </CardHeader>
-          <CardContent>
-            <HomeBadge>{category}</HomeBadge>
+          <CardContent className="flex flex-wrap gap-2">
+            {badges.map((badge) => <HomeBadge key={badge}>{badge}</HomeBadge>)}
           </CardContent>
         </Card>
       </Link>

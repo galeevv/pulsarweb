@@ -1,4 +1,4 @@
-import { ArrowUpRight, RefreshCw, ShieldCheck, Blocks } from "lucide-react"
+import { RefreshCw, ShieldCheck, Blocks } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { ButtonLink } from "@/components/shared/button-link"
 
@@ -60,8 +60,8 @@ export function SupportOffer() {
         ))}
       </div>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <ButtonLink href="/start?service=support" className="h-12">
-          Обсудить сопровождение <ArrowUpRight data-icon="inline-end" />
+        <ButtonLink href="/start?service=support">
+          Обсудить сопровождение
         </ButtonLink>
       </div>
     </Section>

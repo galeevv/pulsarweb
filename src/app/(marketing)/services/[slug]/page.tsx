@@ -5,6 +5,7 @@ import { additionalServiceContent } from "@/config/service-page-content"
 import { notFound } from "next/navigation"
 import { getService, primaryServices } from "@/config/services"
 import { pageMetadata } from "@/lib/seo"
+import { serviceSeo } from "@/config/service-seo"
 
 type ServicePageProps = { params: Promise<{ slug: string }> }
 
@@ -16,9 +17,10 @@ export async function generateMetadata({ params }: ServicePageProps) {
   const { slug } = await params
   const service = getService(slug)
   if (!service) notFound()
+  const seo = serviceSeo(service.slug)
   const metadata = pageMetadata(
-    service.shortTitle,
-    service.description,
+    seo.title,
+    seo.description,
     `/services/${service.slug}`
   )
   return metadata

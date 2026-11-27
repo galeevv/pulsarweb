@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { HomeHeroSurface } from "@/components/shared/home-hero-surface"
 import { ServiceApproachVisual, type ApproachVisual } from "@/components/shared/service-approach-visual"
-import { ArrowUpRight, Check } from "lucide-react"
+import { Check } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { ButtonLink } from "@/components/shared/button-link"
 import { Badge } from "@/components/ui/badge"
@@ -90,10 +90,9 @@ export function ServicePageTemplate({
             <ButtonLink
               href={projectRequestHref(content.service)}
               aria-label={`${content.cta.label} — ${content.price}`}
-              className="h-12 w-full shrink-0 px-6 md:w-auto"
+              className="w-full shrink-0 md:w-auto"
             >
               {content.showPriceBesideCta ? content.cta.label : content.price}
-              <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
             </ButtonLink>
           </CardContent>
         </Card>
@@ -156,9 +155,8 @@ export function ServicePageTemplate({
                   <p className="text-base font-medium">{content.support.title}</p>
                   <p className="text-sm leading-relaxed text-muted-foreground">{content.support.description}</p>
                 </div>
-                <ButtonLink href={projectRequestHref(content.service)} className="mt-2 h-12 w-full px-6 sm:w-auto">
+                <ButtonLink href={projectRequestHref(content.service)} className="mt-2 w-full sm:w-auto">
                   {content.cta.label}
-                  <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
                 </ButtonLink>
               </div>
             </div>

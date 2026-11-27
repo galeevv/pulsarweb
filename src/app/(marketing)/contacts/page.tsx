@@ -1,5 +1,5 @@
+import { Send } from "lucide-react"
 import { redirect } from "next/navigation"
-import { ArrowUpRight } from "lucide-react"
 import { MarketingHero } from "@/components/shared/marketing-hero"
 import { HomeBadge } from "@/components/shared/home-badge"
 import { ButtonLink } from "@/components/shared/button-link"
@@ -35,13 +35,12 @@ export default async function ContactsPage({
         или оставить заявку.
       </p>
       <div className="hero-intro-actions flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
-        <ButtonLink href={owner.url} className="min-h-12 px-5">
+        <ButtonLink href={owner.url}>
+          <Send data-icon="inline-start" aria-hidden="true" />
           Написать в Telegram{" "}
-          <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
         </ButtonLink>
-        <ButtonLink href="/start" variant="outline" className="min-h-12 px-5">
+        <ButtonLink href="/start" variant="outline">
           Оставить заявку{" "}
-          <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
         </ButtonLink>
       </div>
     </MarketingHero>

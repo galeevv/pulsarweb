@@ -490,3 +490,38 @@ body:has(.not-found-page, .error-page) > footer {
 :root { --marketing-radius: 1.5rem; }
 @media (min-width: 640px) { :root { --marketing-radius: 2rem; } }
 .marketing-surface { border-radius: var(--marketing-radius); }
+
+/* One shared timeline: staggered entrances, simultaneous exit, no layout shifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .support-conversation > p {
+    animation-duration: 8s;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+  .support-conversation[data-playing="true"] > p { animation-play-state: running; }
+  .support-conversation > p:nth-child(1) { animation-name: support-message-1; }
+  .support-conversation > p:nth-child(2) { animation-name: support-message-2; }
+  .support-conversation > p:nth-child(3) { animation-name: support-message-3; }
+  .support-conversation > p:nth-child(4) { animation-name: support-message-4; }
+}
+@keyframes support-message-1 {
+  0%, 5% { opacity: 0; transform: translateY(6px); }
+  9%, 85% { opacity: 1; transform: translateY(0); }
+  89%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes support-message-2 {
+  0%, 20% { opacity: 0; transform: translateY(6px); }
+  24%, 85% { opacity: 1; transform: translateY(0); }
+  89%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes support-message-3 {
+  0%, 35% { opacity: 0; transform: translateY(6px); }
+  39%, 85% { opacity: 1; transform: translateY(0); }
+  89%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes support-message-4 {
+  0%, 50% { opacity: 0; transform: translateY(6px); }
+  54%, 85% { opacity: 1; transform: translateY(0); }
+  89%, 100% { opacity: 0; transform: translateY(6px); }
+}

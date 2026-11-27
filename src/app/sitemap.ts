@@ -2,15 +2,16 @@ import type { MetadataRoute } from "next"
 import { getServerEnv } from "@/lib/env/server"
 import { services } from "@/config/services"
 import { navigation } from "@/config/navigation"
-import { pulsarCloud } from "@/config/projects"
+import { publishedProjects } from "@/config/projects"
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === "true") return []
+  const paths = [
     "/",
     "/start",
-    "/projects/pulsar-web",
     "/services/support",
     ...navigation.map(({ href }) => href),
     ...services.map((service) => `/services/${service.slug}`),
-    ...(pulsarCloud.casePublished ? [pulsarCloud.href] : []),
-  ].map((path) => ({ url: new URL(path, getServerEnv().SITE_URL).href }))
+    ...publishedProjects.map((project) => project.href),
+  ]
+  return [...new Set(paths)].map((path) => ({ url: new URL(path, getServerEnv().SITE_URL).href }))
 }

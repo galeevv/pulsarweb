@@ -370,7 +370,7 @@ export function ProjectRequestWizard({
             type="button"
             size="lg"
             variant="outline"
-            className="h-12 w-full rounded-2xl"
+            className="h-12 w-full rounded-2xl px-4 has-data-[icon=inline-start]:pl-3 has-data-[icon=inline-end]:pr-3"
             onClick={() => go(0)}
           >
             <FileText data-icon="inline-start" aria-hidden="true" />
@@ -389,7 +389,7 @@ export function ProjectRequestWizard({
           <ButtonLink
             href={telegramUrl}
             variant="outline"
-            className="h-12 w-full rounded-2xl"
+            className="h-12 w-full rounded-2xl px-4 has-data-[icon=inline-start]:pl-3 has-data-[icon=inline-end]:pr-3"
           >
             <Send data-icon="inline-start" aria-hidden="true" />
             <span className="flex-1 text-left">Написать разработчику</span>

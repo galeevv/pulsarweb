@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { ButtonLink } from "@/components/shared/button-link"
 import { cn } from "@/lib/utils"
@@ -46,10 +45,9 @@ export function CTA({
           </div>
           <ButtonLink
             href={href}
-            className="h-12 w-full shrink-0 px-6 sm:w-auto"
+            className="w-full shrink-0 sm:w-auto"
           >
             {label}
-            <ArrowUpRight data-icon="inline-end" />
           </ButtonLink>
         </div>
       </Section>

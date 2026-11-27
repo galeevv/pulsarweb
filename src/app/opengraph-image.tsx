@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og"
 import { site } from "@/config/site"
 import { PulsarMark } from "@/components/shared/logo"
-export const alt = `${site.name} — ${site.tagline}`
+export const alt = `${site.name} — ${site.seoTitle}`
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 export default function OpenGraphImage() {
@@ -33,10 +33,10 @@ export default function OpenGraphImage() {
           maxWidth: 1000,
         }}
       >
-        {site.tagline}
+        {site.seoTitle}
       </div>
       <div style={{ display: "flex", fontSize: 24, color: "#a3a3a3" }}>
-        Digital products, thoughtfully built.
+        От идеи до запуска
       </div>
     </div>,
     size

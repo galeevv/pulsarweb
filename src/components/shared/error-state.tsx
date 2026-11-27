@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft, RotateCcw } from "lucide-react"
+import { RotateCcw } from "lucide-react"
 import { useEffect, useRef, useTransition } from "react"
 import { PulsarMark } from "@/components/shared/logo"
 import { Button } from "@/components/ui/button"
@@ -44,8 +44,7 @@ export function ErrorState({ retry }: { retry: () => void }) {
           )}
           {pending ? "Пробуем снова…" : "Попробовать снова"}
         </Button>
-        <ButtonLink href="/" variant="outline" className="h-12 px-6">
-          <ArrowLeft data-icon="inline-start" />
+        <ButtonLink href="/" variant="outline">
           На главную
         </ButtonLink>
       </div>

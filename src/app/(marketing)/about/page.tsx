@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react"
 import { MarketingHero } from "@/components/shared/marketing-hero"
 import { ButtonLink } from "@/components/shared/button-link"
 import { HomeBadge } from "@/components/shared/home-badge"
@@ -46,13 +45,11 @@ export default function AboutPage() {
           идеи до запуска.
         </p>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <ButtonLink href="/start" className="h-12 px-5">
+          <ButtonLink href="/start">
             Обсудить проект{" "}
-            <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
           </ButtonLink>
-          <ButtonLink href="/projects" variant="outline" className="h-12 px-5">
+          <ButtonLink href="/projects" variant="outline">
             Наши проекты{" "}
-            <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
           </ButtonLink>
         </div>
         <div className="mt-6 flex max-w-4xl flex-col gap-5 md:mt-10">

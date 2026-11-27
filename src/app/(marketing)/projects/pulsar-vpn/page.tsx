@@ -79,7 +79,7 @@ export default function PulsarVpnPage() {
           </div>
           <CardHeader className="gap-4">
             <CardTitle><h1 id="project-title" className="home-section-title">PULSAR VPN</h1></CardTitle>
-            <CardDescription className="max-w-2xl text-base leading-relaxed sm:text-lg">VPN-сервис с личным кабинетом и Telegram-ботом: подписка, подключение устройств и поддержка.</CardDescription>
+            <CardDescription className="max-w-2xl text-base leading-relaxed sm:text-lg">{pulsarCloud.description}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
@@ -87,7 +87,7 @@ export default function PulsarVpnPage() {
               <Badge variant="outline">Web-Приложение</Badge>
               <Badge variant="outline">Telegram bot</Badge>
             </div>
-            <ButtonLink href="https://pulsar-cloud.space" target="_blank" rel="noopener noreferrer" className="h-12 w-full shrink-0 px-6 md:w-auto">
+            <ButtonLink href="https://pulsar-cloud.space" target="_blank" rel="noopener noreferrer" className="w-full shrink-0 md:w-auto">
               Открыть продукт <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
             </ButtonLink>
           </CardContent>
@@ -99,7 +99,7 @@ export default function PulsarVpnPage() {
             <div className="flex flex-col items-start gap-5 bg-linear-to-r from-card via-card/90 to-transparent px-6 py-10 sm:p-12">
               <h2 id="project-cta" className="max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Ваш продукт — следующий.</h2>
               <p className="max-w-lg text-muted-foreground">Обсудим интерфейс, логику и запуск вашего сервиса.</p>
-              <ButtonLink href={`/start?service=other&source=${encodeURIComponent(pulsarCloud.href)}`} className="h-12 w-full sm:w-auto">Обсудить проект <ArrowUpRight data-icon="inline-end" aria-hidden="true" /></ButtonLink>
+              <ButtonLink href={`/start?service=other&source=${encodeURIComponent(pulsarCloud.href)}`} className="w-full sm:w-auto">Обсудить проект </ButtonLink>
             </div>
           </HomeHeroSurface>
         </div>

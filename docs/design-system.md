@@ -10,6 +10,13 @@ ProjectPageTemplate owns project scope, palette, screen gallery and technology l
 
 DetailLoading appears only while route content is pending. Static media placeholders indicate missing assets, not loading. Existing start loading, validation, pending, success and error states remain. WebGL failure keeps the static background and readable content.
 
+## Кнопки и карточки проектов — 26 ноября 2026
+
+- `ButtonLink` задаёт маркетинговым CTA высоту 48 px и боковые отступы 24 px, включая кнопки со стрелкой. Локальные классы отвечают за ширину и размещение. Кнопки меню, закрытия и прочие служебные контролы сохраняют свои размеры.
+- Стрелки оставляем в карточках услуг/проектов, включая hero-карточки, и внутри `/start`. В навигационном CTA шапки, обычных промоблоках и завершающих CTA стрелок нет. Кнопки с ценой на главной и страницах услуг также без стрелок.
+- `src/config/projects.ts` — единый список проектов для главной, каталога и sitemap. Чтобы добавить кейс, создайте его страницу и обложку, затем запись с уникальными `id`/`href`, `releaseYear` и `casePublished: true`. Черновики с `casePublished: false` не отображаются в списках и sitemap.
+- `HomeProjectCard` сохраняет общий внешний вид. В каталоге заголовок карточки — H2, внутри секции главной — H3. Бейдж на обложке показывает год релиза.
+
 Mobile hero height is owned by CSS, without competing Tailwind min-height utilities. Verify expanded/collapsed Safari bars and landscape on a real iPhone before release.
 
 ## Изображения

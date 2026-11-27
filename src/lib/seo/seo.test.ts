@@ -1,5 +1,8 @@
-import { describe, expect, it, vi } from "vitest"
-import { pageMetadata, rootMetadata, websiteJsonLd } from "./index"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+import { homeMetadata, pageMetadata, rootMetadata, websiteJsonLd } from "./index"
+import { publishedProjects } from "@/config/projects"
+import { serviceSeo } from "@/config/service-seo"
+import { primaryServiceIds, serviceCatalog } from "@/config/service-catalog"
 import sitemap from "@/app/sitemap"
 import robots from "@/app/robots"
 
@@ -8,6 +11,36 @@ vi.mock("@/lib/env/server", () => ({
 }))
 
 describe("SEO foundation", () => {
+  beforeEach(() => vi.stubEnv("NEXT_PUBLIC_DEMO_MODE", "false"))
+  afterEach(() => vi.unstubAllEnvs())
+
+  it("keeps homepage search and social titles aligned", () => {
+    const metadata = homeMetadata()
+    expect(metadata.title).toEqual({ absolute: metadata.openGraph?.title })
+    expect(metadata.twitter?.title).toEqual(metadata.openGraph?.title)
+    expect(metadata.alternates?.canonical).toBe("/")
+    expect(metadata.robots).toBeUndefined()
+  })
+
+  it("lets crawlers read demo noindex without advertising indexable URLs", () => {
+    vi.stubEnv("NEXT_PUBLIC_DEMO_MODE", "true")
+    expect(rootMetadata().robots).toEqual({ index: false, follow: false })
+    expect(pageMetadata("Test", "Test page", "/projects").robots).toEqual({ index: false, follow: false })
+    expect(sitemap()).toEqual([])
+    expect(robots()).toEqual({ rules: { userAgent: "*", allow: "/", disallow: ["/api/"] } })
+  })
+
+  it("includes every published case and keeps service prices in sync", () => {
+    const urls = sitemap().map(({ url }) => new URL(url).pathname)
+    for (const project of publishedProjects) expect(urls).toContain(project.href)
+    expect(urls).not.toContain("/projects/pulsar-cloud")
+    expect(urls).not.toContain("/projects/form")
+    for (const slug of primaryServiceIds) {
+      expect(serviceSeo(slug).description).toContain(serviceCatalog[slug].priceLabel)
+    }
+    expect(new Set(primaryServiceIds.map((slug) => serviceSeo(slug).title)).size).toBe(primaryServiceIds.length)
+  })
+
   it("keeps child canonicals and social metadata specific to the page", () => {
     const metadata = pageMetadata(
       "Контакты",

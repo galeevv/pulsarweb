@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react"
 import { Container } from "@/components/layout/container"
 import { MobileNavigation } from "@/components/layout/mobile-navigation"
 import { Logo } from "@/components/shared/logo"
@@ -18,9 +17,8 @@ export function SiteHeader() {
             <NavigationLinks />
           </nav>
           <div className="hidden md:block">
-            <ButtonLink href="/start" size="lg" className="h-12">
+            <ButtonLink href="/start" size="lg">
               Обсудить проект
-              <ArrowUpRight data-icon="inline-end" />
             </ButtonLink>
           </div>
           <div className="lg:hidden">

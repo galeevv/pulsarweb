@@ -121,14 +121,14 @@ export default function PulsarWebProjectPage() {
           />
           <CardHeader className="gap-4">
             <CardTitle><h1 id="project-title" className="home-section-title">PULSAR WEB</h1></CardTitle>
-            <CardDescription className="max-w-2xl text-base leading-relaxed sm:text-lg">Сайт нашей студии: услуги, проекты и простой путь от идеи до заявки на разработку.</CardDescription>
+            <CardDescription className="max-w-2xl text-base leading-relaxed sm:text-lg">Сайт студии: услуги, проекты и удобный путь от знакомства до заявки.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">Сайт студии</Badge>
               <Badge variant="outline">Собственный проект</Badge>
             </div>
-            <ButtonLink href="/" className="h-12 w-full shrink-0 px-6 md:w-auto">
+            <ButtonLink href="/" className="w-full shrink-0 md:w-auto">
               Открыть сайт <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
             </ButtonLink>
           </CardContent>
@@ -140,7 +140,7 @@ export default function PulsarWebProjectPage() {
             <div className="flex flex-col items-start gap-5 bg-linear-to-r from-card via-card/90 to-transparent px-6 py-10 sm:p-12">
               <h2 id="project-cta" className="max-w-xl text-3xl font-medium tracking-tight sm:text-4xl">Ваш сайт — следующий.</h2>
               <p className="max-w-lg text-muted-foreground">Обсудим задачу, структуру и запуск сайта для вашего бизнеса.</p>
-              <ButtonLink href="/start?service=other&source=%2Fprojects%2Fpulsar-web" className="h-12 w-full sm:w-auto">Обсудить проект <ArrowUpRight data-icon="inline-end" aria-hidden="true" /></ButtonLink>
+              <ButtonLink href="/start?service=other&source=%2Fprojects%2Fpulsar-web" className="w-full sm:w-auto">Обсудить проект </ButtonLink>
             </div>
           </HomeHeroSurface>
         </div>

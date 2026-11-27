@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, ArrowUpRight, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { NavigationLinks } from "@/components/layout/navigation-links"
 import { Button } from "@/components/ui/button"
 import { ButtonLink } from "@/components/shared/button-link"
@@ -60,7 +60,6 @@ export function MobileNavigation() {
             className="mt-6 h-12"
           >
             Обсудить проект
-            <ArrowUpRight data-icon="inline-end" />
           </ButtonLink>
         </nav>
       </SheetContent>

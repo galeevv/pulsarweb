@@ -20,7 +20,7 @@ function socialMetadata(
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: `${site.name} — ${site.tagline}`,
+          alt: `${site.name} — ${site.seoTitle}`,
         },
       ],
     },
@@ -29,7 +29,7 @@ function socialMetadata(
       title,
       description,
       images: [
-        { url: "/opengraph-image", alt: `${site.name} — ${site.tagline}` },
+        { url: "/opengraph-image", alt: `${site.name} — ${site.seoTitle}` },
       ],
     },
   }
@@ -43,22 +43,35 @@ export function pageMetadata(
   return {
     title,
     description,
+    ...(process.env.NEXT_PUBLIC_DEMO_MODE === "true"
+      ? { robots: { index: false, follow: false } }
+      : {}),
     alternates: { canonical: path },
     ...socialMetadata(`${title} — ${site.name}`, description, path),
   }
 }
 
+export function homeMetadata(): Metadata {
+  const title = `${site.name} — ${site.seoTitle}`
+  return {
+    ...pageMetadata(site.seoTitle, site.description, "/"),
+    title: { absolute: title },
+    ...socialMetadata(title, site.description, "/"),
+  }
+}
+
 export function rootMetadata(): Metadata {
   return {
+    ...homeMetadata(),
     metadataBase: new URL(getServerEnv().SITE_URL),
     title: {
-      default: `${site.name} — ${site.tagline}`,
+      default: `${site.name} — ${site.seoTitle}`,
       template: `%s — ${site.name}`,
     },
     description: site.description,
     applicationName: site.name,
     alternates: { canonical: "/" },
-    ...socialMetadata(`${site.name} — ${site.tagline}`, site.description, "/"),
+    ...socialMetadata(`${site.name} — ${site.seoTitle}`, site.description, "/"),
   }
 }
 

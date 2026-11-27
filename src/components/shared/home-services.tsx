@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
 import { serviceBadges, serviceCatalog } from "@/config/service-catalog"
 import { ButtonLink } from "@/components/shared/button-link"
 import { HomeBadge } from "@/components/shared/home-badge"
@@ -69,10 +68,10 @@ export function HomeServices() {
                 </ul>
                 <ButtonLink
                   href={`/services/${id}`}
-                  className="h-12 w-full sm:w-auto"
+                  className="w-full sm:w-auto"
                   aria-label={`${service.shortTitle} — ${service.priceLabel}`}
                 >
-                  {service.priceLabel} <ArrowUpRight data-icon="inline-end" />
+                  {service.priceLabel}
                 </ButtonLink>
               </div>
             </div>

@@ -1,8 +1,6 @@
-import type { Metadata } from "next"
 import { MarketingHero } from "@/components/shared/marketing-hero"
 import { ButtonLink } from "@/components/shared/button-link"
-import { ArrowRight, ArrowUpRight } from "lucide-react"
-import { websiteJsonLd } from "@/lib/seo"
+import { homeMetadata, websiteJsonLd } from "@/lib/seo"
 import { Section } from "@/components/layout/section"
 import { DeliveryProcess } from "@/components/shared/delivery-process"
 import { LatestProjects } from "@/components/shared/latest-projects"
@@ -10,11 +8,7 @@ import { HomeServices } from "@/components/shared/home-services"
 import { WhyPulsarWeb } from "@/components/shared/why-pulsarweb"
 import { HomeBadge } from "@/components/shared/home-badge"
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "PulsarWeb — Разработка сайтов и Telegram Mini Apps",
-  },
-}
+export const metadata = homeMetadata()
 
 export default function Page() {
   return (
@@ -33,21 +27,12 @@ export default function Page() {
           <br className="hidden lg:block" /> заявки и продажи
         </h1>
         <p className="hero-intro-description max-w-md text-lg leading-relaxed text-foreground/90">
-          От идеи до работающего продукта
+          От идеи до запуска
         </p>
         <div className="hero-intro-actions flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
-          <ButtonLink href="/start" className="min-h-12 px-5">
-            Обсудить проект
-            <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
-          </ButtonLink>
-          <ButtonLink
-            href="/projects"
-            variant="outline"
-
-            className="min-h-12 px-5"
-          >
+          <ButtonLink href="/start">Обсудить проект</ButtonLink>
+          <ButtonLink href="/projects" variant="outline">
             Посмотреть проекты
-            <ArrowRight data-icon="inline-end" aria-hidden="true" />
           </ButtonLink>
         </div>
       </MarketingHero>
@@ -66,18 +51,15 @@ export default function Page() {
           <ButtonLink
             href="/projects"
             variant="outline"
-
             className="hidden shrink-0 md:inline-flex"
           >
-            Все проекты{" "}
-            <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
+            Все проекты
           </ButtonLink>
         </div>
         <LatestProjects />
         <div className="mt-8 flex justify-center md:hidden">
           <ButtonLink href="/projects" variant="outline">
-            Все проекты{" "}
-            <ArrowUpRight data-icon="inline-end" aria-hidden="true" />
+            Все проекты
           </ButtonLink>
         </div>
       </Section>

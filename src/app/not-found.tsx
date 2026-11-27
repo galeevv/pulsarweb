@@ -23,7 +23,7 @@ export default function NotFound() {
       </h1>
       <ButtonLink
         href="/"
-        className="mt-8 h-12 bg-foreground px-6 text-background hover:bg-foreground/90"
+        className="mt-8 bg-foreground text-background hover:bg-foreground/90"
       >
         На главную
       </ButtonLink>
